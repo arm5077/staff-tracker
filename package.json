@@ -1,0 +1,24 @@
+{
+  "name": "staff-tracker",
+  "version": "1.0.0",
+  "description": "Tracks staff movements between candidates in the 2016 presidential campaign.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arm5077/staff-tracker.git"
+  },
+  "author": "Andrew McGill",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arm5077/staff-tracker/issues"
+  },
+  "homepage": "https://github.com/arm5077/staff-tracker",
+  "dependencies": {
+    "edit-google-spreadsheet": "^0.2.16",
+    "express": "^4.12.4",
+    "mysql": "^2.6.2"
+  }
+}
