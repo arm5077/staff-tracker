@@ -13,6 +13,48 @@ app.get("/employment", function(request, response){
 	response.status(200).json({ response: "Yeppp!" });
 });
 
+// Return feed of hirings, by data and by person
+app.get("/feed", function(request, response){
+	
+	var connection = connectMySQL();
+	
+	connection.query("SELECT * FROM feed", function(err, rows, header){
+		if( err ) throw err;
+		var temp = {};
+		
+		rows.forEach(function(row){
+			if( !temp[row.name] )
+				temp[row.name] = {};
+			temp[row.name].date = row.date;
+			temp[row.name].year = row.year;
+			temp[row.name][row.action] = { employer: row.employer };
+		});
+		
+		var exportArray = []; 
+		
+		for( key in temp){
+			if( temp.hasOwnProperty(key) ){
+				var leaves = null;
+				if( temp[key].leaves ) 
+					leaves = temp[key].leaves.employer
+				exportArray.push({
+					name: key,
+					date: temp[key].date,
+					year: temp[key].year,
+					joining: temp[key].joins.employer,
+					leaving: leaves
+				});
+			}
+		}
+
+		
+		response.status(200).json(exportArray);
+		
+	});
+	
+	
+});
+
 // Launch scraper
 app.get("/scrape", function(request, response){	
 	
@@ -53,6 +95,9 @@ app.get("/scrape", function(request, response){
 			// Let us first compile 2016 comings and goings
 			data.forEach(function(data){
 				data.dates.forEach(function(date, i){
+					
+					// So sometimes a date is an actual date, and sometimes it's just a year.
+					// If it's a year, we want to store it differently on the server.
 					if( date.length > 4){
 						date = new Date(date);
 						date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate());
@@ -61,6 +106,7 @@ app.get("/scrape", function(request, response){
 						date = null;
 					}
 					
+					// Check if this is a "joining" entry
 					if( data.employers[i] ){
 						console.log(date + ": " + data.Staffer + " joins " + data.employers[i]);
 						connection.query('INSERT INTO feed (name, employer, action, date, year) VALUES (?,?,?,?,?)', 
@@ -74,6 +120,8 @@ app.get("/scrape", function(request, response){
 							console.log(date + ": " + data.Staffer + " joins " + data.employers[i]);
 						});
 					}
+					
+					// Check if is a "leaving" entry
 					if( data.employers[i + 1] ){
 						connection.query('INSERT INTO feed (name, employer, action, date, year) VALUES (?,?,?,?,?)', 
 							[data.Staffer,
@@ -87,7 +135,9 @@ app.get("/scrape", function(request, response){
 						});
 					}
 				});
-			})
+			});
+			
+			connection.end();
 			
 		});
 	});	
