@@ -9,9 +9,9 @@ app.listen(port, function(){
 	console.log("We're live at port " + port + ".");
 });
 
-app.get("/employment", function(request, response){
-	response.status(200).json({ response: "Yeppp!" });
-});
+
+// Set up static page (main page)
+app.use("/", express.static(__dirname + "/public/"));
 
 // Return feed of hirings, by data and by person
 app.get("/feed", function(request, response){
@@ -46,8 +46,11 @@ app.get("/feed", function(request, response){
 				});
 			}
 		}
-
-		
+			
+		// Sort from newest to oldest
+		exportArray.sort(function(a,b){
+			return b.date - a.date;
+		})
 		response.status(200).json(exportArray);
 		
 	});

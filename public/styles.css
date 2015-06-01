@@ -1,0 +1,54 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
+
+body {
+	font-family: Roboto, sans-serif;
+}
+
+#feed {
+	
+}
+
+#feed table {
+	border-collapse: collapse;
+	cell-spacing: 0;
+}
+
+#feed thead {
+	background-color: #404041;
+}
+
+#feed td, th {
+	vertical-align: top;
+	border-top: 1px solid #ccc;
+	padding: 15px 20px;
+}
+
+#feed th {
+	border-top: 0;
+	color: white;
+	font-weight: 300;
+}
+
+#feed th:nth-child(2){
+	text-align: left;
+	border-left: 1px solid #ccc;
+}
+
+#feed .date {
+	color: #EA463D;
+	font-weight: 600;
+	font-size: 14pt;
+	text-align: right;
+	padding-right: 15px;
+}
+
+#feed .info {
+	padding-left: 15px;
+	font-size: 11pt;
+	color: #404041;
+	font-weight: 300;
+}
+
+	#feed .info .action {
+		color: #808284;
+	}
