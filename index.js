@@ -26,6 +26,8 @@ app.get("/staffer/:stafferName", function(request, response){
 			history.push({ year: row.year, employer: row.employer })
 		});
 		
+		connection.end();
+		
 		response.status(200).json({
 			name: request.params.stafferName,
 			history: history
@@ -70,7 +72,10 @@ app.get("/feed", function(request, response){
 		// Sort from newest to oldest
 		exportArray.sort(function(a,b){
 			return b.date - a.date;
-		})
+		});
+		
+		connection.end();
+		
 		response.status(200).json(exportArray);
 		
 	});
