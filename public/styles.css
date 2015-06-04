@@ -1,5 +1,9 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
 
+html, body {
+
+}
+
 body {
 	font-family: Roboto, sans-serif;
 	margin: 0;
@@ -15,11 +19,16 @@ body {
 }
 
 .content {
-	
+	min-height: 100%;
 }
 
 
 /* Staffer page styles */
+
+#staffer {
+	background-color: white;
+	min-height: 100%;
+}
 
 #staffer .header {
 	height: 50px;
@@ -42,8 +51,9 @@ body {
 	font-size: 14pt;
 }
 
-	#staffer td.year {
+	#staffer .year {
 		width: 150px;
+		padding-left: 20px ;
 	}
 
 #staffer tr {
@@ -66,7 +76,8 @@ body {
 /* Feed styles */
 
 #feed {
-	
+	background-color: white;
+	border-right: 10px solid #404041;	
 }
 
 #feed a {

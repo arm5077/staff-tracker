@@ -3,8 +3,8 @@ angular.module("stafferApp", ['ngRoute'])
 	return {
 		link: function(scope, element, attr) {
 			element.css({
-				width: (window.innerWidth - element.parent().children()[0].offsetWidth - 15) + "px",
-				"margin-left": (element.parent().children()[0].offsetWidth + 15) + "px",
+				width: (window.innerWidth - element.parent().children()[0].offsetWidth) + "px",
+				"margin-left": (element.parent().children()[0].offsetWidth) + "px",
 			});
 		}
 	};	
