@@ -13,6 +13,26 @@ app.listen(port, function(){
 // Set up static page (main page)
 app.use("/", express.static(__dirname + "/public/"));
 
+// Return biographical information about a person
+app.get("/staffer/:stafferName", function(request, response){
+	var connection = connectMySQL();
+	
+	connection.query("SELECT * FROM history WHERE name = ?", [request.params.stafferName], function(err, rows, header){
+		if( err ) throw err;
+		
+		var history = [];
+		
+		rows.forEach(function(row){
+			history.push({ year: row.year, employer: row.employer })
+		});
+		
+		response.status(200).json({
+			name: request.params.stafferName,
+			history: history
+		});	
+	});	
+});
+
 // Return feed of hirings, by data and by person
 app.get("/feed", function(request, response){
 	
@@ -71,7 +91,8 @@ app.get("/scrape", function(request, response){
 	
 	// Truncate existing tables
 	connection.query('TRUNCATE TABLE feed', function(err, rows, header){ console.log("Truncated feed"); if( err ) throw err; });
-	
+	connection.query('TRUNCATE TABLE history', function(err, rows, header){ console.log("Truncated history"); if( err ) throw err; });
+		
 	// Pop open the source spreadsheet
 	Spreadsheet.load({
 		debug: true,
@@ -138,6 +159,24 @@ app.get("/scrape", function(request, response){
 						});
 					}
 				});
+			});
+			
+			// Now, it is time to compile a storied history
+			data.forEach(function(data){
+				for(year = 2016; year >= 1968; year--){
+					if( data[year.toString()] ){
+						data[year.toString()].split(",").forEach(function(job){
+							connection.query('INSERT INTO history (name, year, employer) VALUES (?,?,?)',
+								[data.Staffer,
+								year,
+								job],
+						 	function(err, rows, header){
+								if( err ) throw err;
+							});
+						});
+					}
+				}
+				
 			});
 			
 			connection.end();

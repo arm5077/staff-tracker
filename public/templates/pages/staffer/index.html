@@ -1,0 +1,20 @@
+<div id="staffer" ng-controller="stafferController">
+
+	<div class="header">
+		<strong>{{ name }}</strong>: Previous campaign work
+	</div>
+		<table>
+		<thead>
+			<th>Election cycle</th>
+			<th>Candidate/group</th>
+		</thead>
+		<tbody>
+			<tr ng-repeat="job in jobs.history">
+				<td class="year">{{job.year}}</td>
+				<td>{{job.employer}}</td>
+			</tr>
+		</tbody>
+	</div>	
+	
+
+</div>

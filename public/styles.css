@@ -2,31 +2,105 @@
 
 body {
 	font-family: Roboto, sans-serif;
+	margin: 0;
 }
+
+.feed {
+	position: fixed;
+	width: 380px;
+	top: 0;
+	left: 0;
+	overflow: scroll;
+	height: 100%;
+}
+
+.content {
+	
+}
+
+
+/* Staffer page styles */
+
+#staffer .header {
+	height: 50px;
+	background-color: #EA463D;
+	text-align: center;
+	line-height: 50px;
+	color: rgba(255, 255, 255, .95);
+	font-size: 16pt;
+}
+
+#staffer table {
+	width: 100%;
+	border-collapse:collapse;
+}
+
+#staffer th {
+	padding: 20px 10px 5px;
+	font-weight: 800;
+	text-align: left;
+	font-size: 14pt;
+}
+
+	#staffer td.year {
+		width: 150px;
+	}
+
+#staffer tr {
+	
+}
+
+	#staffer tr:nth-child(2n+1) td {
+		border-top: 1px solid #ccc;
+		border-bottom: 1px solid #ccc;
+	}
+
+	#staffer tr:nth-child(2n){
+		background-color: #dadada;
+	}
+
+#staffer td {
+	padding: 15px 10px;
+}
+
+/* Feed styles */
 
 #feed {
 	
 }
 
+#feed a {
+	text-decoration: none;
+	color: inherit;
+}
+
+	#feed a:hover {
+		text-decoration: underline;
+	}
+
 #feed table {
 	border-collapse: collapse;
 	cell-spacing: 0;
+	width: 100%;
 }
 
 #feed thead {
 	background-color: #404041;
 }
 
-#feed td, th {
+#feed td, #feed th {
 	vertical-align: top;
 	border-top: 1px solid #ccc;
 	padding: 15px 20px;
 }
 
 #feed th {
+	padding: 0px 20px;
 	border-top: 0;
 	color: white;
 	font-weight: 300;
+	height: 50px;
+	vertical-align: middle;
 }
 
 #feed th:nth-child(2){
@@ -48,6 +122,10 @@ body {
 	color: #404041;
 	font-weight: 300;
 }
+
+	#feed .info .name {
+		font-weight: 400;
+	}
 
 	#feed .info .action {
 		color: #808284;
