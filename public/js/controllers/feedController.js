@@ -3,7 +3,7 @@ angular.module("stafferApp")
 	
 	$scope.moment = moment;
 	
-	$http.get("/feed").success(function(data){
+	$http.get("/api/feed").success(function(data){
 		$scope.feed = data;
 	});
 	

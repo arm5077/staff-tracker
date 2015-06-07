@@ -7,4 +7,8 @@ angular.module("stafferApp").config(function($routeProvider){
 		templateUrl: "/templates/pages/staffer/",
 		controller: "stafferController"
 	})
+	.when("/network/:candidateName", {
+		templateUrl: "/templates/pages/network/",
+		controller: "networkController"
+	})
 });

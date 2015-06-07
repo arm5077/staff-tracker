@@ -9,6 +9,15 @@ body {
 	margin: 0;
 }
 
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+	a:hover {
+		text-decoration: underline;
+	}
+
 .feed {
 	position: fixed;
 	width: 380px;
@@ -23,14 +32,9 @@ body {
 }
 
 
-/* Staffer page styles */
+/* Shared style */
 
-#staffer {
-	background-color: white;
-	min-height: 100%;
-}
-
-#staffer .header {
+#staffer .header, #network .header {
 	height: 50px;
 	background-color: #EA463D;
 	text-align: center;
@@ -38,6 +42,147 @@ body {
 	color: rgba(255, 255, 255, .95);
 	font-size: 16pt;
 }
+
+
+
+/* Network/history page styles */
+
+#network {
+}
+
+#network .header {
+
+}
+
+#network .list {
+	float: right;
+	width: 200px;
+	background-color: #404041;
+	height: 100%;
+	z-index:2;
+	position:fixed;
+	top: 0px;
+	right: 0px;
+	color: white;
+	padding: 50px 15px 0px;
+	overflow: scroll;
+}
+
+	#network .list.hidden {
+		right: -200px;
+	}
+	
+#network .list .title {
+	font-weight: 800;
+}
+
+#network .list ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	color: white;
+	font-weight: 100;
+	margin-top: 20px;
+}
+
+#network .list ul li {
+	margin-bottom: 15px;
+	padding: 8px 8px;
+}
+
+	#network .list ul li:hover, #network .list ul li.selected {
+		background-color: rgba(255,255,255,.9);
+		color: #404041;
+		cursor: pointer;
+	}
+	
+	#network .list ul a:hover {
+		color: #404041;
+	}
+
+#network .network.partial {
+	padding-right: 200px;
+}
+
+
+
+#network .year {
+	padding-top: 10px;
+	position: relative;
+	padding-left: 40px;
+}
+
+#network .year:nth-child(2n){
+	background-color: #eee;
+}
+
+#network .year:first-child {
+	margin-top: 10px;
+}
+
+#network .year .label {
+  transform: rotate(90deg);
+  transform-origin: bottom left;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  left: 0;
+  padding-bottom: 5px;
+  font-size: 14pt;
+  color: #444;
+  font-weight: 800;
+}
+
+#network .employer {
+	display: inline-block;
+	text-align: center;
+	margin: 0px 5px 15px;
+	vertical-align: top
+}
+
+	#network .employer:hover {
+		cursor: pointer;
+	}
+	
+#network .employer .count {
+	background-color: #EA463D;
+	display: inline-block;
+	width: 35px;
+	border-radius: 50%;
+	height: 35px;
+	text-align: center;
+	line-height: 35px;
+	margin-bottom: 5px;
+	font-size: 15pt;
+	font-weight: 100;
+	color: white;
+}
+
+	#network .employer .count:hover {
+		background-color: #952326;
+	}
+
+#network .employer.selected .count {
+	background-color: #952326;
+}
+
+#network .employer .name {
+	text-align: center;
+	width: 75px;
+	font-size: 10pt;
+}
+
+#network .employer.selected .name {
+	font-weight: 800;
+}
+
+/* Staffer page styles */
+
+#staffer {
+	background-color: white;
+	min-height: 100%;
+}
+
 
 #staffer table {
 	width: 100%;
@@ -53,7 +198,7 @@ body {
 
 	#staffer .year {
 		width: 150px;
-		padding-left: 20px ;
+		padding-left: 20px;
 	}
 
 #staffer tr {

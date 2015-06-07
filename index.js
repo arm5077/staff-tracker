@@ -13,8 +13,58 @@ app.listen(port, function(){
 // Set up static page (main page)
 app.use("/", express.static(__dirname + "/public/"));
 
+// Return listing of previous organizations staffers have worked at
+app.get("/api/network/:candidateName", function(request, response){
+	var connection = connectMySQL();
+		connection.query("SELECT * FROM history WHERE employer = ? and year = 2016", [request.params.candidateName], function(err, rows, header){
+		console.log(header);
+		var names = "";
+		rows.forEach(function(row){
+			names += " OR name = '" + row.name.replace("'", "\\'") + "'";
+		});
+		
+		console.log("SELECT * FROM history WHERE " + names.slice(4));
+		
+		connection.query("SELECT * FROM history WHERE " + names.slice(4), function(err, rows, header){
+			var aggregate = [];
+			var exportArray = [];
+			
+			if(rows){
+				// Re-organize and aggregate first by year, then by employer.
+				rows.forEach(function(row){
+					if( !aggregate[row.year.toString()])
+						aggregate[row.year.toString()] = [];
+					if( !aggregate[row.year.toString()][row.employer] )
+						aggregate[row.year.toString()][row.employer] = [];
+
+					aggregate[row.year.toString()][row.employer].push(row.name);
+				});
+
+				// Stuff this back into an array of objects
+				for( year in aggregate ){
+					var yearArray = [];
+					for( employer in aggregate[year] ){
+						yearArray.push({ employer: employer, staffers: aggregate[year][employer] });
+					}
+
+					// Sort collection of employers by size of workforce
+					yearArray.sort(function(a,b){ return b.staffers.length - a.staffers.length; });
+
+					exportArray.push({ year: year, employers: yearArray });
+				}
+
+				// Sort by date descending 
+				exportArray.sort(function(a,b){ return b.year - a.year });
+				
+			}
+
+			response.status(200).json(exportArray);
+		});
+	});
+});
+
 // Return biographical information about a person
-app.get("/staffer/:stafferName", function(request, response){
+app.get("/api/staffer/:stafferName", function(request, response){
 	var connection = connectMySQL();
 	
 	connection.query("SELECT * FROM history WHERE name = ?", [request.params.stafferName], function(err, rows, header){
@@ -36,7 +86,7 @@ app.get("/staffer/:stafferName", function(request, response){
 });
 
 // Return feed of hirings, by data and by person
-app.get("/feed", function(request, response){
+app.get("/api/feed", function(request, response){
 	
 	var connection = connectMySQL();
 	
@@ -84,7 +134,7 @@ app.get("/feed", function(request, response){
 });
 
 // Launch scraper
-app.get("/scrape", function(request, response){	
+app.get("/api/scrape", function(request, response){	
 	
 	var connection = connectMySQL();
 	
