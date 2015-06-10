@@ -13,7 +13,10 @@
 		<tbody>
 			<tr ng-repeat="job in jobs.history">
 				<td class="year">{{job.year}}</td>
-				<td>{{job.employer}}</td>
+				<td>
+					<a ng-if="job.year == 2016" ng-href="#/network/{{job.employer}}">{{job.employer}}</a>
+					<a ng-if="job.year != 2016" ng-href="#/organization/{{job.employer}}">{{job.employer}}</a>
+				</td>
 			</tr>
 		</tbody>
 	</div>	

@@ -20,7 +20,8 @@
 			<div label class="label">{{ year.year }}</div>
 			<div class="employer" ng-repeat="employer in year.employers" ng-class="{selected: employer.selected }">
 				<div class = "count" ng-click="previouslySelected.length = 0; previouslySelected.push(employer); filterList(employer.staffers, employer.employer, year.year); employer.selected = true;">{{ employer.staffers.length }}</div>
-				<a ng-href="#/network/{{ employer.employer }}"><div class = "name">{{ employer.employer }}</div></a>
+				<a  ng-if="year.year == 2016" ng-href="#/network/{{ employer.employer }}"><div class = "name">{{ employer.employer }}</div></a>
+				<a  ng-if="year.year != 2016" ng-href="#/organization/{{ employer.employer }}"><div class = "name">{{ employer.employer }}</div></a>
 			</div>
 		</div>
 	

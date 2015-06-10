@@ -56,7 +56,7 @@ a {
 
 /* Shared style */
 
-#staffer .header, #network .header {
+.header {
 	height: 50px;
 	background-color: #EA463D;
 	text-align: center;
@@ -65,7 +65,7 @@ a {
 	font-size: 16pt;
 }
 
-	#staffer .header .fa, #network .header .fa {
+	.header .fa {
 		float: left;
 		margin-left:10px;
 		font-size: 20pt;
@@ -73,7 +73,33 @@ a {
 		cursor: pointer;
 	}
 
+/* Organization page */
+#organization {
+	
+}
 
+#organization .name {
+	padding: 10px 15px 10px 10px;
+	text-align:right
+	;
+}
+
+#organization table {
+	width: 80%;
+	margin: 30px auto;
+}
+
+#organization table td {
+	vertical-align: top;
+}
+
+#organization bar {
+	background-color: #EA463D;
+	display: block;
+	color:  rgba(255,255,255,.95);
+	padding: 10px 10px;
+	height: 20px;
+}
 
 /* Network/history page styles */
 

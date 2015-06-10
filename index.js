@@ -13,11 +13,54 @@ app.listen(port, function(){
 // Set up static page (main page)
 app.use("/", express.static(__dirname + "/public/"));
 
+// Return a profile page for an organization
+app.get("/api/organization/:organization", function(request, response){
+	var connection = connectMySQL();
+	
+	connection.query("SELECT * FROM history WHERE employer = ? GROUP BY name", [request.params.organization], function(err, rows, header){
+		if(err) throw err;
+		
+		if( rows.length == 0 ){
+			response.status(200).json([]);
+		}
+		else {
+			var names = "";
+			rows.forEach(function(row){
+				names += " OR name = '" + row.name.replace("'", "\\'") + "'";
+			});
+
+			connection.query("SELECT * FROM history WHERE year = 2016 AND (" + names.slice(4) + ")", function(err, rows, header){
+			 	if(err) throw err;
+
+				var temp = {}
+				rows.forEach(function(row){
+					if( !temp[row.employer] ) 
+						temp[row.employer] = [];
+					temp[row.employer].push({name: row.name, year: row.year});
+				});
+
+				var exportArray = [];
+				for( employer in temp ){
+					exportArray.push({name: employer, count: temp[employer].length, staffers: temp[employer]});
+				}
+
+				exportArray.sort(function(a,b){
+					return b.count - a.count;
+				});
+
+				response.status(200).json(exportArray);
+
+			});
+		}
+	});
+	
+});
+
 // Return listing of previous organizations staffers have worked at
 app.get("/api/network/:candidateName", function(request, response){
 	var connection = connectMySQL();
 		connection.query("SELECT * FROM history WHERE employer = ? and year = 2016", [request.params.candidateName], function(err, rows, header){
-		console.log(header);
+		if(err) throw err;
 		var names = "";
 		rows.forEach(function(row){
 			names += " OR name = '" + row.name.replace("'", "\\'") + "'";
@@ -57,7 +100,7 @@ app.get("/api/network/:candidateName", function(request, response){
 				exportArray.sort(function(a,b){ return b.year - a.year });
 				
 			}
-
+			connection.end();
 			response.status(200).json(exportArray);
 		});
 	});

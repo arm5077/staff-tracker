@@ -1,0 +1,22 @@
+<div id="organization" ng-controller="organizationController">
+	<div class="header">
+		<i class="fa fa-arrow-circle-left" back-button></i>
+		<a href="#"><i class="fa fa-home"></i></a>
+		Where <strong>{{ name }}</strong> alumni are in 2016
+	</div>
+
+	
+
+	<table class = "entry">
+		<tr ng-repeat="organization in organizations">
+			<td class="name">{{organization.name}}</td>
+			<td>
+				<bar>{{organization.count}}</bar>
+				<ul>
+					<li ng-repeat="staffer in organization.staffers">{{staffer.name}} ({{staffer.year}})</li>
+				</ul>
+			</td>
+		</tr>
+	</table>
+
+</div>
