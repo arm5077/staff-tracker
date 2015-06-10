@@ -4,13 +4,15 @@
 	<div class = "list" ng-class="{ hidden: showList == false }">
 		<div class="title">Senior 2016 staff</div>
 		<ul>
-			<li ng-repeat="staffer in staff" ng-click="clearStafferSelection(); staffer.selected=true; filterCountsByName(staffer.name, true)" ng-mouseover="filterCountsByName(staffer.name);" ng-mouseout="filterCountsByLastSelected()" ng-class="{selected: staffer.selected == true}"><a ng-href="#/staffer/{{ staffer.name }}">{{ staffer.name }}</a></li>
+			<li ng-repeat="staffer in staff" ng-click="clearStafferSelection(); staffer.selected=true; filterCountsByName(staffer.name, true)" ng-mouseover="filterCountsByName(staffer.name);" ng-mouseout="filterCountsByLastSelected()" ng-class="{selected: staffer.selected == true}">{{ staffer.name }} <a ng-href="#/staffer/{{ staffer.name }}"><i class="fa fa-arrow-circle-o-right"></i></a></li>
 		</ul>
 	</div>
 
 	
 	<div class = "network" ng-class="{ partial: showList == true }">
 		<div class="header">
+			<i class="fa fa-arrow-circle-left" back-button></i>
+			<a href="#"><i class="fa fa-home"></i></a>
 			<strong>{{ name }}</strong>: Campaign staff history
 		</div>
 		

@@ -16,4 +16,15 @@ angular.module("stafferApp", ['ngRoute'])
 		}
 	};	
 
-});
+})
+.directive("backButton", function() {
+	return {
+		link: function(scope, element, attr) {
+			element.on("click", function(){
+				window.history.back();
+			});
+			
+		}
+	};	
+
+})

@@ -11,4 +11,8 @@ angular.module("stafferApp").config(function($routeProvider){
 		templateUrl: "/templates/pages/network/",
 		controller: "networkController"
 	})
+	.otherwise({
+		templateUrl: "/templates/pages/home/",
+		controller: "homeController"
+	})
 });
