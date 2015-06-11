@@ -78,19 +78,26 @@ a {
 	
 }
 
-#organization .name {
+#organization table.entry .name {
 	padding: 10px 15px 10px 10px;
-	text-align:right
-	;
+	text-align:right;
+	font-weight: 800;
 }
 
-#organization table {
+
+#organization table.entry {
 	width: 80%;
 	margin: 30px auto;
 }
 
-#organization table td {
+#organization table.entry .info {
+	width: 80%;
+}
+
+
+#organization table.entry td {
 	vertical-align: top;
+	padding-bottom: 15px;
 }
 
 #organization bar {
@@ -99,6 +106,22 @@ a {
 	color:  rgba(255,255,255,.95);
 	padding: 10px 10px;
 	height: 20px;
+}
+
+#organization table.staffers {
+	color: #40404;
+}
+
+#organization table.staffers td {
+	padding: 5px 0px;
+}
+
+#organization table.staffers .staffer {
+	font-weight: 800;
+}
+
+#organization table.staffers .year {
+	width: 45px;
 }
 
 /* Network/history page styles */
@@ -120,7 +143,7 @@ a {
 	top: 0px;
 	right: 0px;
 	color: white;
-	padding: 50px 15px 0px;
+	padding: 50px 15px 20px;
 	overflow: scroll;
 }
 
@@ -139,6 +162,7 @@ a {
 	color: white;
 	font-weight: 100;
 	margin-top: 20px;
+	padding-bottom: 200px;
 }
 
 #network .list ul li {

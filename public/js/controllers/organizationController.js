@@ -13,9 +13,11 @@ angular.module("stafferApp")
 }])
 .directive("bar", function() {
 	return {
-		link: function(scope, element, attr) {	
-			console.log(element.parent()[0].offsetWidth * scope.organization.count / scope.max);
-			element[0].style.width = (element.parent()[0].offsetWidth * scope.organization.count / scope.max) + "px";
+		link: function(scope, element, attr) {
+			console.log( scope.organization.count + " out of " + scope.max );	
+				console.log(element.parent()[0].offsetWidth);
+				element[0].style.width = (scope.organization.count / scope.max * 100) + "%";
+			
 			
 		}
 	};	

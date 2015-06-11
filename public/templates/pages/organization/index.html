@@ -10,11 +10,15 @@
 	<table class = "entry">
 		<tr ng-repeat="organization in organizations">
 			<td class="name">{{organization.name}}</td>
-			<td>
+			<td class="info">
 				<bar>{{organization.count}}</bar>
-				<ul>
-					<li ng-repeat="staffer in organization.staffers">{{staffer.name}} ({{staffer.year}})</li>
-				</ul>
+				<table class="staffers">
+
+						<tr ng-repeat="staffer in organization.staffers">
+							<td class="year">{{staffer.year}}</td>
+							<td class="staffer"><a ng-href="#/staffer/{{staffer.name}}">{{staffer.name}}</a></td>
+						</tr>
+				</table>
 			</td>
 		</tr>
 	</table>
