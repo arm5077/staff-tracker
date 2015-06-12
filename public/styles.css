@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
+@import url(http://fonts.googleapis.com/css?family=Roboto:100,400,300,500,700);
 
 
 @keyframes slideInRight {
@@ -63,6 +63,7 @@ a {
 	line-height: 50px;
 	color: rgba(255, 255, 255, .95);
 	font-size: 16pt;
+	font-weight: 100;
 }
 
 	.header .fa {
@@ -72,6 +73,48 @@ a {
 		line-height: 50px;
 		cursor: pointer;
 	}
+
+/* Home page */
+
+#home .header {
+	background-color: #404040;
+	border-left: 1px solid #888;
+}
+
+#home .candidates {
+	width: 90%;
+	margin: auto;
+}
+
+#home
+
+#home .candidates .party {
+	margin-bottom: 50px;
+	display: block;
+}
+
+#home .party .label {
+	font-weight: 600;
+	color: #404040;
+	margin-bottom: 10px;
+	text-transform: uppercase;
+	font-size: 13pt;
+}
+
+#home .candidate {
+	display: inline-block;
+	padding: 10px;
+	margin-right: 15px;
+	text-align: center;
+	background-color: #EA463D;
+	color: white;
+	margin-bottom: 10px;
+	width: 120px;
+}
+
+#home .candidate img {
+	width: 100%;
+}
 
 /* Organization page */
 #organization {
@@ -101,7 +144,7 @@ a {
 }
 
 #organization bar {
-	background-color: #EA463D;
+	background-color: #404040;
 	display: block;
 	color:  rgba(255,255,255,.95);
 	padding: 10px 10px;
@@ -109,7 +152,7 @@ a {
 }
 
 #organization table.staffers {
-	color: #40404;
+	color: #888;
 }
 
 #organization table.staffers td {
@@ -117,8 +160,12 @@ a {
 }
 
 #organization table.staffers .staffer {
-	font-weight: 800;
+	font-weight: 800
 }
+
+	#organization table tr:hover {
+		color: #404040;
+	}
 
 #organization table.staffers .year {
 	width: 45px;
@@ -167,7 +214,7 @@ a {
 
 #network .list ul li {
 	margin-bottom: 15px;
-	padding: 8px 8px;
+	position:relative;
 }
 
 	#network .list ul li:hover, #network .list ul li.selected {
@@ -181,20 +228,29 @@ a {
 	}
 
 #network .list ul li a {
-	float: right;
-	display: none;
-	opacity: .5;
+	width: 100%;
+	padding: 8px 8px;
+	display: inline-block;
 }
 
-	#network .list ul li:hover a{
+#network .list ul li .fa {
+	position:absolute;
+	top: 0px;
+	right: 0px;
+	display: none;
+	opacity: .5;
+	padding: 10px 10px;
+}
+
+	#network .list ul li:hover .fa{
 		display: block;
 	}
 	
-	#network .list ul li:hover a:hover {
+	#network .list ul li:hover .fa:hover {
 		opacity: 1;
 	}
 	
-	#network .list ul li.selected a {
+	#network .list ul li.selected .fa {
 		display: block;
 	}
 
@@ -369,7 +425,7 @@ a {
 #feed .date {
 	color: #EA463D;
 	font-weight: 600;
-	font-size: 14pt;
+	font-size: 11pt;
 	text-align: right;
 	padding-right: 15px;
 }

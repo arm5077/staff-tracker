@@ -7,7 +7,6 @@ angular.module("stafferApp")
 	$scope.fullList = [];
 	$scope.previouslySelected = [];
 	$scope.selectionOn = false;
-
 	
 	$http.get("/api/network/" + $routeParams.candidateName).success(function(data){
 		$scope.years = data;
@@ -31,6 +30,31 @@ angular.module("stafferApp")
 		
 		$scope.fullList = $scope.staff;
 	});
+	
+	$scope.toggleSelected = function(staffer){
+		if(staffer.selected == false) { 
+			$scope.clearStafferSelection(); 
+			staffer.selected=true; 
+			$scope.filterCountsByName(staffer.name, true); 
+		} 
+		else { 
+			$scope.clearStafferSelection(); 
+		}
+	};
+	
+	$scope.toggleListSelected = function(employer, year){
+		if( !employer.selected ) {
+			$scope.previouslySelected.length = 0; 
+			$scope.previouslySelected.push(employer); 
+			$scope.filterList(employer.staffers, employer.employer, year.year); 
+			employer.selected = true;
+		} 
+		else {
+			$scope.staff = $scope.fullList;
+			employer.selected = false;
+		}
+		
+	}
 	
 	$scope.filterCountsByLastSelected = function(){
 		$scope.clearSelection();

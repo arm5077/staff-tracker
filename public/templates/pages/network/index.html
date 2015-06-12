@@ -4,7 +4,10 @@
 	<div class = "list" ng-class="{ hidden: showList == false }">
 		<div class="title">Senior 2016 staff</div>
 		<ul>
-			<li ng-repeat="staffer in staff" ng-click="clearStafferSelection(); staffer.selected=true; filterCountsByName(staffer.name, true)" ng-mouseover="filterCountsByName(staffer.name);" ng-mouseout="filterCountsByLastSelected()" ng-class="{selected: staffer.selected == true}">{{ staffer.name }} <a ng-href="#/staffer/{{ staffer.name }}"><i class="fa fa-arrow-circle-o-right"></i></a></li>
+			<li ng-repeat="staffer in staff" ng-mouseover="filterCountsByName(staffer.name);" ng-mouseout="filterCountsByLastSelected()" ng-class="{selected: staffer.selected == true}">
+				<a ng-href="#/staffer/{{staffer.name}}" >{{ staffer.name }}</a>
+				<i class="fa fa-thumb-tack" ng-click="toggleSelected(staffer)"></i>
+			</li>
 		</ul>
 	</div>
 
@@ -19,7 +22,7 @@
 		<div class="year" ng-repeat="year in years" ng-click="">
 			<div label class="label">{{ year.year }}</div>
 			<div class="employer" ng-repeat="employer in year.employers" ng-class="{selected: employer.selected }">
-				<div class = "count" ng-click="previouslySelected.length = 0; previouslySelected.push(employer); filterList(employer.staffers, employer.employer, year.year); employer.selected = true;">{{ employer.staffers.length }}</div>
+				<div class = "count" ng-click="toggleListSelected(employer,year)">{{ employer.staffers.length }}</div>
 				<a  ng-if="year.year == 2016" ng-href="#/network/{{ employer.employer }}"><div class = "name">{{ employer.employer }}</div></a>
 				<a  ng-if="year.year != 2016" ng-href="#/organization/{{ employer.employer }}"><div class = "name">{{ employer.employer }}</div></a>
 			</div>

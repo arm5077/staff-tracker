@@ -13,6 +13,19 @@ app.listen(port, function(){
 // Set up static page (main page)
 app.use("/", express.static(__dirname + "/public/"));
 
+// Return 2016 candidates
+app.get("/api/candidates", function(request, response){
+	var connection = connectMySQL();
+	
+	connection.query("SELECT employer as name, party, count(employer) as count FROM history JOIN candidates ON candidates.name=history.employer WHERE year = 2016 GROUP BY name ORDER BY count DESC", function(err, rows, header){
+		if(err) throw err;		
+		response.status(200).json(rows);
+		connection.end();
+	});
+	
+});
+
+
 // Return a profile page for an organization
 app.get("/api/organization/:organization", function(request, response){
 	var connection = connectMySQL();
@@ -179,7 +192,7 @@ app.get("/api/feed", function(request, response){
 // Launch scraper
 app.get("/api/scrape", function(request, response){	
 	
-	var connection = connectMySQL();
+
 	
 	var spreadsheet_email = process.env.SPREADSHEET_EMAIL;
 	var spreadsheet_key = process.env.SPREADSHEET_KEY;
@@ -187,9 +200,49 @@ app.get("/api/scrape", function(request, response){
 	var completed = 0;
 	var timeout = 0;
 	
+	var connection = connectMySQL();
+	
 	// Truncate existing tables
 	connection.query('TRUNCATE TABLE feed', function(err, rows, header){ console.log("Truncated feed"); if( err ) throw err; });
 	connection.query('TRUNCATE TABLE history', function(err, rows, header){ console.log("Truncated history"); if( err ) throw err; });
+	connection.query('TRUNCATE TABLE candidates', function(err, rows, header){ console.log("Truncated history"); if( err ) throw err; });
+	
+	connection.end();
+	
+	// Pop open the candidate master list spreadsheet
+	// Pop open the source spreadsheet
+	Spreadsheet.load({
+		debug: true,
+		spreadsheetName: "Staffer Tracker",
+		worksheetName: "Candidates",
+		oauth: {
+			email: spreadsheet_email,
+			key: spreadsheet_key
+		}
+	}, function(err, spreadsheet){
+		if( err ) throw err;
+		
+		var connection = connectMySQL();
+		
+		spreadsheet.receive({getValues: true}, function(err, rows, info) {
+			if( err ) throw err;
+			// Cycle through spreadsheet and create new object
+			data = makeObjectFromSpreadsheet(rows);
+			data.forEach(function(candidate){
+				if( candidate.party ){
+					connection.query('INSERT INTO candidates (name, party) VALUES (?,?)', [candidate.name, candidate.party], function(err){
+						if(err) throw err;
+					});
+				}
+			});
+			
+			connection.end();
+
+		});
+
+		
+	});
+	
 		
 	// Pop open the source spreadsheet
 	Spreadsheet.load({
@@ -204,12 +257,15 @@ app.get("/api/scrape", function(request, response){
 		if( err ) throw err;
 		spreadsheet.receive(function(err, rows, info) {
 			if( err ) throw err;
+			
+			var connection = connectMySQL();
+			
 			// Cycle through spreadsheet and create new object
 			data = makeObjectFromSpreadsheet(rows);
 			
 			// Split 2016 employers and hire dates into arrays
 			data.forEach(function(data){
-				console.log(data["Date Hire/Resignation Known"]);
+			//	console.log(data["Date Hire/Resignation Known"]);
 				data.dates = String(data["Date Hire/Resignation Known"]).split(",");
 				data.employers = data["2016"].split(",");
 			});
@@ -230,7 +286,7 @@ app.get("/api/scrape", function(request, response){
 					
 					// Check if this is a "joining" entry
 					if( data.employers[i] ){
-						console.log(date + ": " + data.Staffer + " joins " + data.employers[i]);
+					// console.log(date + ": " + data.Staffer + " joins " + data.employers[i]);
 						connection.query('INSERT INTO feed (name, employer, action, date, year) VALUES (?,?,?,?,?)', 
 							[data.Staffer,
 							data.employers[i],
@@ -239,7 +295,7 @@ app.get("/api/scrape", function(request, response){
 							year],
 						function(err, rows, header){ 
 							if( err ) throw err;
-							console.log(date + ": " + data.Staffer + " joins " + data.employers[i]);
+						//	console.log(date + ": " + data.Staffer + " joins " + data.employers[i]);
 						});
 					}
 					
@@ -253,7 +309,7 @@ app.get("/api/scrape", function(request, response){
 							year],
 						function(err, rows, header){ 
 							if( err ) throw err;
-							console.log(date + ": " + data.Staffer + " leaves " + data.employers[i+1]);
+						//	console.log(date + ": " + data.Staffer + " leaves " + data.employers[i+1]);
 						});
 					}
 				});

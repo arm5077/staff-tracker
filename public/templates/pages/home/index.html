@@ -5,7 +5,21 @@
 	</div>
 	
 	<div class="right" size-to-sibling >
-		fddfdf
+		<div class="header">
+			<strong>TwentySixteen</strong> campaign staffer tracker
+		</div>
+		
+		<div class="candidates">		
+			<div class="party" ng-repeat="party in parties">
+				<div class = "label">{{party.name}}</div>
+				<div class="candidate" ng-repeat="candidate in party.candidates">
+					<img ng-src="/img/{{ candidate.substr(candidate.indexOf(' ')+1,100) }}.png" />
+					<div class="name">{{candidate}}</div>
+				</div>
+			</div>
+		</div>
+		
+		
 	</div>
 	
 </div>
