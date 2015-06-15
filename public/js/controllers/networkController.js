@@ -18,6 +18,7 @@ angular.module("stafferApp")
 			year.employers.forEach(function(employer){
 				employer.staffers.forEach(function(staffer){
 					temp[staffer] = employer.employer;
+				//	$scope.previouslySelected.push(employer);
 				});
 			});
 		});
@@ -29,16 +30,21 @@ angular.module("stafferApp")
 		$scope.sortStaff();
 		
 		$scope.fullList = $scope.staff;
+		
+
+		
 	});
 	
 	$scope.toggleSelected = function(staffer){
-		if(staffer.selected == false) { 
+		if(staffer.selected == false || staffer.selected == null) { 
 			$scope.clearStafferSelection(); 
 			staffer.selected=true; 
 			$scope.filterCountsByName(staffer.name, true); 
 		} 
 		else { 
 			$scope.clearStafferSelection(); 
+			$scope.clearEmployerSelection(); 
+			$scope.previouslySelected.length = 0;
 		}
 	};
 	
@@ -51,26 +57,31 @@ angular.module("stafferApp")
 		} 
 		else {
 			$scope.staff = $scope.fullList;
-			employer.selected = false;
+			employer.selected = null;
 		}
 		
 	}
 	
 	$scope.filterCountsByLastSelected = function(){
-		$scope.clearSelection();
-		$scope.previouslySelected.forEach(function(employer){
-			employer.selected=true;
-		});
+		$scope.clearEmployerSelection();
+		if( $scope.previouslySelected.length > 0 ) {
+			$scope.dimAllEmployers();
+			$scope.previouslySelected.forEach(function(employer){
+				employer.selected=true;
+			});
+		}
 	}
 	
 	$scope.filterCountsByName = function(name, sticky){
-		$scope.clearSelection();
+		$scope.clearEmployerSelection();
 		if(sticky) $scope.previouslySelected.length = 0;
 		$scope.years.forEach(function(year){
 			year.employers.forEach(function(employer){
 				if( employer.staffers.indexOf(name) != -1){
 					employer.selected = true;
 					if(sticky) $scope.previouslySelected.push(employer);	
+				} else {
+					employer.selected = false;
 				}
 			});
 		});
@@ -80,7 +91,7 @@ angular.module("stafferApp")
 	}
 	
 	$scope.filterList = function(staffers, employer, year){
-		$scope.clearSelection();
+		$scope.clearEmployerSelection();
 		$scope.staff = [];
 		staffers.forEach(function(staffer){
 			$scope.staff.push({ name: staffer, employer: employer });
@@ -97,17 +108,25 @@ angular.module("stafferApp")
 		});
 	}
 	
-	$scope.clearStafferSelection = function(){
-		$scope.staff.forEach(function(staffer){
-			staffer.selected = false;
+	$scope.clearEmployerSelection = function(){
+		$scope.years.forEach(function(year){
+			year.employers.forEach(function(employer){
+				employer.selected = null;
+			})
 		});
 	}
 	
-	$scope.clearSelection = function clearSelection(){
+	$scope.dimAllEmployers = function(){
 		$scope.years.forEach(function(year){
 			year.employers.forEach(function(employer){
 				employer.selected = false;
-			});
+			})
+		});
+	}
+	
+	$scope.clearStafferSelection = function(){
+		$scope.staff.forEach(function(staffer){
+			staffer.selected = false;
 		});
 	}
 	

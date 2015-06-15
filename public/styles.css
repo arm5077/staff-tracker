@@ -264,7 +264,6 @@ a {
 	color: white;
 	font-weight: 100;
 	margin-top: 20px;
-	padding-bottom: 200px;
 }
 
 #network .list ul li {
@@ -308,6 +307,25 @@ a {
 	#network .list ul li.selected .fa {
 		display: block;
 	}
+
+#network .list .clear {
+	font-size: 11pt;
+	padding-left: 10px;
+	font-weight: 100;
+	text-transform: uppercase;
+	color: #999;
+	margin-top: 10px;
+}
+
+	#network .list .clear:hover {
+		color: #ccc;
+		cursor: pointer;
+		font-weight: 300;
+	}
+
+#network .list .spacer {
+	height: 250px;
+}
 
 #network .network {
 	text-align: center;
@@ -387,6 +405,10 @@ a {
 
 #network .employer.selected .name {
 	font-weight: 800;
+}
+
+#network .employer.faded {
+	opacity: .5;
 }
 
 /* Staffer page styles */
