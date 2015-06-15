@@ -49,7 +49,8 @@ angular.module("stafferApp")
 	};
 	
 	$scope.toggleListSelected = function(employer, year){
-		if( !employer.selected ) {
+		if( employer.selected == false || employer.selected == null) {
+			$scope.dimAllEmployers();
 			$scope.previouslySelected.length = 0; 
 			$scope.previouslySelected.push(employer); 
 			$scope.filterList(employer.staffers, employer.employer, year.year); 
@@ -58,6 +59,7 @@ angular.module("stafferApp")
 		else {
 			$scope.staff = $scope.fullList;
 			employer.selected = null;
+			$scope.previouslySelected.length = 0; 
 		}
 		
 	}
@@ -91,7 +93,6 @@ angular.module("stafferApp")
 	}
 	
 	$scope.filterList = function(staffers, employer, year){
-		$scope.clearEmployerSelection();
 		$scope.staff = [];
 		staffers.forEach(function(staffer){
 			$scope.staff.push({ name: staffer, employer: employer });
@@ -109,6 +110,7 @@ angular.module("stafferApp")
 	}
 	
 	$scope.clearEmployerSelection = function(){
+		$scope.previouslySelected.length = 0;
 		$scope.years.forEach(function(year){
 			year.employers.forEach(function(employer){
 				employer.selected = null;
