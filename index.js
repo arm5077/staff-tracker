@@ -62,7 +62,9 @@ app.get("/api/organization/:organization", function(request, response){
 		}
 		else {
 			var names = "";
+			var years = {}
 			rows.forEach(function(row){
+				years[row.name] = row.year;
 				names += " OR name = '" + row.name.replace("'", "\\'") + "'";
 			});
 
@@ -73,7 +75,7 @@ app.get("/api/organization/:organization", function(request, response){
 				rows.forEach(function(row){
 					if( !temp[row.employer] ) 
 						temp[row.employer] = [];
-					temp[row.employer].push({name: row.name, year: row.year});
+					temp[row.employer].push({name: row.name, year: years[row.name]});
 				});
 
 				var exportArray = [];
