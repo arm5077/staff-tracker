@@ -1,5 +1,5 @@
 angular.module("stafferApp")
-.controller("homeController", ["$scope", "$http", "$routeParams", function($scope, $http, $routeParams){
+.controller("homeController", ["$scope", "$http", "$routeParams", "$location", function($scope, $http, $routeParams, $location){
 
 	$http.get("/api/candidates/").success(function(data){
 		var temp = {};
@@ -31,4 +31,20 @@ angular.module("stafferApp")
 	
 	
 	
-}]);
+}])
+.directive('enter', ['$location', function ($location) {
+	return function (scope, element, attrs) {
+		element.bind("keydown keypress", function (event) {
+			if(event.which === 13 ) {
+				scope.$apply(function (){
+					if(typeof scope["filtered" + element[0].title][0] != "undefined"){
+						console.log(scope["filtered" + element[0].title][0]);
+						$location.path("/organization/" + scope["filtered" + element[0].title][0].employer);
+					};
+				});
+
+				event.preventDefault();
+	            }
+	        });
+	    };
+	}]);
