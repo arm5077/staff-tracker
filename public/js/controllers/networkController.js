@@ -40,6 +40,7 @@ angular.module("stafferApp")
 			$scope.clearStafferSelection(); 
 			staffer.selected=true; 
 			$scope.filterCountsByName(staffer.name, true); 
+			
 		} 
 		else { 
 			$scope.clearStafferSelection(); 
@@ -68,10 +69,12 @@ angular.module("stafferApp")
 		$scope.clearEmployerSelection();
 		if( $scope.previouslySelected.length > 0 ) {
 			$scope.dimAllEmployers();
-			$scope.previouslySelected.forEach(function(employer){
-				employer.selected=true;
-			});
 		}
+		
+		$scope.previouslySelected.forEach(function(employer){
+			employer.selected=true;
+		});
+		
 	}
 	
 	$scope.filterCountsByName = function(name, sticky){
@@ -87,7 +90,6 @@ angular.module("stafferApp")
 				}
 			});
 		});
-		
 		
 		
 	}
@@ -110,7 +112,6 @@ angular.module("stafferApp")
 	}
 	
 	$scope.clearEmployerSelection = function(){
-		$scope.previouslySelected.length = 0;
 		$scope.years.forEach(function(year){
 			year.employers.forEach(function(employer){
 				employer.selected = null;

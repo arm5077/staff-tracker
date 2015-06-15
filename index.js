@@ -41,7 +41,7 @@ app.get("/api/staffers", function(request, response){
 app.get("/api/organizations", function(request, response){
 	var connection = connectMySQL();
 	
-	connection.query("SELECT employer from history WHERE year < 2016 GROUP BY employer ORDER BY employer ASC", function(err, rows, header){
+	connection.query("SELECT employer as name from history WHERE year < 2016 GROUP BY employer ORDER BY employer ASC", function(err, rows, header){
 		if(err) throw err;		
 		response.status(200).json(rows);
 		connection.end();

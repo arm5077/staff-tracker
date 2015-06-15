@@ -41,7 +41,7 @@
 			</div>
 			<input ng-model="search.organization" enter title="Organizations">
 			<ul ng-show="search.organization">
-				<a ng-href="#/organization/{{organization.employer}}"  ng-repeat="organization in filteredOrganizations = (organizations | filter:search.organization)"><li>{{organization.employer}}</li></a>
+				<a ng-href="#/organization/{{organization.name}}"  ng-repeat="organization in filteredOrganizations = (organizations | filter:search.organization)"><li>{{organization.name}}</li></a>
 			</ul>
 			
 			
