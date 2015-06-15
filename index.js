@@ -107,7 +107,7 @@ app.get("/api/network/:candidateName", function(request, response){
 		
 		console.log("SELECT * FROM history WHERE " + names.slice(4));
 		
-		connection.query("SELECT * FROM history WHERE " + names.slice(4), function(err, rows, header){
+		connection.query("SELECT * FROM history WHERE ((" + names.slice(4) + ") AND year != 2016) OR employer = ?", [request.params.candidateName], function(err, rows, header){
 			var aggregate = [];
 			var exportArray = [];
 			
