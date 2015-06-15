@@ -25,6 +25,30 @@ app.get("/api/candidates", function(request, response){
 	
 });
 
+// Return 2016 staffers
+app.get("/api/staffers", function(request, response){
+	var connection = connectMySQL();
+	
+	connection.query("SELECT name, MID(name,LOCATE(' ', name) + 1, 100) as lastName from history GROUP BY name ORDER BY lastName ASC", function(err, rows, header){
+		if(err) throw err;		
+		response.status(200).json(rows);
+		connection.end();
+	});
+	
+});
+
+// Return prior organizations
+app.get("/api/organizations", function(request, response){
+	var connection = connectMySQL();
+	
+	connection.query("SELECT employer from history WHERE year < 2016 GROUP BY employer ORDER BY employer ASC", function(err, rows, header){
+		if(err) throw err;		
+		response.status(200).json(rows);
+		connection.end();
+	});
+	
+});
+
 
 // Return a profile page for an organization
 app.get("/api/organization/:organization", function(request, response){

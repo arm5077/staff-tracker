@@ -19,4 +19,16 @@ angular.module("stafferApp")
 		
 	});
 	
+	$http.get("/api/staffers/").success(function(data){
+		$scope.staffers = data;
+		
+	});
+	
+	$http.get("/api/organizations/").success(function(data){
+		$scope.organizations = data;
+		
+	});
+	
+	
+	
 }]);

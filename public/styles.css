@@ -86,12 +86,21 @@ a {
 	margin: auto;
 }
 
-#home
+#home .title {
+	font-size: 17pt;
+	  margin: 30px 0px 15px;
+	  border-bottom: 1px solid #ccc;
+	  padding-bottom: 5px;
+}
 
 #home .candidates .party {
 	margin-bottom: 50px;
 	display: block;
 }
+
+	#home .candidates .party:last-child {
+		margin-bottom: 20px;
+	}
 
 #home .party .label {
 	font-weight: 600;
@@ -102,18 +111,64 @@ a {
 }
 
 #home .candidate {
-	display: inline-block;
-	padding: 10px;
-	margin-right: 15px;
-	text-align: center;
-	background-color: #EA463D;
-	color: white;
-	margin-bottom: 10px;
-	width: 120px;
+  display: inline-block;
+  padding: 10px;
+  margin-right: 15px;
+  text-align: center;
+  background-color: #EA463D;
+  color: white;
+  margin-bottom: 18px;
+  width: 120px;
+  box-shadow: 2px 2px 12px 1px #777;
+  font-weight: 300;
+}
+
+#home .candidate:hover {
+	background-color: #952326;
 }
 
 #home .candidate img {
 	width: 100%;
+}
+
+#home .splitSection {
+	width: 44%;
+  padding-left: 3%;
+	display:inline-block;
+	vertical-align: top;
+}
+
+#home .splitSection label {
+	margin: 10px 0px;
+}
+
+#home .splitSection ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#home .splitSection ul li {
+	padding: 0;
+	margin: 0 0 10px 0;
+	font-size: 13pt;
+}
+
+#home input {
+	padding: 6px 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-family: Roboto, sans-serif;
+	font-size: 12pt;
+	margin-bottom: 15px;
+}
+
+#home .splitSection .label {
+	color: #999;
+	text-transform: uppercase;
+	font-size: 10pt;
+	font-weight: 300;
+	margin-bottom: 5px;
 }
 
 /* Organization page */

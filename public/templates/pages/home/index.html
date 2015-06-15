@@ -9,14 +9,42 @@
 			<strong>TwentySixteen</strong> campaign staffer tracker
 		</div>
 		
-		<div class="candidates">		
+		<div class="candidates">
+			<div class="title">See the history behind a 2016 candidate's current staff</div>		
 			<div class="party" ng-repeat="party in parties">
 				<div class = "label">{{party.name}}</div>
-				<div class="candidate" ng-repeat="candidate in party.candidates">
-					<img ng-src="/img/{{ candidate.substr(candidate.indexOf(' ')+1,100) }}.png" />
-					<div class="name">{{candidate}}</div>
-				</div>
+				<a ng-repeat="candidate in party.candidates" ng-href="#/network/{{candidate}}">
+					<div class="candidate">
+						<img ng-src="/img/{{ candidate.substr(candidate.indexOf(' ')+1,100) }}.png" />
+						<div class="name">{{candidate}}</div>
+					</div>
+				</a>
 			</div>
+		</div>
+		
+		<div class="staffers splitSection">
+			<div class="title">Browse staffers</div>
+			<div class="label">
+				Filter:
+			</div> 
+			<input ng-model="search.name">
+			<ul>
+				<a ng-repeat="staffer in staffers | filter:search.name" href="#/staffer/{{staffer.name}}"><li>{{staffer.name}}</li></a>
+			</ul>
+	
+		</div>
+		
+		<div class="organizations splitSection">
+			<div class="title">Browse organizations</div>
+			<div class="label">
+				Filter:
+			</div>
+			<input ng-model="search.organization">
+			<ul>
+				<a ng-href="#/organization/{{organization.employer}}"  ng-repeat="organization in organizations | filter:search.organization"><li>{{organization.employer}}</li></a>
+			</ul>
+			
+			
 		</div>
 		
 		
