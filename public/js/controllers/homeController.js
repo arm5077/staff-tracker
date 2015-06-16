@@ -1,6 +1,8 @@
 angular.module("stafferApp")
 .controller("homeController", ["$scope", "$http", "$routeParams", "$location", function($scope, $http, $routeParams, $location){
 
+	$scope.header = "<strong>TwentySixteen</strong> Staffer Tracker"
+	
 	$http.get("/api/candidates/").success(function(data){
 		var temp = {};
 		data.forEach(function(candidate){

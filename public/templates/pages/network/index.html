@@ -23,11 +23,33 @@
 		
 		<div class="year" ng-repeat="year in years" ng-click="">
 			<div label class="label">{{ year.year }}</div>
-			<div class="employer" ng-repeat="employer in year.employers" ng-class="{selected: employer.selected == true, faded: employer.selected == false }">
-				<div class = "count" ng-click="toggleListSelected(employer,year)">{{ employer.staffers.length }}</div>
-				<a  ng-if="year.year == 2016" ng-href="#/network/{{ employer.employer }}"><div class = "name">{{ employer.employer }}</div></a>
-				<a  ng-if="year.year != 2016" ng-href="#/organization/{{ employer.employer }}"><div class = "name">{{ employer.employer }}</div></a>
+			
+			<div class="clusters" ng-if="year.employers.filter(filterClusters).length > 0" ng-class="{centered: year.employers.filter(filterSingles).length == 0 }">
+				<div class="employer" ng-repeat="employer in year.employers" ng-if="employer.staffers.length > 1" ng-class="{selected: employer.selected == true, faded: employer.selected == false }">
+					<div class = "count" ng-click="toggleListSelected(employer,year)">{{ employer.staffers.length }}</div>
+					<a  ng-if="year.year == 2016" ng-href="#/network/{{ employer.employer }}"><div class = "name">{{ employer.employer }}</div></a>
+					<a  ng-if="year.year != 2016" ng-href="#/organization/{{ employer.employer }}"><div class = "name">{{ employer.employer }}</div></a>
+				</div>
+			
 			</div>
+			
+			<div class="singles" ng-if="year.employers.filter(filterSingles).length > 0" ng-class="{centered: year.employers.filter(filterClusters).length == 0 }">
+				<div class="employer" ng-repeat="employer in year.employers" ng-if="employer.staffers.length == 1" ng-class="{selected: employer.selected == true, faded: employer.selected == false }">
+					<table>
+						<tr>
+							<td class="count" ng-click="toggleListSelected(employer,year)">
+								<div class="circle">1</div>
+							</td>
+							<td>
+									<a ng-href="#/organization/{{ employer.employer }}"><div class="name">{{ employer.employer }}</div></a>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			
+			
+		
 		</div>
 	
 	</div>

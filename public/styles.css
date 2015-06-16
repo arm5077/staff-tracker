@@ -56,6 +56,10 @@ a {
 
 /* Shared style */
 
+.mobile-header {
+	display: none;
+}
+
 .header {
 	height: 50px;
 	background-color: #EA463D;
@@ -342,7 +346,7 @@ a {
 }
 
 #network .network.partial {
-	padding-right: 200px;
+	padding-right: 230px;
 }
 
 
@@ -374,18 +378,85 @@ a {
   font-weight: 800;
 }
 
-#network .employer {
+#network .year .clusters, #network .year .singles {
+	width: 47%;
+	display: inline-block;
+	text-align: right;
+	vertical-align: top;
+	margin:auto;
+}
+
+#network .year .clusters {
+	margin-right: 5%;
+}
+
+
+#network .year .clusters.centered, #network .year .singles.centered {
+	text-align: center;
+	margin: 0;
+}
+
+#network .employer:hover {
+	cursor: pointer;
+}
+
+#network .year .singles {
+
+	text-align: left;
+}
+
+#network .singles .employer {
+	display: inline-block;
+	margin: 0px 5px 15px;
+	width: 125px;
+	vertical-align:top;
+}
+
+#network .singles .employer .count {
+	width: 30px;
+	font-weight: 800;
+	vertical-align: top;
+	color: #EA463D;
+	border-radius: 50%;
+}
+
+#network .singles .employer .count .circle {
+  text-align: center;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+	border-radius: 50%;
+
+}
+
+	#network .singles .employer .count:hover, #network .singles .employer.selected .count  {
+		color: white;
+	}
+
+	#network .singles .employer .count:hover .circle, #network .singles .employer.selected .count .circle {
+		background-color: #952326;
+	}
+
+#network .singles .employer .name {
+	text-align: left;
+	width: 75px;
+	font-size: 10pt;
+}
+
+#network .singles.centered .employer .name {
+	text-align: center;
+}
+
+#network .clusters .employer {
 	display: inline-block;
 	text-align: center;
 	margin: 0px 5px 15px;
 	vertical-align: top
 }
 
-	#network .employer:hover {
-		cursor: pointer;
-	}
+
 	
-#network .employer .count {
+#network .clusters .employer .count {
 	background-color: #EA463D;
 	display: inline-block;
 	width: 35px;
@@ -399,21 +470,21 @@ a {
 	color: white;
 }
 
-	#network .employer .count:hover {
+	#network .clusters .employer .count:hover {
 		background-color: #952326;
 	}
 
-#network .employer.selected .count {
+#network .clusters .employer.selected .count {
 	background-color: #952326;
 }
 
-#network .employer .name {
+#network .clusters .employer .name {
 	text-align: center;
 	width: 75px;
 	font-size: 10pt;
 }
 
-#network .employer.selected .name {
+#network .clusters .employer.selected .name {
 	font-weight: 800;
 }
 
@@ -531,3 +602,38 @@ a {
 	#feed .info .action {
 		color: #808284;
 	}
+	
+/* Mobile styles */
+
+@media screen and (max-width: 700px) {
+	
+	.mobile-header {
+		display: block;
+		z-index: 2;
+		background-color: #404040;
+		height: 60px;
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		text-align: center;
+		color: rgba(255,255,255,.95);
+		line-height: 60px;
+		font-size: 16pt;
+		font-weight: 100;
+	}
+
+	#home .right {
+		display:none;
+	}
+	
+	#home .feed {
+		position: static;
+		width: 100%;
+	}
+	
+	#feed {
+		border: 0;
+	}
+	
+}

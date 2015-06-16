@@ -10,7 +10,6 @@ angular.module("stafferApp")
 	
 	$http.get("/api/network/" + $routeParams.candidateName).success(function(data){
 		$scope.years = data;
-
 		
 		// Make list of unique staffer names
 		var temp = {};
@@ -34,6 +33,14 @@ angular.module("stafferApp")
 
 		
 	});
+	
+	$scope.filterClusters = function(employer){
+		return employer.staffers.length > 1;	
+	}
+	
+	$scope.filterSingles = function(employer){
+		return employer.staffers.length == 1;	
+	}
 	
 	$scope.toggleSelected = function(staffer){
 		if(staffer.selected == false || staffer.selected == null) { 

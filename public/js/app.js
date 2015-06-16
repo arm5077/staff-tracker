@@ -1,4 +1,7 @@
 angular.module("stafferApp", ['ngRoute'])
+.controller("overallController", ["$scope", "$sce", function($scope, $sce){
+	$scope.renderHTML = function(text){ return $sce.trustAsHtml(text); };
+}])
 .directive("sizeToSibling", function() {
 	return {
 		link: function(scope, element, attr) {
