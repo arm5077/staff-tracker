@@ -33,22 +33,22 @@
 			
 			</div>
 			
-			<div class="singles" ng-if="year.employers.filter(filterSingles).length > 0" ng-class="{centered: year.employers.filter(filterClusters).length == 0 }">
-				<div class="employer" ng-repeat="employer in year.employers" ng-if="employer.staffers.length == 1" ng-class="{selected: employer.selected == true, faded: employer.selected == false }">
-					<table>
-						<tr>
-							<td class="count" ng-click="toggleListSelected(employer,year)">
-								<div class="circle">1</div>
-							</td>
-							<td>
-									<a ng-href="#/organization/{{ employer.employer }}"><div class="name">{{ employer.employer }}</div></a>
-							</td>
-						</tr>
-					</table>
-				</div>
+
+			
+			<div class="employer singles" ng-repeat="employer in year.employers" ng-if="employer.staffers.length == 1" ng-class="{selected: employer.selected == true, faded: employer.selected == false }">
+				<table>
+					<tr>
+						<td class="count" ng-click="toggleListSelected(employer,year)">
+							<div class="circle">1</div>
+						</td>
+						<td>
+								<a ng-href="#/organization/{{ employer.employer }}"><div class="name">{{ employer.employer }}</div></a>
+						</td>
+					</tr>
+				</table>
 			</div>
 			
-			
+			<div style="clear: both"></div>
 		
 		</div>
 	

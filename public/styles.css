@@ -355,6 +355,8 @@ a {
 	padding-top: 10px;
 	position: relative;
 	padding-left: 40px;
+	text-align:left;
+	vertical-align:top;
 }
 
 #network .year:nth-child(2n){
@@ -378,18 +380,13 @@ a {
   font-weight: 800;
 }
 
-#network .year .clusters, #network .year .singles {
-	width: 47%;
+#network .year .clusters {
 	display: inline-block;
 	text-align: right;
 	vertical-align: top;
-	margin:auto;
+	float: left;
+	margin: 0 30px 10px 0;
 }
-
-#network .year .clusters {
-	margin-right: 5%;
-}
-
 
 #network .year .clusters.centered, #network .year .singles.centered {
 	text-align: center;
@@ -405,14 +402,12 @@ a {
 	text-align: left;
 }
 
-#network .singles .employer {
+#network .employer.singles {
 	display: inline-block;
-	margin: 0px 5px 15px;
-	width: 125px;
-	vertical-align:top;
+	vertical-align: top;
 }
 
-#network .singles .employer .count {
+#network .employer.singles .count {
 	width: 30px;
 	font-weight: 800;
 	vertical-align: top;
@@ -420,7 +415,7 @@ a {
 	border-radius: 50%;
 }
 
-#network .singles .employer .count .circle {
+#network .employer.singles .count .circle {
   text-align: center;
   width: 25px;
   height: 25px;
@@ -429,23 +424,20 @@ a {
 
 }
 
-	#network .singles .employer .count:hover, #network .singles .employer.selected .count  {
+	#network .employer.singles .count:hover, #network .employer.singles.selected .count  {
 		color: white;
 	}
 
-	#network .singles .employer .count:hover .circle, #network .singles .employer.selected .count .circle {
+	#network .employer.singles .count:hover .circle, #network.employer.singles.selected .count .circle {
 		background-color: #952326;
 	}
 
-#network .singles .employer .name {
+#network .employer.singles .name {
 	text-align: left;
 	width: 75px;
 	font-size: 10pt;
 }
-
-#network .singles.centered .employer .name {
-	text-align: center;
-}
+	
 
 #network .clusters .employer {
 	display: inline-block;
