@@ -450,7 +450,7 @@ a {
 #network .clusters .employer {
 	display: inline-block;
 	text-align: center;
-	margin: 0px 5px 15px;
+	margin: 0px 5px 10px;
 	vertical-align: top
 }
 
@@ -459,13 +459,13 @@ a {
 #network .clusters .employer .count {
 	background-color: #EA463D;
 	display: inline-block;
-	width: 35px;
+	width: 30px;
 	border-radius: 50%;
-	height: 35px;
+	height: 30px;
 	text-align: center;
-	line-height: 35px;
+	line-height: 30px;
 	margin-bottom: 5px;
-	font-size: 15pt;
+	font-size: 13pt;
 	font-weight: 100;
 	color: white;
 }
@@ -480,7 +480,7 @@ a {
 
 #network .clusters .employer .name {
 	text-align: center;
-	width: 75px;
+	width: 65px;
 	font-size: 10pt;
 }
 
