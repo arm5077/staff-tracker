@@ -1,7 +1,42 @@
 <div id="network" ng-controller="networkController">
-	
 
-	<div class = "list" ng-class="{ hidden: showList == false }">
+
+	<div class="header" header>
+		<i class="fa fa-arrow-circle-left" back-button></i>
+		<a href="#/"><i class="fa fa-home"></i></a>
+		
+		<div class="title">
+			<strong>{{ name }}</strong>: Campaign staff history
+		</div>
+		
+		<div class ="portrait">
+			<img ng-src="/img/{{ name.substr(name.indexOf(' ')+1,100) }}.png" />
+		</div>
+		
+		<div class = "info">
+			<div class="item">
+				<div class="data">
+					{{ years[0].employers[0].staffers.length }}
+				</div>
+				<div class="label">
+					Number of senior staffers
+				</div>
+			</div>
+			<div class="item">
+				<div style="display:inline-block">
+				<div class="data formerEmployer" ng-repeat="name in biggestEmployer.split(' ')">
+					{{ name }}
+				</div>
+				</div>
+				<div class="label">
+					Most common previous job
+				</div>
+			</div>
+		</div>
+		
+	</div>
+
+	<div class = "list" ng-class="{ hidden: showList == false }" scroll-watch="{from: 0, to: 2000}" sw-class="{floating: $positive >= headerHeight}" >
 		<div class="title">Senior 2016 staff</div>
 		<ul>
 			<li ng-repeat="staffer in staff" ng-mouseover="filterCountsByName(staffer.name);" ng-mouseout="filterCountsByLastSelected()" ng-class="{selected: staffer.selected == true}">
@@ -15,10 +50,10 @@
 
 	
 	<div class = "network" ng-class="{ partial: showList == true }">
-		<div class="header">
-			<i class="fa fa-arrow-circle-left" back-button></i>
-			<a href="#/"><i class="fa fa-home"></i></a>
-			<strong>{{ name }}</strong>: Campaign staff history
+
+
+		<div class="sectionHeader">
+		 	History of campaign staff
 		</div>
 		
 		<div class="year" ng-repeat="year in years" ng-click="">

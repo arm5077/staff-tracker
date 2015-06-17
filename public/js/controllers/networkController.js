@@ -7,26 +7,49 @@ angular.module("stafferApp")
 	$scope.fullList = [];
 	$scope.previouslySelected = [];
 	$scope.selectionOn = false;
+	$scope.biggestEmployer = "";
 	
 	$http.get("/api/network/" + $routeParams.candidateName).success(function(data){
 		$scope.years = data;
 		
 		// Make list of unique staffer names
 		var temp = {};
+		var overall = {}
 		data.forEach(function(year){
 			year.employers.forEach(function(employer){
-				employer.staffers.forEach(function(staffer){
-					temp[staffer] = employer.employer;
-				//	$scope.previouslySelected.push(employer);
-				});
+				
+				// Also add to a count of overall employers (skipping 2016, cuz we don't want to add the current candidate)
+				if(year.year != 2016){
+					if( !overall[employer.employer])
+						overall[employer.employer] = 0;
+					overall[employer.employer] += employer.staffers.length;
+
+					employer.staffers.forEach(function(staffer){
+						temp[staffer] = employer.employer;
+					//	$scope.previouslySelected.push(employer);
+					});
+				}
+				
 			});
 		});
 		for( name in temp ){
 			$scope.staff.push({name: name, employer: temp[name] });
 		}
 		
+		
 		// Sort list of unique staffers by last name
 		$scope.sortStaff();
+		
+		// Convert object of overall organizations that have hired staffers into array and sort
+		var employers = [];
+		for( employer in overall ){
+			employers.push({employer: employer, count: overall[employer]});
+		}
+		
+		employers.sort(function(a,b){ return b.count - a.count });
+		
+		// Get employers that has employed largest number of current staffers.
+		$scope.biggestEmployer = employers[0].employer; 
 		
 		$scope.fullList = $scope.staff;
 		
@@ -146,7 +169,6 @@ angular.module("stafferApp")
 		link: function(scope, element, attr) {
 
 			setTimeout(function(){
-				console.log((element[0].offsetWidth) / 2);
 				element.css({
 					"margin-top": ( (element.parent()[0].offsetHeight - element[0].offsetWidth) / 2 - 28) + "px",
 				});	
@@ -154,5 +176,15 @@ angular.module("stafferApp")
 		}
 	};	
 
-});
+})	.directive("header", function() {
+		return {
+			link: function(scope, element, attr) {
+				scope.$watch("name", function(){
+					scope.headerHeight = element[0].offsetHeight;
+				})
+
+			}
+		};	
+
+	});
 

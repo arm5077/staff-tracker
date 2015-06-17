@@ -1,4 +1,4 @@
-angular.module("stafferApp", ['ngRoute'])
+angular.module("stafferApp", ['ngRoute', 'pc035860.scrollWatch'])
 .controller("overallController", ["$scope", "$sce", function($scope, $sce){
 	$scope.renderHTML = function(text){ return $sce.trustAsHtml(text); };
 }])

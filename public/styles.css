@@ -245,9 +245,84 @@ a {
 #network {
 }
 
-#network .header {
 
+
+#network .header {
+	height: auto;
+	padding-bottom: 10px;
+	line-height: normal;
+	position: relative;
 }
+
+#network .header .title {
+	padding-right: 230px;
+	border-bottom: 1px solid rgba(255,255,255,.95);
+	  line-height: 50px;
+}
+
+#network .header .portrait {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #EA463D;
+  box-shadow: -1px 0px 10px 0px rgba(0,0,0,.5);
+  width: 229px;
+  height: 100%;
+}
+
+#network .header .portrait img {
+	height: 90%;
+	  position: relative;
+	  top: 5%;
+	border-radius: 50%;
+}
+
+#network .header .info {
+	padding-right: 230px;
+	text-align: center;
+	vertical-align:top;
+	margin-top: 20px;
+}
+
+#network .header .item {
+	display:inline-block;
+	text-align: center;
+}
+
+#network .header .item:first-child{
+	margin-right: 20px;
+}
+
+#network .header .item .data {
+	font-size: 25pt;
+	font-weight: 800;
+	background-color: rgba(255,255,255,.95);
+	color: #404040;
+	display: inline-block;
+	padding: 5px 10px 6px;
+  text-align: center;
+	vertical-align: top;
+	font-weight: 100;
+}
+
+#network .header .item .data.formerEmployer {
+	font-size: 25pt;
+	margin-bottom: 10px;
+	padding: 5px 10px 6px
+}
+
+#network .header .item .label {
+	padding: 10px;
+	max-width: 100px;
+	font-size: 10pt;
+	color: white;
+	background-color: #404040;
+	display: inline-block;
+	vertical-align: top;
+	text-align: left;
+	
+}
+
 
 #network .list {
 	float: right;
@@ -255,17 +330,22 @@ a {
 	background-color: #404041;
 	height: 100%;
 	z-index:2;
-	position:fixed;
-	top: 0px;
 	right: 0px;
 	color: white;
-	padding: 50px 15px 20px;
+	padding: 20px 15px 20px;
 	overflow: scroll;
 }
 
 	#network .list.hidden {
 		right: -200px;
 	}
+	
+#network .list.floating {
+	position: fixed;
+	top: 0;
+	right: 0;
+	height: 100%;
+}
 	
 #network .list .title {
 	font-weight: 800;
@@ -345,6 +425,16 @@ a {
 	text-align: center;
 }
 
+#network .network .sectionHeader {
+	height: 50px;
+	line-height: 50px;
+	font-weight: 600;
+	color: rgba(255,255,255,.95);
+	background-color: #404040;
+	border-right: 1px solid rgba(255,255,255,.95);
+	font-size: 14pt;
+}
+
 #network .network.partial {
 	padding-right: 230px;
 }
@@ -379,15 +469,16 @@ a {
 }
 
 #network .year .clusters, #network .year .singles {
-	width: 47%;
-	display: inline-block;
+
+	display: block;
 	text-align: right;
 	vertical-align: top;
 	margin:auto;
+	text-align:center;
 }
 
 #network .year .clusters {
-	margin-right: 5%;
+	margin-bottom: 20px;
 }
 
 
@@ -400,10 +491,6 @@ a {
 	cursor: pointer;
 }
 
-#network .year .singles {
-
-	text-align: left;
-}
 
 #network .singles .employer {
 	display: inline-block;
@@ -418,6 +505,7 @@ a {
 	vertical-align: top;
 	color: #EA463D;
 	border-radius: 50%;
+	padding-right: 5px;
 }
 
 #network .singles .employer .count .circle {
@@ -426,7 +514,7 @@ a {
   height: 25px;
   line-height: 25px;
 	border-radius: 50%;
-
+	border: 1px solid #EA463D;
 }
 
 	#network .singles .employer .count:hover, #network .singles .employer.selected .count  {
@@ -435,6 +523,7 @@ a {
 
 	#network .singles .employer .count:hover .circle, #network .singles .employer.selected .count .circle {
 		background-color: #952326;
+		border: 1px solid #952326;
 	}
 
 #network .singles .employer .name {
@@ -443,9 +532,7 @@ a {
 	font-size: 10pt;
 }
 
-#network .singles.centered .employer .name {
-	text-align: center;
-}
+
 
 #network .clusters .employer {
 	display: inline-block;
