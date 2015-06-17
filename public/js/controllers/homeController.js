@@ -40,8 +40,13 @@ angular.module("stafferApp")
 			if(event.which === 13 ) {
 				scope.$apply(function (){
 					if(typeof scope["filtered" + element[0].title][0] != "undefined"){
-						console.log(scope["filtered" + element[0].title][0]);
-						$location.path("/organization/" + scope["filtered" + element[0].title][0].name);
+						if( element[0].title == "Organizations"){
+							$location.path("/organization/" + scope["filtered" + element[0].title][0].name);							
+						}
+						else {
+							$location.path("/staffer/" + scope["filtered" + element[0].title][0].name);							
+						}
+
 					};
 				});
 
