@@ -1,14 +1,33 @@
 	<div id="home">
 
-	<ng-include src="'/templates/pages/mobile-header/index.html'"></ng-include>
+
 
 	<div class="feed">
 		<ng-include src="'/templates/pages/feed/index.html'"></ng-include>
+		
+		<!-- This is mobile stuff below -->
+		<div class="more mobile" ng-click="mobileFeedHeight = mobileFeedHeight + 1000">More</div>
+		
+		<div class="mobile-parties mobile" ng-repeat="party in parties">
+			<div class="mobile-title">{{party.name}}</div>
+			<a ng-href="#/network/{{candidate}}" ng-repeat="candidate in party.candidates">
+				<div class="mobile-candidate">
+					<img ng-src="/img/{{ candidate.substr(candidate.indexOf(' ')+1,100) }}.png" />
+					<div class="text">{{candidate}}</div>
+				</div>
+			</a>
+		</div>
+		
 	</div>
+	
 	
 	<div class="right" size-to-sibling >
 		<div class="header">
 			<strong>TwentySixteen</strong> campaign staffer tracker
+		</div>
+		
+		<div class="hero">
+			<div class="title">Tracking <span>{{staffers.length}}</span> staffers<br />and counting.</div>
 		</div>
 		
 		<div class="candidates">
@@ -51,6 +70,8 @@
 		
 		
 	</div>
+	
+
 	
 </div>
 	

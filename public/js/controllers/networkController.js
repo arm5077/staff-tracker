@@ -52,7 +52,7 @@ angular.module("stafferApp")
 		$scope.biggestEmployer = employers[0].employer; 
 		
 		$scope.fullList = $scope.staff;
-		
+		console.log(data);
 
 		
 	});

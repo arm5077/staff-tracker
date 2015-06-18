@@ -1,6 +1,11 @@
 angular.module("stafferApp", ['ngRoute', 'pc035860.scrollWatch', "ngAnimate"])
 .controller("overallController", ["$scope", "$sce", function($scope, $sce){
 	$scope.renderHTML = function(text){ return $sce.trustAsHtml(text); };
+	$scope.header = "<strong>TwentySixteen</strong> Staffer Tracker";
+	
+	if( window.innerWidth <= 700 )
+		$scope.mobile = true;
+	
 }])
 .directive("sizeToSibling", function() {
 	return {
@@ -10,6 +15,7 @@ angular.module("stafferApp", ['ngRoute', 'pc035860.scrollWatch', "ngAnimate"])
 			window.addEventListener("resize", resize);
 			
 			function resize(){
+				console.log(element.parent().children()[0]);
 				element.css({
 					width: (window.innerWidth - element.parent().children()[0].offsetWidth) + "px",
 					"margin-left": (element.parent().children()[0].offsetWidth) + "px",

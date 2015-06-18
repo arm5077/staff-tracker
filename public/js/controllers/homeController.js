@@ -2,6 +2,8 @@ angular.module("stafferApp")
 .controller("homeController", ["$scope", "$http", "$routeParams", "$location", function($scope, $http, $routeParams, $location){
 
 	$scope.header = "<strong>TwentySixteen</strong> Staffer Tracker"
+	$scope.$parent.header = "<strong>TwentySixteen</strong> Staffer Tracker"
+	$scope.mobileFeedHeight = 1000;
 	
 	$http.get("/api/candidates/").success(function(data){
 		var temp = {};

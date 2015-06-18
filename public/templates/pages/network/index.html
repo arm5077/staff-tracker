@@ -2,8 +2,10 @@
 
 
 	<div class="header" header>
-		<i class="fa fa-arrow-circle-left" back-button></i>
-		<a href="#/"><i class="fa fa-home"></i></a>
+		<div class="social">
+			<i class="fa fa-arrow-circle-left" back-button></i>
+			<a href="#/"><i class="fa fa-home"></i></a>
+		</div>
 		
 		<div class="title">
 			<strong>{{ name }}</strong>: Campaign staff history
@@ -89,5 +91,28 @@
 	
 	</div>
 	
+	<div class = "mobile">
+		
+		<div class = "mobile-year" ng-repeat="year in years">
+			<div class="mobile-label">{{year.year }}</div>
+			<div class="mobile-employer" ng-repeat="employer in year.employers">
+				<div class="head">
+					<a href="#/organization/{{ employer.employer }}">
+						<div class="mobile-count">{{ employer.staffers.length }}</div>
+						<div class="mobile-name">{{employer.employer}}</div>
+					</a>
+					<div class="mobile-toggle" ng-click="employer.mobileShow = !employer.mobileShow"><i class="fa fa-plus-circle"></i></div>
+				</div>
+				<div class="mobile-employees" ng-show="employer.mobileShow" >
+					<a ng-href="#/staffer/{{staffer}}" ng-repeat="staffer in employer.staffers">
+						<div class="mobile-employee" >
+							{{staffer}}
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
 
 </div>

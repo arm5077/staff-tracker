@@ -1,7 +1,9 @@
 <div id="organization">
 	<div class="header">
-		<i class="fa fa-arrow-circle-left" back-button></i>
-		<a href="#/"><i class="fa fa-home"></i></a>
+		<div class="social">
+			<i class="fa fa-arrow-circle-left" back-button></i>
+			<a href="#/"><i class="fa fa-home"></i></a>
+		</div>
 		Where <strong>{{ name }}</strong> alumni are in 2016
 	</div>
 	
@@ -15,11 +17,11 @@
 	<div class="data">
 		<table>
 			<thead>
-				<th></th>
+				<th class="cap"></th>
 				<th>Staffer</th>
 				<th class="number">When they worked for {{name}}</th>
 				<th>Who they're working for now</th>
-				<th></th>
+				<th class="cap"></th>
 			</thead>
 			<tbody>
 				<tr ng-repeat="staffer in staffers | filter:selectedName">

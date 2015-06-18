@@ -52,6 +52,10 @@ body {
 
 body::-webkit-scrollbar, body *::-webkit-scrollbar { width: 0 !important }
 
+.mobile {
+	display: none;
+}
+
 a {
 	color: inherit;
 	text-decoration: none;
@@ -98,6 +102,14 @@ a {
 		line-height: 50px;
 		cursor: pointer;
 	}
+	
+.social {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	display: inline-block;
+	padding-left: 10px;
+}
 
 /* Home page */
 
@@ -116,6 +128,26 @@ a {
 	  margin: 30px 0px 15px;
 	  border-bottom: 1px solid #ccc;
 	  padding-bottom: 5px;
+}
+
+#home .hero {
+	width: 90%;
+	margin: 20px auto;
+}
+
+#home .hero .title {
+	font-size: 50pt;
+	font-weight: 100;
+	border: 0;
+
+}
+
+#home .hero .title span {
+//	background-color: #EA463D;
+//	color: white;
+	border-bottom: 3px solid #404040;
+	display: inline-block;
+	padding: 0px 0px;
 }
 
 #home .candidates .party {
@@ -682,7 +714,7 @@ a {
 	}
 
 	#staffer tr:nth-child(2n){
-		background-color: #dadada;
+		background-color: #eee;
 	}
 
 #staffer td {
@@ -767,8 +799,12 @@ a {
 
 @media screen and (max-width: 700px) {
 	
+	.mobile {
+		display: block;
+	}
+	
 	.content {
-		margin-top: 50px;
+		margin-top: 60px;
 	}
 	
 	.mobile-header {
@@ -787,6 +823,28 @@ a {
 		font-weight: 100;
 	}
 
+	.header .social {
+		display:none;
+	}
+	
+	#organization .cap {
+		display: none;
+	}
+
+	#organization .data table {
+		font-size: 10pt;
+		
+	}
+	
+	#organization .data td, #organization .data th {
+		min-width: 10px;
+	}
+
+	#organization .portrait img {
+		width: 100px;
+		height: 100px;
+	}
+
 	#home .right {
 		display:none;
 	}
@@ -796,8 +854,156 @@ a {
 		width: 100%;
 	}
 	
+	#home .mobile-parties {
+		width: 100%;
+		margin: 20px auto;
+	}
+	
+	#home .mobile-title {
+		font-size: 12pt;
+		font-weight: 600;
+		color: 404040;
+		text-transform: uppercase;
+		margin-bottom: 15px;
+		padding-left: 15px;
+	}
+	
+	#home .mobile-candidate {
+		background-color: #EA463D;
+		height: 60px;
+		line-height: 60px;
+		border-bottom: 1px solid rgba(255,255,255,.8);
+		overflow: hidden;
+		color: white;
+	}
+	
+	#home .mobile-candidate img {
+		height: 80%;
+		position: relative;
+		top: 10%;
+		margin: 0px 15px 0px 10px;
+		border-radius: 50%;
+	}
+	
+	#home .mobile-candidate .text {
+		display: inline-block;
+		vertical-align:top;
+		font-size: 14pt;
+		font-weight: 100;
+	}
+	
 	#feed {
 		border: 0;
+		overflow:hidden;
+		transition: .25s all ease-in;
+	}
+	
+	#feed thead {
+		background-color: #EA463D;
+	}
+	
+	.more {
+		width: 90%;
+		  margin: 10px auto;
+		  text-align: center;
+		  padding: 15px 0px;
+		  background-color: #404040;
+		  color: rgba(255,255,255,.95);
+		  font-size: 14pt;
+		  border-radius: 5px;
+		cursor: pointer;
+		border: 1px solid white;
+	}
+	
+	#network .header {
+		padding-bottom: 0;
+	}
+	
+	#network .header .title {
+		padding: 0;
+	}
+	
+	#network .portrait {
+		display: none;
+	}
+	
+	#network .info {
+		display: none;
+	}
+	
+	#network .network {
+		display: none;
+	}
+	
+	#network .list {
+		display: none;
+	}
+	
+	#network .mobile-label {
+		padding: 10px 15px;
+	  background-color: #606060;
+	  color: rgba(255,255,255,.95);
+	  font-weight: 500;
+	}
+	
+	#network .mobile-employer {
+		background-color: white;
+
+
+		overflow: hidden;
+		color: #404040;
+		border-bottom: 1px solid #ccc;
+		position: relative;
+	}
+	
+	
+	#network .mobile-employer .head {
+		height: 60px;
+		line-height: 60px;
+		position:relative;
+		padding: 0px 15px;
+	}
+	
+		#network .mobile-employer:last-child {
+			border: 0;
+		}
+		
+	#network .mobile-toggle {
+		position: absolute;
+		top: 0px;
+		right: 15px;
+		color: #A0A0A0;
+		font-size: 20pt;
+	}
+	
+	#network .mobile-count {
+		color: #EA463D;
+		font-size:16pt;
+		font-weight: 600;
+		display:inline-block;
+		width: 35px;
+		text-align: center;
+		margin-right: 10px;
+	}
+
+	#network .mobile-name {
+		color: #404040;
+		display: inline-block;
+		vertical-align: top;
+		font-weight: 300;
+	}
+	
+	#network .mobile-employees {
+
+	}
+
+	#network .mobile-employee {
+		padding: 20px 0px 20px 65px;
+		background-color: rgba(234, 70, 61, 0.7);
+		color: #202020;
+		opacity: .75;
+		border-bottom: 1px solid rgba(0,0,0,.3);
+		font-weight: 400;
 	}
 	
 }

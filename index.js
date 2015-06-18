@@ -54,7 +54,7 @@ app.get("/api/organizations", function(request, response){
 app.get("/api/organization/:organization", function(request, response){
 	var connection = connectMySQL();
 	
-	connection.query("SELECT * FROM history WHERE employer = ? GROUP BY name", [request.params.organization], function(err, rows, header){
+	connection.query("SELECT * FROM history WHERE employer = ? AND year != 2016 GROUP BY name", [request.params.organization], function(err, rows, header){
 		if(err) throw err;
 		
 		if( rows.length == 0 ){
