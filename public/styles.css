@@ -150,6 +150,14 @@ a {
 	padding: 0px 0px;
 }
 
+#home .hero .text {
+	  font-size: 16pt;
+	  font-weight: 300;
+	  max-width: 600px;
+	  width: 100%;
+	  line-height: 1.3em;
+}
+
 #home .candidates .party {
 	margin-bottom: 50px;
 	display: block;
