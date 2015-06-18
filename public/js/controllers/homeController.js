@@ -33,6 +33,14 @@ angular.module("stafferApp")
 		
 	});
 	
+	$scope.search = function(){
+
+		if( $scope.stafferSearch )
+			$location.path('/search/staff/' + $scope.stafferSearch);
+		if( $scope.organizationSearch )
+			$location.path('/search/organization/' + $scope.organizationSearch);
+	}
+	
 	
 	
 }])

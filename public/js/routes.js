@@ -15,6 +15,14 @@ angular.module("stafferApp").config(function($routeProvider){
 		templateUrl: "/templates/pages/organization/",
 		controller: "organizationController"
 	})
+	.when("/search/staff/:stafferName", {
+		templateUrl: "/templates/pages/search/",
+		controller: "searchController"
+	})
+	.when("/search/organization/:organizationName", {
+		templateUrl: "/templates/pages/search/",
+		controller: "searchController"
+	})
 	.when("/", {
 		templateUrl: "/templates/pages/home/",
 		controller: "homeController"
