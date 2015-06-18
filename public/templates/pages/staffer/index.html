@@ -3,20 +3,24 @@
 	<div class="header">
 		<i class="fa fa-arrow-circle-left" back-button></i>
 		<a href="#/"><i class="fa fa-home"></i></a>
-		<strong>{{ name }}</strong>: Previous campaign work
+		Staffer <strong>{{ name }}</strong>'s previous campaign work
 	</div>
 		<table>
 		<thead>
+			<th></th>
 			<th class = "year">Election cycle</th>
 			<th>Candidate/group</th>
+			<th></th>
 		</thead>
 		<tbody>
 			<tr ng-repeat="job in jobs.history">
+				<td class="cap"></td>
 				<td class="year">{{job.year}}</td>
 				<td>
-					<a ng-if="job.year == 2016" ng-href="#/network/{{job.employer}}">{{job.employer}}</a>
-					<a ng-if="job.year != 2016" ng-href="#/organization/{{job.employer}}">{{job.employer}}</a>
+					<a ng-if="job.year == 2016" ng-href="#/network/{{job.employer}}"><strong>{{job.employer}}<strong></a>
+					<a ng-if="job.year != 2016" ng-href="#/organization/{{job.employer}}"><strong>{{job.employer}}<strong></a>
 				</td>
+				<td class="cap"></td>
 			</tr>
 		</tbody>
 	</div>	

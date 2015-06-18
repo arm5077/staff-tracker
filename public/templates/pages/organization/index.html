@@ -1,26 +1,38 @@
-<div id="organization" ng-controller="organizationController">
+<div id="organization">
 	<div class="header">
 		<i class="fa fa-arrow-circle-left" back-button></i>
 		<a href="#/"><i class="fa fa-home"></i></a>
 		Where <strong>{{ name }}</strong> alumni are in 2016
 	</div>
+	
+	<div class="portraits">
+		<div class="portrait" ng-repeat="candidate in candidates" ng-click="toggleCandidate(candidate.name)">
+			<img ng-src="/img/{{ candidate.name.substr(candidate.name.indexOf(' ')+1,100) }}.png" />
+			{{candidate.name}}
+		</div>
+	</div>
+
+	<div class="data">
+		<table>
+			<thead>
+				<th></th>
+				<th>Staffer</th>
+				<th class="number">When they worked for {{name}}</th>
+				<th>Who they're working for now</th>
+				<th></th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="staffer in staffers | filter:selectedName">
+					<td class="cap"></td>
+					<td><strong><a ng-href="#/staffer/{{staffer.name}}">{{staffer.name}}</strong></td>
+					<td class="number">{{staffer.year}}</td>
+					<td><a href="#/network/{{staffer.employer}}">{{staffer.employer}}</a></td>
+					<td class="cap"></td>
+				</tr>
+			</tbody>
+		</table>
+	</data>
 
 	
-
-	<table class = "entry">
-		<tr ng-repeat="organization in organizations">
-			<td class="name"><a ng-href="#/network/{{organization.name}}">{{organization.name}}</a></td>
-			<td class="info">
-				<bar></bar>
-				<table class="staffers">
-
-						<tr ng-repeat="staffer in organization.staffers">
-							<td class="year">{{staffer.year}}</td>
-							<td class="staffer"><a ng-href="#/staffer/{{staffer.name}}">{{staffer.name}}</a></td>
-						</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
 
 </div>

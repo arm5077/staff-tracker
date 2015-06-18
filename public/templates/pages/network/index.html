@@ -39,9 +39,9 @@
 	<div class = "list" ng-class="{ hidden: showList == false }" scroll-watch="{from: 0, to: 2000}" sw-class="{floating: $positive >= headerHeight}" >
 		<div class="title">Senior 2016 staff</div>
 		<ul>
-			<li ng-repeat="staffer in staff" ng-mouseover="filterCountsByName(staffer.name);" ng-mouseout="filterCountsByLastSelected()" ng-class="{selected: staffer.selected == true}">
-				<a ng-href="#/staffer/{{staffer.name}}" >{{ staffer.name }}</a>
-				<i class="fa fa-thumb-tack" ng-click="toggleSelected(staffer)"></i>
+			<li ng-repeat="staffer in staff" ng-mouseover="filterCountsByName(staffer.name);" ng-mouseout="filterCountsByLastSelected()" ng-class="{selected: staffer.selected == true}" ng-click="toggleSelected(staffer)">
+				{{ staffer.name }}
+				<a ng-href="#/staffer/{{staffer.name}}" ><i class="fa fa-list-alt"></i></a>
 			</li>
 		</ul>
 		<div class="clear" ng-show="staff != fullList" ng-click="clearEmployerSelection(); previouslySelected.length = 0; staff = fullList;">Clear selection</div>

@@ -61,8 +61,12 @@ app.get("/api/organization/:organization", function(request, response){
 			response.status(200).json([]);
 		}
 		else {
+			
+		
+			
 			var names = "";
 			var years = {}
+			var staff = [];
 			rows.forEach(function(row){
 				years[row.name] = row.year;
 				names += " OR name = '" + row.name.replace("'", "\\'") + "'";
@@ -76,6 +80,7 @@ app.get("/api/organization/:organization", function(request, response){
 					if( !temp[row.employer] ) 
 						temp[row.employer] = [];
 					temp[row.employer].push({name: row.name, year: years[row.name]});
+					staff.push({name: row.name, year: years[row.name], employer: row.employer});
 				});
 
 				var exportArray = [];
@@ -86,8 +91,17 @@ app.get("/api/organization/:organization", function(request, response){
 				exportArray.sort(function(a,b){
 					return b.count - a.count;
 				});
-
-				response.status(200).json(exportArray);
+			
+				// Let's sort these records by last name.
+				staff.sort(function(a,b){
+					if( b.name.slice(b.name.indexOf(" ") + 1) > a.name.slice(a.name.indexOf(" ") + 1) )
+						return -1;
+					else
+						return 1;
+				});
+			
+				response.status(200).json({staffers: staff, candidates: exportArray});
+				
 
 			});
 		}
@@ -110,6 +124,8 @@ app.get("/api/network/:candidateName", function(request, response){
 		connection.query("SELECT * FROM history WHERE ((" + names.slice(4) + ") AND year != 2016) OR employer = ?", [request.params.candidateName], function(err, rows, header){
 			var aggregate = [];
 			var exportArray = [];
+
+		
 			
 			if(rows){
 				// Re-organize and aggregate first by year, then by employer.
