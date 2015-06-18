@@ -19,7 +19,7 @@
 			<div class = "info-label">Fast stats:</div>
 			<div class="item">
 				<div class="label">
-					Number of tracked staffers
+					Staffers we're tracking
 				</div>
 				<div class="data">
 					{{ years[0].employers[0].staffers.length }}
@@ -40,7 +40,10 @@
 	</div>
 
 	<div class = "list" ng-class="{ hidden: showList == false }" scroll-watch="{from: 0, to: 2000}" sw-class="{floating: $positive >= headerHeight}" >
-		<div class="title">Senior 2016 staff</div>
+		<div class="title">Tracked 2016 staff</div>
+		<div class="explainer">
+			Click a staffer's name to highlight their experience on the timeline. Or select <i class="fa fa-list-alt"></i> to see more details about them. 
+		</div>
 		<ul>
 			<li ng-repeat="staffer in staff" ng-mouseover="filterCountsByName(staffer.name);" ng-mouseout="filterCountsByLastSelected()" ng-class="{selected: staffer.selected == true}" ng-click="toggleSelected(staffer)">
 				{{ staffer.name }}
@@ -103,10 +106,16 @@
 			<div class="mobile-label">{{year.year }}</div>
 			<div class="mobile-employer" ng-repeat="employer in year.employers">
 				<div class="head">
-					<a href="#/organization/{{ employer.employer }}">
+					<!-- If this is the first result (ie, the current candidate), deactivate org page link -->
+					<a ng-if="$parent.$index==0">
 						<div class="mobile-count">{{ employer.staffers.length }}</div>
 						<div class="mobile-name">{{employer.employer}}</div>
 					</a>
+					<a ng-if="$parent.$index > 0" ng-href="#/organization/{{ employer.employer }}">
+						<div class="mobile-count">{{ employer.staffers.length }}</div>
+						<div class="mobile-name">{{employer.employer}}</div>
+					</a>
+					
 					<div class="mobile-toggle" ng-click="employer.mobileShow = !employer.mobileShow"><i class="fa" ng-class="{ 'fa-minus-circle': employer.mobileShow, 'fa-plus-circle': !employer.mobileShow}"></i></div>
 				</div>
 				<div class="mobile-employees" ng-class="{show: employer.mobileShow }" >

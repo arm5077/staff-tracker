@@ -63,10 +63,11 @@
 		</div>
 		
 		<div class="staffers splitSection">
-			<div class="title">Browse staffers</div>
+			<div class="title">Search staffers</div>
+
 			<div class="label">
-				Filter:
-			</div> 
+				Search by name
+			</div>
 			<input ng-model="searches.name" enter title="Staffers">
 			<ul ng-show="searches.name">
 				<a ng-repeat="staffer in filteredStaffers = (staffers | filter:searches.name)" href="#/staffer/{{staffer.name}}"><li>{{staffer.name}}</li></a>
@@ -75,9 +76,9 @@
 		</div>
 		
 		<div class="organizations splitSection">
-			<div class="title">Browse organizations</div>
+			<div class="title">Search former jobs</div>
 			<div class="label">
-				Filter:
+				Search by name
 			</div>
 			<input ng-model="searches.organization" enter title="Organizations">
 			<ul ng-show="searches.organization">
