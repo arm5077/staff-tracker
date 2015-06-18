@@ -50,7 +50,7 @@ body {
 	margin: 0;
 }
 
-body::-webkit-scrollbar, body *::-webkit-scrollbar { width: 0 !important }
+//body::-webkit-scrollbar, body *::-webkit-scrollbar { width: 0 !important }
 
 .mobile {
 	display: none;
@@ -136,26 +136,31 @@ a {
 }
 
 #home .hero .title {
-	font-size: 50pt;
+	font-size: 45pt;
 	font-weight: 100;
 	border: 0;
+	font-weight: 800;
+	color: #404040;
+	line-height: 1.1em;
 
 }
 
 #home .hero .title span {
-//	background-color: #EA463D;
-//	color: white;
-	border-bottom: 3px solid #404040;
+	color: #EA463D;
 	display: inline-block;
 	padding: 0px 0px;
 }
 
 #home .hero .text {
-	  font-size: 16pt;
+	  font-size: 14pt;
 	  font-weight: 300;
 	  max-width: 600px;
 	  width: 100%;
 	  line-height: 1.3em;
+}
+
+#home .candidates a {
+	text-decoration: none;
 }
 
 #home .candidates .party {
@@ -242,6 +247,11 @@ a {
 /* Organization page */
 #organization {
 	
+}
+
+#organization .header {
+	background-color: #d5b329;
+	color: white;
 }
 
 #organization .portraits {
