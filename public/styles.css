@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:100,400,300,500,700);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,300);
 
 /*
 @keyframes slideInRight {
@@ -86,12 +87,12 @@ a {
 }
 
 .header {
-	height: 50px;
+	height: 60px;
 	background-color: #EA463D;
 	text-align: center;
-	line-height: 50px;
+	line-height: 60px;
 	color: rgba(255, 255, 255, .95);
-	font-size: 16pt;
+	font-size: 20pt;
 	font-weight: 100;
 }
 
@@ -199,6 +200,7 @@ a {
 
 #home .candidate img {
 	width: 100%;
+	background-color: white;
 }
 
 #home .splitSection {
@@ -254,33 +256,59 @@ a {
 	color: white;
 }
 
+#organization .organization {
+	text-align: center;
+	margin: 30px 0px 0px;
+}
+
+#organization .organization .totem {
+	//background-color: rgba(213, 179, 41, 0.8);
+	background-color: #606060;
+	border-radius: 10px;
+	padding: 15px;
+	color: rgba(255,255,255,1);
+	display: inline-block;
+	font-size: 20pt;
+	font-weight: 800;
+}
+
+#organization .organization .fa-long-arrow-down {
+	display: block;
+	margin: 30px 0px;
+	font-size: 20pt;
+	color: #606060
+}
+
 #organization .portraits {
 	text-align: center;
-	padding: 20px 0px;
+	padding: 0px 0px 20px;
 }
 
 #organization .portrait {
 	display: inline-block;
 	overflow: hidden;
 	position:relative;
-	font-weight: 200;
+	font-weight: 400;
 	margin: 0px 15px 10px;
-	font-size: 13pt;
+	font-size: 12pt;
 }
 
 	#organization .portrait:hover {
-		font-weight: 400;
 		cursor: pointer;
 	}
 
 #organization .portrait img {
 	border-radius: 50%;
-	background-color: red;
-	width: 150px;
-	height: 150px;
+	width: 100px;
+	height: 100px;
 	display: block;
 	margin-bottom: 10px;
+	background-color: rgba(213, 179, 41, 0.47)
 }
+
+	#organization .portrait:hover img {
+			background-color: rgba(213, 179, 41, 1);
+	}
 
 #organization .data {
 
@@ -366,7 +394,7 @@ a {
 
 #network .header .title {
 	padding-right: 230px;
-	border-bottom: 1px solid rgba(255,255,255,.75);
+	border-bottom: 1px solid rgba(255,255,255,.5);
 	  line-height: 50px;
 }
 
@@ -385,6 +413,7 @@ a {
 	  position: relative;
 	  top: 5%;
 	border-radius: 50%;
+	background-color: white;
 }
 
 #network .header .info {
@@ -392,11 +421,22 @@ a {
 	text-align: center;
 	vertical-align:top;
 	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+#network .header .info-label {
+	display: inline-block;
+  vertical-align: bottom;
+  padding: 14px 11px;
+  font-size: 14pt;
+  font-weight: 400;
 }
 
 #network .header .item {
 	display:inline-block;
-	text-align: center;
+	text-align: center;	
+	background-color: white;
+	margin-right: 10px;
 }
 
 #network .header .item:first-child{
@@ -404,33 +444,29 @@ a {
 }
 
 #network .header .item .data {
-	font-size: 25pt;
+	font-size: 22pt;
 	font-weight: 800;
+	font-family: "Roboto Slab", sans-serif;
 	background-color: rgba(255,255,255,.95);
-	color: #404040;
+	color: #EA463D;
 	display: inline-block;
-	padding: 5px 10px 6px;
-  text-align: center;
+	padding: 5px 10px 0px 0px;
+  	text-align: center;
 	vertical-align: top;
 	font-weight: 100;
 }
 
-#network .header .item .data.formerEmployer {
-	font-size: 25pt;
-	margin-bottom: 10px;
-	padding: 5px 10px 6px
-}
 
 #network .header .item .label {
 	padding: 10px;
 	max-width: 100px;
 	font-size: 10pt;
-	color: white;
-	background-color: #404040;
+	color: #404040;
+	background-color: white;
 	display: inline-block;
 	vertical-align: top;
-	text-align: left;
-	
+	text-align: right;
+	font-weight: 300;
 }
 
 
@@ -471,7 +507,7 @@ a {
 }
 
 #network .list ul li {
-	margin-bottom: 15px;
+	margin-bottom: 5px;
 	position:relative;
 }
 
@@ -637,11 +673,11 @@ a {
   font-size: 10pt;
 }
 
-	#network .singles .employer .count:hover, #network .singles .employer.selected .count  {
+	#network .singles .employer:hover  .count, #network .singles .employer.selected .count  {
 		color: white;
 	}
 
-	#network .singles .employer .count:hover .circle, #network .singles .employer.selected .count .circle {
+	#network .singles .employer:hover .count .circle, #network .singles .employer.selected .count .circle {
 		background-color: #952326;
 		border: 1px solid #952326;
 	}
@@ -677,7 +713,7 @@ a {
 	color: white;
 }
 
-	#network .clusters .employer .count:hover {
+	#network .clusters .employer:hover .count {
 		background-color: #952326;
 	}
 
@@ -736,7 +772,7 @@ a {
 		border-bottom: 1px solid #ccc;
 	}
 
-	#staffer tr:nth-child(2n){
+	#staffer tbody tr:nth-child(2n + 1){
 		background-color: #eee;
 	}
 
@@ -1077,6 +1113,12 @@ a {
 		opacity: .75;
 		border-bottom: 1px solid rgba(0,0,0,.3);
 		font-weight: 400;
+		height: 0;
+		transition: .5s all;
+	}
+
+	#network .mobile-employee .show {
+		height: auto;	
 	}
 
 	.header {

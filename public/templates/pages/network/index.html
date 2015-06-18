@@ -16,22 +16,23 @@
 		</div>
 		
 		<div class = "info">
+			<div class = "info-label">Fast stats:</div>
 			<div class="item">
+				<div class="label">
+					Number of tracked staffers
+				</div>
 				<div class="data">
 					{{ years[0].employers[0].staffers.length }}
-				</div>
-				<div class="label">
-					Number of senior staffers
 				</div>
 			</div>
 			<div class="item">
 				<div style="display:inline-block">
-				<div class="data formerEmployer" ng-repeat="name in biggestEmployer.split(' ')">
-					{{ name }}
-				</div>
-				</div>
-				<div class="label">
-					Most common previous job
+					<div class="label">
+						Most common previous job
+					</div>
+					<div class="data formerEmployer" ng-repeat="name in biggestEmployer.split(' ')">
+						{{ name }}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -54,9 +55,7 @@
 	<div class = "network" ng-class="{ partial: showList == true }">
 
 
-		<div class="sectionHeader">
-		 	History of campaign staff
-		</div>
+
 		
 		<div class="year" ng-repeat="year in years" ng-click="">
 			<div label class="label">{{ year.year }}</div>
@@ -108,9 +107,9 @@
 						<div class="mobile-count">{{ employer.staffers.length }}</div>
 						<div class="mobile-name">{{employer.employer}}</div>
 					</a>
-					<div class="mobile-toggle" ng-click="employer.mobileShow = !employer.mobileShow"><i class="fa fa-plus-circle"></i></div>
+					<div class="mobile-toggle" ng-click="employer.mobileShow = !employer.mobileShow"><i class="fa" ng-class="{ 'fa-minus-circle': employer.mobileShow, 'fa-plus-circle': !employer.mobileShow}"></i></div>
 				</div>
-				<div class="mobile-employees" ng-show="employer.mobileShow" >
+				<div class="mobile-employees" ng-class="{show: employer.mobileShow }" >
 					<a ng-href="#/staffer/{{staffer}}" ng-repeat="staffer in employer.staffers">
 						<div class="mobile-employee" >
 							{{staffer}}

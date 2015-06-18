@@ -7,6 +7,13 @@
 		Where <strong>{{ name }}</strong> alumni are in 2016
 	</div>
 	
+	<div class="organization">
+		<div class="totem">{{ name }}</div>
+		
+		<i class="fa fa-long-arrow-down"></i></a>
+		
+	</div>
+	
 	<div class="portraits">
 		<div class="portrait" ng-repeat="candidate in candidates" ng-click="toggleCandidate(candidate.name)">
 			<img ng-src="/img/{{ candidate.name.substr(candidate.name.indexOf(' ')+1,100) }}.png" />
