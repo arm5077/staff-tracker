@@ -67,9 +67,9 @@
 			<div class="label">
 				Filter:
 			</div> 
-			<input ng-model="search.name" enter title="Staffers">
-			<ul ng-show="search.name">
-				<a ng-repeat="staffer in filteredStaffers = (staffers | filter:search.name)" href="#/staffer/{{staffer.name}}"><li>{{staffer.name}}</li></a>
+			<input ng-model="searches.name" enter title="Staffers">
+			<ul ng-show="searches.name">
+				<a ng-repeat="staffer in filteredStaffers = (staffers | filter:searches.name)" href="#/staffer/{{staffer.name}}"><li>{{staffer.name}}</li></a>
 			</ul>
 	
 		</div>
@@ -79,8 +79,8 @@
 			<div class="label">
 				Filter:
 			</div>
-			<input ng-model="search.organization" enter title="Organizations">
-			<ul ng-show="search.organization">
+			<input ng-model="searches.organization" enter title="Organizations">
+			<ul ng-show="searches.organization">
 				<a ng-href="#/organization/{{organization.name}}"  ng-repeat="organization in filteredOrganizations = (organizations | filter:search.organization)"><li>{{organization.name}}</li></a>
 			</ul>
 			
