@@ -40,9 +40,9 @@
 	</div>
 
 	<div class = "list" ng-class="{ hidden: showList == false }" scroll-watch="{from: 0, to: 2000}" sw-class="{floating: $positive >= headerHeight}" >
-		<div class="title">Tracked 2016 staff</div>
 		<div class="explainer">
-			Click a staffer's name to highlight their experience on the timeline. Or select <i class="fa fa-list-alt"></i> to see more details about them. 
+			<div class="title">Tracked staffers {{name}} 2016</div>
+			Click a staffer's name to highlight their experience on the timeline, or select <i class="fa fa-list-alt"></i> to see more details about them. 
 		</div>
 		<ul>
 			<li ng-repeat="staffer in staff" ng-mouseover="filterCountsByName(staffer.name);" ng-mouseout="filterCountsByLastSelected()" ng-class="{selected: staffer.selected == true}" ng-click="toggleSelected(staffer)">
@@ -64,6 +64,9 @@
 			<div label class="label">{{ year.year }}</div>
 			
 			<div class="clusters" ng-if="year.employers.filter(filterClusters).length > 0" ng-class="{centered: year.employers.filter(filterSingles).length == 0 }">
+				<div class="infobox" ng-if="$index==1">
+					<table><tr><td>This means <strong>{{year.employers[0].staffers.length}}</strong> of {{name}}'s current staffers worked for <strong>{{year.employers[0].employer}}</strong> in <strong>{{year.year}}</strong>.</td><td> <i class="fa fa-arrow-right"></i></tr></table>
+				</div>
 				<div class="employer" ng-repeat="employer in year.employers" ng-if="employer.staffers.length > 1" ng-class="{selected: employer.selected == true, faded: employer.selected == false }">
 					<a  ng-if="year.year == 2016" ng-href="#/network/{{ employer.employer }}">
 						<div class = "count">{{ employer.staffers.length }}</div>
@@ -78,6 +81,10 @@
 			</div>
 			
 			<div class="singles" ng-if="year.employers.filter(filterSingles).length > 0" ng-class="{centered: year.employers.filter(filterClusters).length == 0 }">
+				<div class="infobox" ng-if="$index==1 && year.employers.filter(filterClusters).length == 0">
+					<table><tr><td>This means <strong>{{year.employers.filter(filterSingles)[0].staffers.length}}</strong> of {{name}}'s current staffers worked for <strong>{{year.employers.filter(filterSingles)[0].employer}}</strong> in <strong>{{year.year}}</strong>.</td><td> <i class="fa fa-arrow-right"></i></tr></table>
+				</div>
+				
 				<div class="employer" ng-repeat="employer in year.employers" ng-if="employer.staffers.length == 1" ng-class="{selected: employer.selected == true, faded: employer.selected == false }">
 					<a ng-href="#/organization/{{ employer.employer }}">
 					<table>

@@ -92,7 +92,7 @@ a {
 	text-align: center;
 	line-height: 50px;
 	color: rgba(255, 255, 255, .95);
-	font-size: 16pt;
+	font-size: 14pt;
 	font-weight: 100;
 }
 
@@ -476,7 +476,7 @@ a {
 	z-index:2;
 	right: 0px;
 	color: white;
-	padding: 20px 15px 20px;
+	padding: 0px 15px 20px;
 	overflow: scroll;
 }
 
@@ -493,16 +493,20 @@ a {
 	
 #network .list .title {
 	font-weight: 800;
+	font-size: 14pt;
+	margin-bottom: 10px;
 }
 
 #network .list .explainer {
 	font-weight: 300;
-	margin: 10px 0px -10px;
-	line-height:1.4em;
+	margin: 0px 0px -10px;
+	line-height: 1.4em;
 	background-color: rgba(0,0,0,.3);
-	  padding: 10px;
-	font-size:11pt;
-	
+	padding: 15px;
+	font-size: 11pt;
+	width: 200px;
+	margin-left: -15px;
+	color: rgba(255,255,255,.9);
 }
 
 #network .list .explainer .fa {
@@ -634,6 +638,27 @@ a {
   font-weight: 800;
 }
 
+.network .year .infobox {
+	display: inline-block;
+	font-size: 11pt;
+	background-color: #404040;
+	padding: 10px;
+	color: rgba(255,255,255,.95);
+	vertical-align: top;
+	max-width: 300px;
+	font-weight:300;
+	margin-bottom: 10px;
+}
+
+.network .year .infobox td:first-child{
+	text-align: right;
+	padding-right: 10px;
+}
+
+.network .year .infobox td:nth-child(2){
+	vertical-align: top;
+}
+
 #network .year .clusters, #network .year .singles {
 
 	display: block;
@@ -647,6 +672,11 @@ a {
 	margin-bottom: 20px;
 }
 
+	#network .year:first-child .clusters .employer .count {
+		background-color: #202020;
+	}
+
+
 
 #network .year .clusters.centered, #network .year .singles.centered {
 	text-align: center;
@@ -655,6 +685,12 @@ a {
 
 #network .employer:hover {
 	cursor: pointer;
+}
+
+
+#network .year:first-child .employer:hover a, #network .year:first-child .employer:hover  {
+	text-decoration: none;
+	cursor: default;
 }
 
 
