@@ -840,10 +840,17 @@ a {
 	border-collapse: collapse;
 	cell-spacing: 0;
 	width: 100%;
+	border-top: 1px solid #ccc;
 }
 
 #feed thead {
 	background-color: #606060;
+}
+
+#feed thead.floating {
+	position:fixed;
+	top: 0;
+	left: 0;
 }
 
 #feed td, #feed th {
@@ -853,17 +860,18 @@ a {
 }
 
 #feed th {
-	padding: 0px 20px;
+	padding: 10px 20px;
 	border-top: 0;
 	color: white;
 	font-weight: 300;
-	height: 60px;
 	vertical-align: middle;
+	width: 82px;
 }
 
 #feed th:nth-child(2){
 	text-align: left;
 	border-left: 1px solid #ccc;
+	width: 207px;
 }
 
 #feed .date {

@@ -1,6 +1,7 @@
-<div id="feed" ng-controller="feedController" style="height: {{mobile ? mobileFeedHeight + 'px' : ''}}">
+<div id="feed" ng-controller="feedController" style="height: {{mobile ? mobileFeedHeight + 'px' : ''}}" >
 	<table>
-		<thead>
+		<thead scroll-watch="{from: 0, to: 2000, stage: 'feed'}" sw-class="{floating: $positive > 50}">
+
 			<tr>
 				<th>Date</th>
 				<th>Staffer & campaign</th>
