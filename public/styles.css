@@ -87,12 +87,12 @@ a {
 }
 
 .header {
-	height: 60px;
+	height: 50px;
 	background-color: #EA463D;
 	text-align: center;
-	line-height: 60px;
+	line-height: 50px;
 	color: rgba(255, 255, 255, .95);
-	font-size: 20pt;
+	font-size: 16pt;
 	font-weight: 100;
 }
 
@@ -258,30 +258,28 @@ a {
 
 #organization .organization {
 	text-align: center;
-	margin: 30px 0px 0px;
+	margin: 30px 0px 30px;
+	font-size: 20pt;
+	font-weight: 900;
 }
 
-#organization .organization .totem {
-	//background-color: rgba(213, 179, 41, 0.8);
-	background-color: #606060;
-	border-radius: 10px;
-	padding: 15px;
-	color: rgba(255,255,255,1);
-	display: inline-block;
-	font-size: 20pt;
-	font-weight: 800;
+#organization .organization strong {
+	color: #d5b329;
 }
 
-#organization .organization .fa-long-arrow-down {
-	display: block;
-	margin: 30px 0px;
-	font-size: 20pt;
-	color: #606060
+#organization .organization .small {
+	font-size: 15pt;
+	font-weight: 400;
 }
+
 
 #organization .portraits {
 	text-align: center;
 	padding: 0px 0px 20px;
+}
+
+#organization .portraits a {
+	text-decoration: none;
 }
 
 #organization .portrait {
