@@ -21,12 +21,12 @@
 	animation: slideInRight 0.25s both ease-in; 
 	z-index: 8888; 
 }
-*/
+
 .ng-leave {
 	animation: slideOutLeft 0.25s both ease-in;
 	z-index: 9999; 	
 }
-
+*/
 
 @keyframes fadeOut {
 	from { opacity: 1; }
@@ -355,11 +355,11 @@ a {
 }
 
 #organization tr.ng-leave {
-	animation: fadeOut .25s both ease-in;
+
 }
 
 #organization tr.ng-enter {
-	animation: fadeIn .25s both ease-in;
+
 }
 
 
@@ -661,7 +661,7 @@ a {
 	color: #666;
 }
 
-.dismiss.ng-leave {
+.network .year .ng-leave {
 	animation: slideOutLeft 0.20s both ease-in;
 	z-index: 9999; 	
 }

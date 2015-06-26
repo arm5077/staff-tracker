@@ -67,7 +67,9 @@
 				<div class="infobox" ng-if="$index==1  && hint == true">
 					<table><tr><td>
 						This means <strong>{{year.employers[0].staffers.length}}</strong> of {{name}}'s current staffers worked for <strong>{{year.employers[0].employer}}</strong> in <strong>{{year.year}}</strong>.
-						<div class = "dismiss" ng-click="$parent.hint=false">Ok, got it</div>
+						<div>
+							<div class = "dismiss" ng-click="$parent.hint=false">Ok, got it</div>
+						</div>
 					</td>
 					<td>
 						<i class="fa fa-arrow-right"></i>
