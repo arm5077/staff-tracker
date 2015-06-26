@@ -761,6 +761,17 @@ a {
 	background-color: #649985;
 }
 
+#staffer .title {
+	text-align: center;
+	margin: 20px 0px 0px;
+	font-size: 18pt;
+	font-weight: 900;	
+}
+
+#staffer .title strong {
+	color: #649985;
+}
+
 #staffer table {
 	width: 100%;
 	border-collapse:collapse;
@@ -807,6 +818,15 @@ a {
 	border-right: 10px solid #404041;	
 }
 
+.feed .head {
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	background-color: #404040;
+	color: white;
+	font-size: 14pt;
+}
+
 #feed a {
 	text-decoration: none;
 	color: inherit;
@@ -823,7 +843,7 @@ a {
 }
 
 #feed thead {
-	background-color: #404041;
+	background-color: #606060;
 }
 
 #feed td, #feed th {
