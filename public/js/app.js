@@ -2,6 +2,7 @@ angular.module("stafferApp", ['ngRoute', 'pc035860.scrollWatch', "ngAnimate"])
 .controller("overallController", ["$scope", "$sce", function($scope, $sce){
 	$scope.renderHTML = function(text){ return $sce.trustAsHtml(text); };
 	$scope.header = "<strong>TwentySixteen</strong> Staffer Tracker";
+	$scope.hint = true;
 	
 	if( window.innerWidth <= 700 )
 		$scope.mobile = true;

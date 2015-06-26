@@ -1,14 +1,14 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:100,400,300,500,700);
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,300);
 
-/*
+
 @keyframes slideInRight {
     from    { transform:translateX(100%); }
     to      { transform: translateX(0); }
 }
 
 @keyframes slideOutLeft {
-    to      { transform: translateX(-100%); }
+    to      { margin-left: -275px; opacity: 0; }
 }
 
 @keyframes fadeOut {
@@ -16,16 +16,17 @@
 	to { opacity: 0 }
 }
 
+/*
 .ng-enter { 
 	animation: slideInRight 0.25s both ease-in; 
 	z-index: 8888; 
 }
-
+*/
 .ng-leave {
 	animation: slideOutLeft 0.25s both ease-in;
 	z-index: 9999; 	
 }
-*/
+
 
 @keyframes fadeOut {
 	from { opacity: 1; }
@@ -641,14 +642,36 @@ a {
 .network .year .infobox {
 	display: inline-block;
 	font-size: 11pt;
-	background-color: #404040;
+	background-color: #bbb;
 	padding: 10px;
-	color: rgba(255,255,255,.95);
+	color: #222222;
 	vertical-align: top;
 	max-width: 300px;
-	font-weight:300;
+	font-weight: 300;
 	margin-bottom: 10px;
 }
+
+.network .year .infobox .dismiss {
+	display: inline-block;
+	border: 1px solid #777;
+	padding: 3px 10px;
+	margin-top: 10px;
+	text-transform: uppercase;
+	font-size: 10pt;
+	color: #666;
+}
+
+.dismiss.ng-leave {
+	animation: slideOutLeft 0.20s both ease-in;
+	z-index: 9999; 	
+}
+
+
+	.network .year .infobox .dismiss:hover {
+		color: black;
+		border-color: black;
+		cursor: pointer;
+	}
 
 .network .year .infobox td:first-child{
 	text-align: right;

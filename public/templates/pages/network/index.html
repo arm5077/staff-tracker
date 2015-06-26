@@ -64,8 +64,14 @@
 			<div label class="label">{{ year.year }}</div>
 			
 			<div class="clusters" ng-if="year.employers.filter(filterClusters).length > 0" ng-class="{centered: year.employers.filter(filterSingles).length == 0 }">
-				<div class="infobox" ng-if="$index==1">
-					<table><tr><td>This means <strong>{{year.employers[0].staffers.length}}</strong> of {{name}}'s current staffers worked for <strong>{{year.employers[0].employer}}</strong> in <strong>{{year.year}}</strong>.</td><td> <i class="fa fa-arrow-right"></i></tr></table>
+				<div class="infobox" ng-if="$index==1  && hint == true">
+					<table><tr><td>
+						This means <strong>{{year.employers[0].staffers.length}}</strong> of {{name}}'s current staffers worked for <strong>{{year.employers[0].employer}}</strong> in <strong>{{year.year}}</strong>.
+						<div class = "dismiss" ng-click="$parent.hint=false">Ok, got it</div>
+					</td>
+					<td>
+						<i class="fa fa-arrow-right"></i>
+					</td></tr></table>
 				</div>
 				<div class="employer" ng-repeat="employer in year.employers" ng-if="employer.staffers.length > 1" ng-class="{selected: employer.selected == true, faded: employer.selected == false }">
 					<a  ng-if="year.year == 2016" ng-href="#/network/{{ employer.employer }}">
@@ -81,7 +87,7 @@
 			</div>
 			
 			<div class="singles" ng-if="year.employers.filter(filterSingles).length > 0" ng-class="{centered: year.employers.filter(filterClusters).length == 0 }">
-				<div class="infobox" ng-if="$index==1 && year.employers.filter(filterClusters).length == 0">
+				<div class="infobox" ng-if="$index==1 && year.employers.filter(filterClusters).length == 0 && hint == true">
 					<table><tr><td>This means <strong>{{year.employers.filter(filterSingles)[0].staffers.length}}</strong> of {{name}}'s current staffers worked for <strong>{{year.employers.filter(filterSingles)[0].employer}}</strong> in <strong>{{year.year}}</strong>.</td><td> <i class="fa fa-arrow-right"></i></tr></table>
 				</div>
 				
