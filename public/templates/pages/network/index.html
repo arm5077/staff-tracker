@@ -6,114 +6,61 @@
 			<i class="fa fa-arrow-circle-left" back-button></i>
 			<a href="#/"><i class="fa fa-home"></i></a>
 		</div>
-		
-		<div class="title">
-			<strong>TwentySixteen</strong> campaign staffer tracker
-		</div>
-		
-		<div class ="portrait">
-			<img ng-src="/img/{{ name.substr(name.indexOf(' ')+1,100) }}.png" />
-		</div>
-		
-		<div class = "info">
-			<div class = "info-label">Fast stats:</div>
-			<div class="item">
-				<div class="label">
-					Staffers we're tracking
-				</div>
-				<div class="data">
-					{{ years[0].employers[0].staffers.length }}
-				</div>
-			</div>
-			<div class="item">
-				<div style="display:inline-block">
-					<div class="label">
-						Most common previous job
-					</div>
-					<div class="data formerEmployer" ng-repeat="name in biggestEmployer.split(' ')">
-						{{ name }}
-					</div>
-				</div>
-			</div>
-		</div>
-		
+		<strong>TwentySixteen</strong> campaign staffer tracker
 	</div>
 
-	<div class = "list" ng-class="{ hidden: showList == false }" scroll-watch="{from: 0, to: 2000}" sw-class="{floating: $positive >= headerHeight}" >
-		<div class="explainer">
-			<div class="title">Tracked staffers {{name}} 2016</div>
-			Click a staffer's name to highlight their experience on the timeline, or select <i class="fa fa-list-alt"></i> to see more details about them. 
+
+		<div class="lead-title">Who's working for <strong>{{name}}</strong> in 2016?</div>
+		<div class="data">
+			<table>
+				<thead>
+					<th class="cap"></th>
+					<th>Staffer</th>
+					<th class="number">Position</th>
+					<th>Last job</th>
+					<th class="cap"></th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="staffer in staffers">
+						<td class="cap"></td>
+						<td><strong><a ng-href="#/staffer/{{staffer.name}}">{{staffer.name}}</strong></td>
+						<td class="position">{{staffer.position}}</td>
+						<td><a href="#/organization/{{staffer.employers[1].name}}">{{staffer.employers[0].name}}</a></td>
+						<td class="cap"></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
-		<ul>
-			<li ng-repeat="staffer in staff" ng-mouseover="filterCountsByName(staffer.name);" ng-mouseout="filterCountsByLastSelected()" ng-class="{selected: staffer.selected == true}" ng-click="toggleSelected(staffer)">
-				{{ staffer.name }}
-				<a ng-href="#/staffer/{{staffer.name}}" ><i class="fa fa-list-alt"></i></a>
-			</li>
-		</ul>
-		<div class="clear" ng-show="staff != fullList" ng-click="clearEmployerSelection(); previouslySelected.length = 0; staff = fullList;">Clear selection</div>
-		<div class="spacer"></div>
-	</div>
-
-	
-	<div class = "network" ng-class="{ partial: showList == true }">
-
-
-
 		
-		<div class="year" ng-repeat="year in years" ng-click="">
-			<div label class="label">{{ year.year }}</div>
-			
-			<div class="clusters" ng-if="year.employers.filter(filterClusters).length > 0" ng-class="{centered: year.employers.filter(filterSingles).length == 0 }">
-				<div class="infobox" ng-if="$index==1  && hint == true">
-					<table><tr><td>
-						This means <strong>{{year.employers[0].staffers.length}}</strong> of {{name}}'s current staffers worked for <strong>{{year.employers[0].employer}}</strong> in <strong>{{year.year}}</strong>.
-						<div>
-							<div class = "dismiss" ng-click="$parent.hint=false">Ok, got it</div>
-						</div>
-					</td>
-					<td>
-						<i class="fa fa-arrow-right"></i>
-					</td></tr></table>
-				</div>
-				<div class="employer" ng-repeat="employer in year.employers" ng-if="employer.staffers.length > 1" ng-class="{selected: employer.selected == true, faded: employer.selected == false }">
-					<a  ng-if="year.year == 2016" ng-href="#/network/{{ employer.employer }}">
+		<div class="lead-title">Where have they worked before?</div>
+		<div class="map">
+			<div class="clusters centered" ng-if="employers.filter(filterClusters).length > 0">
+				<div class="employer" ng-repeat="employer in employers" ng-if="employer.staffers.length > 1" ng-mouseover="$parent.orgFilter.filter=name">
+					<a ng-href="#/organization/{{ employer.name }}">
 						<div class = "count">{{ employer.staffers.length }}</div>
-						<div class = "name">{{ employer.employer }}</div>
-					</a>
-					<a  ng-if="year.year != 2016" ng-href="#/organization/{{ employer.employer }}">
-						<div class = "count">{{ employer.staffers.length }}</div>
-						<div class = "name">{{ employer.employer }}</div>
+						<div class = "name">{{ employer.name }}</div>
 					</a>
 				</div>
-			
 			</div>
-			
-			<div class="singles" ng-if="year.employers.filter(filterSingles).length > 0" ng-class="{centered: year.employers.filter(filterClusters).length == 0 }">
-				<div class="infobox" ng-if="$index==1 && year.employers.filter(filterClusters).length == 0 && hint == true">
-					<table><tr><td>This means <strong>{{year.employers.filter(filterSingles)[0].staffers.length}}</strong> of {{name}}'s current staffers worked for <strong>{{year.employers.filter(filterSingles)[0].employer}}</strong> in <strong>{{year.year}}</strong>.</td><td> <i class="fa fa-arrow-right"></i></tr></table>
-				</div>
-				
-				<div class="employer" ng-repeat="employer in year.employers" ng-if="employer.staffers.length == 1" ng-class="{selected: employer.selected == true, faded: employer.selected == false }">
-					<a ng-href="#/organization/{{ employer.employer }}">
+
+			<div class="singles centered" ng-if="employers.filter(filterSingles).length > 0" ng-click="$parent.orgFilter=name">
+				<div class="employer" ng-repeat="employer in employers" ng-if="employer.staffers.length == 1">
+					<a ng-href="#/organization/{{ employer.name }}">
 					<table>
 						<tr>
-							<td class="count" ng-click="toggleListSelected(employer,year)">
+							<td class="count">
 								<div class="circle">1</div>
 							</td>
 							<td>
-									<div class="name">{{ employer.employer }}</div>
+								<div class="name">{{ employer.name }}</div>
 							</td>
 						</tr>
 					</table>
 					</a>
 				</div>
 			</div>
-			
-			
-		
 		</div>
-	
-	</div>
+
 	
 	<div class = "mobile">
 		

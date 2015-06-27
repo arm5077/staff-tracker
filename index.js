@@ -54,7 +54,7 @@ app.get("/api/organizations", function(request, response){
 app.get("/api/organization/:organization", function(request, response){
 	var connection = connectMySQL();
 	
-	connection.query("SELECT * FROM history WHERE employer = ? AND year != 2016 GROUP BY name", [request.params.organization], function(err, rows, header){
+	connection.query("SELECT * FROM history WHERE employer = ? AND year != 2016 GROUP BY history.name", [request.params.organization], function(err, rows, header){
 		if(err) throw err;
 		
 		if( rows.length == 0 ){
@@ -69,18 +69,21 @@ app.get("/api/organization/:organization", function(request, response){
 			var staff = [];
 			rows.forEach(function(row){
 				years[row.name] = row.year;
-				names += " OR name = '" + row.name.replace("'", "\\'") + "'";
+				names += " OR history.name = '" + row.name.replace("'", "\\'") + "'";
 			});
-
-			connection.query("SELECT * FROM history WHERE year = 2016 AND (" + names.slice(4) + ")", function(err, rows, header){
+			
+			// Query now for 2016 campaigns with these people, joining to the 2016 candidate table
+			// so we avoid extraneous results.
+			connection.query("SELECT * FROM history LEFT JOIN (select name as candidate from candidates) as candidates on history.employer = candidates.candidate WHERE year = 2016 AND (" + names.slice(4) + ")", function(err, rows, header){
 			 	if(err) throw err;
-
 				var temp = {}
 				rows.forEach(function(row){
-					if( !temp[row.employer] ) 
-						temp[row.employer] = [];
-					temp[row.employer].push({name: row.name, year: years[row.name]});
-					staff.push({name: row.name, year: years[row.name], employer: row.employer});
+					if( row.candidate ){
+						if( !temp[row.employer] ) 
+							temp[row.employer] = [];
+						temp[row.employer].push({name: row.name, year: years[row.name]});
+						staff.push({name: row.name, year: years[row.name], employer: row.employer});
+					}
 				});
 
 				var exportArray = [];
@@ -113,48 +116,51 @@ app.get("/api/organization/:organization", function(request, response){
 app.get("/api/network/:candidateName", function(request, response){
 	var connection = connectMySQL();
 		connection.query("SELECT * FROM history WHERE employer = ? and year = 2016", [request.params.candidateName], function(err, rows, header){
+		console.log("SELECT * FROM history WHERE employer = '" + request.params.candidateName + "' and year = 2016")
 		if(err) throw err;
 		var names = "";
 		rows.forEach(function(row){
 			names += " OR name = '" + row.name.replace("'", "\\'") + "'";
 		});
 		
-		console.log("SELECT * FROM history WHERE " + names.slice(4));
-		
-		connection.query("SELECT * FROM history WHERE ((" + names.slice(4) + ") AND year != 2016) OR employer = ?", [request.params.candidateName], function(err, rows, header){
-			var aggregate = [];
-			var exportArray = [];
+		connection.query("SELECT * FROM history WHERE ((" + names.slice(4) + ")) ORDER BY year DESC", function(err, rows, header){
+			var staffers = [];
+			var employers = [];
+			var exportArray = {staffers: [], employers: []};
 
 		
 			
 			if(rows){
-				// Re-organize and aggregate first by year, then by employer.
+				// Aggregate first by employee, then by employer
 				rows.forEach(function(row){
-					if( !aggregate[row.year.toString()])
-						aggregate[row.year.toString()] = [];
-					if( !aggregate[row.year.toString()][row.employer] )
-						aggregate[row.year.toString()][row.employer] = [];
-
-					aggregate[row.year.toString()][row.employer].push(row.name);
+					if( !staffers[row.name] ){
+						staffers[row.name] = {name: row.name, position: row.position, twitter: row.twitter, linkedin: row.linkedin, employers: [] };
+					}			
+					if(row.year != 2016)
+						staffers[row.name].employers.push({year: row.year, name:row.employer});
+					
+					// Employer section
+					if( !employers[row.employer] )
+						employers[row.employer] = {name: row.employer, staffers: []};
+						
+					if( employers[row.employer].staffers.indexOf(row.name) == -1 && row.year != 2016 )
+						employers[row.employer].staffers.push(row.name)
 				});
 
-				// Stuff this back into an array of objects
-				for( year in aggregate ){
-					var yearArray = [];
-					for( employer in aggregate[year] ){
-						yearArray.push({ employer: employer, staffers: aggregate[year][employer] });
-					}
-
-					// Sort collection of employers by size of workforce
-					yearArray.sort(function(a,b){ return b.staffers.length - a.staffers.length; });
-
-					exportArray.push({ year: year, employers: yearArray });
-				}
-
-				// Sort by date descending 
-				exportArray.sort(function(a,b){ return b.year - a.year });
-				
 			}
+			
+			for( staffer in staffers){
+				exportArray.staffers.push(staffers[staffer]);
+			}
+			
+			for( employer in employers ){
+				exportArray.employers.push(employers[employer]);
+			}
+			
+			exportArray.employers.sort(function(a,b){
+				return b.staffers.length - a.staffers.length;
+			});
+			
 			connection.end();
 			response.status(200).json(exportArray);
 		});
@@ -304,7 +310,6 @@ app.get("/api/scrape", function(request, response){
 			
 			// Cycle through spreadsheet and create new object
 			data = makeObjectFromSpreadsheet(rows);
-			
 			// Split 2016 employers and hire dates into arrays
 			data.forEach(function(data){
 			//	console.log(data["Date Hire/Resignation Known"]);
@@ -360,12 +365,20 @@ app.get("/api/scrape", function(request, response){
 			// Now, it is time to compile a storied history
 			data.forEach(function(data){
 				for(year = 2016; year >= 1968; year--){
+					
+					if( year == 2016 ) position = data["Title/Responsibility"];
+						else position = null;
+					
 					if( data[year.toString()] ){
-						data[year.toString()].split(",").forEach(function(job){
-							connection.query('INSERT INTO history (name, year, employer) VALUES (?,?,?)',
+						data[year.toString()].split(",").forEach(function(job){							
+							connection.query('INSERT INTO history (name, year, employer, position, twitter, linkedin) VALUES (?,?,?,?,?,?)',
 								[data.Staffer,
 								year,
-								job],
+								job,
+								position,
+								data["Twitter (URL)"],
+								data["LinkedIn (URL)"]
+								],
 						 	function(err, rows, header){
 								if( err ) throw err;
 							});

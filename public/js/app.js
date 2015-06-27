@@ -3,7 +3,8 @@ angular.module("stafferApp", ['ngRoute', 'pc035860.scrollWatch', "ngAnimate"])
 	$scope.renderHTML = function(text){ return $sce.trustAsHtml(text); };
 	$scope.header = "<strong>TwentySixteen</strong> Staffer Tracker";
 	$scope.hint = true;
-	
+	$scope.JSON = JSON;
+	$scope.orgFilter = {filter:""};
 	if( window.innerWidth <= 700 )
 		$scope.mobile = true;
 	

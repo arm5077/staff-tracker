@@ -8,27 +8,29 @@
 		<strong>TwentySixteen</strong> campaign staffer tracker
 	</div>
 		
-		<div class="title">Staffer <strong>{{name}}'s</strong> previous campaign work</div>
+		<div class="lead-title">Staffer <strong>{{name}}'s</strong> previous campaign work</div>
 		
-	
-		<table>
-		<thead>
-			<th></th>
-			<th class = "year">Election cycle</th>
-			<th>Candidate/group</th>
-			<th></th>
-		</thead>
-		<tbody>
-			<tr ng-repeat="job in jobs.history">
-				<td class="cap"></td>
-				<td class="year">{{job.year}}</td>
-				<td>
-					<a ng-if="job.year == 2016" ng-href="#/network/{{job.employer}}"><strong>{{job.employer}}<strong></a>
-					<a ng-if="job.year != 2016" ng-href="#/organization/{{job.employer}}"><strong>{{job.employer}}<strong></a>
-				</td>
-				<td class="cap"></td>
-			</tr>
-		</tbody>
+		<div class="data">
+			<table>
+				<thead>
+					<th></th>
+					<th class = "year">Election cycle</th>
+					<th>Candidate/group</th>
+					<th></th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="job in jobs.history">
+						<td class="cap"></td>
+						<td class="year">{{job.year}}</td>
+						<td>
+							<a ng-if="job.year == 2016" ng-href="#/network/{{job.employer}}"><strong>{{job.employer}}<strong></a>
+							<a ng-if="job.year != 2016" ng-href="#/organization/{{job.employer}}"><strong>{{job.employer}}<strong></a>
+						</td>
+						<td class="cap"></td>
+					</tr>
+				</tbody>
+			<table>
+		</div>
 	</div>	
 	
 
