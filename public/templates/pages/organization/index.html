@@ -13,10 +13,15 @@
 	</div>
 	
 	<div class="portraits desktop">
-		<a ng-href="#/network/{{candidate.name}}" ng-repeat="candidate in candidates">
-			<div class="portrait">
-				<div class="sticker" ng-if="candidate.name == orgFilter.filter">Selected</div>
-				<img ng-src="/img/{{ candidate.name.substr(candidate.name.indexOf(' ')+1,100) }}.png" />
+		<a ng-repeat="candidate in candidates">
+			<div class="portrait" ng-click="(candidate.name == orgFilter.filter) ? orgFilter.filter = '' : orgFilter.filter = candidate.name">
+
+				<div class="image" style="background-image: url('/img/{{ candidate.name.substr(candidate.name.indexOf(' ')+1,100).replace('\'','\\\'') }}.png')">
+					<div class="sticker" ng-if="candidate.name == orgFilter.filter">
+						<strong>Selected</strong><small>Click to dismiss</small>
+					</div>
+				</div>
+
 				{{candidate.name}} (<strong>{{candidate.count}}</strong>)
 			</div>
 		</a>

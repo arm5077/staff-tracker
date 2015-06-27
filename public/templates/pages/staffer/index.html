@@ -13,10 +13,13 @@
 		<div class="data">
 			<table>
 				<thead>
-					<th></th>
+					<th class="cap"></th>
 					<th class = "year">Election cycle</th>
 					<th>Candidate/group</th>
-					<th></th>
+					<th>Position</th>
+					<th>Twitter</th>
+					<th>Linkedin</th>
+					<th class="cap"></th>
 				</thead>
 				<tbody>
 					<tr ng-repeat="job in jobs.history">
@@ -25,6 +28,15 @@
 						<td>
 							<a ng-if="job.year == 2016" ng-href="#/network/{{job.employer}}"><strong>{{job.employer}}<strong></a>
 							<a ng-if="job.year != 2016" ng-href="#/organization/{{job.employer}}"><strong>{{job.employer}}<strong></a>
+						</td>
+						<td>
+							<div ng-if="job.year == 2016">{{jobs.position}}</div>
+						</td>
+						<td>
+							<div ng-if="job.year == 2016"><a ng-href="{{jobs.twitter}}" ng-if="jobs.twitter">@{{jobs.twitter.replace('https://twitter.com/', '')}}</div>
+						</td>
+						<td>
+							
 						</td>
 						<td class="cap"></td>
 					</tr>

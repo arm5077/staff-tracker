@@ -184,6 +184,9 @@ app.get("/api/staffer/:stafferName", function(request, response){
 		
 		response.status(200).json({
 			name: request.params.stafferName,
+			position: rows[0].position,
+			linkedin: rows[0].linkedin,
+			twitter: rows[0].twitter,
 			history: history
 		});	
 	});	
