@@ -1,4 +1,4 @@
-angular.module("stafferApp", ['ngRoute', 'pc035860.scrollWatch', "ngAnimate"])
+angular.module("stafferApp", ['ngRoute', 'pc035860.scrollWatch', "ngAnimate", 'perfect_scrollbar'])
 .controller("overallController", ["$scope", "$sce", function($scope, $sce){
 	$scope.renderHTML = function(text){ return $sce.trustAsHtml(text); };
 	$scope.header = "<strong>TwentySixteen</strong> Staffer Tracker";
@@ -38,4 +38,16 @@ angular.module("stafferApp", ['ngRoute', 'pc035860.scrollWatch', "ngAnimate"])
 		}
 	};	
 
-})
+}).directive('script', function() {
+	    return {
+	      restrict: 'E',
+	      scope: false,
+	      link: function(scope, elem, attr) {
+	        if (attr.type === 'text/javascript-lazy') {
+	          var code = elem.text();
+	          var f = new Function(code);
+	          f();
+	        }
+	      }
+	    };
+	  });

@@ -1,6 +1,5 @@
 <div id="network">
 
-
 	<div class="header" header>
 		<div class="social">
 			<i class="fa fa-arrow-circle-left" back-button></i>
@@ -11,13 +10,13 @@
 
 
 		<div class="lead-title">Who's working for <strong>{{name}}</strong> in 2016?</div>
-		<div class="data">
+		<div class="data" id="all-staffers" perfect-scrollbar>
 			<table>
 				<thead>
 					<th class="cap"></th>
 					<th>Staffer</th>
 					<th class="number">Position</th>
-					<th>Last job</th>
+					<th>Previous campaign</th>
 					<th class="cap"></th>
 				</thead>
 				<tbody>
@@ -25,7 +24,7 @@
 						<td class="cap"></td>
 						<td><strong><a ng-href="#/staffer/{{staffer.name}}">{{staffer.name}}</strong></td>
 						<td class="position">{{staffer.position}}</td>
-						<td><a href="#/organization/{{staffer.employers[1].name}}">{{staffer.employers[0].name}}</a></td>
+						<td><a href="#/organization/{{staffer.employers[0].name}}">{{staffer.employers[0].name}}</a></td>
 						<td class="cap"></td>
 					</tr>
 				</tbody>
@@ -34,28 +33,11 @@
 		
 		<div class="lead-title">Where have they worked before?</div>
 		<div class="map">
-			<div class="clusters centered" ng-if="employers.filter(filterClusters).length > 0">
-				<div class="employer" ng-repeat="employer in employers" ng-if="employer.staffers.length > 1" ng-mouseover="$parent.orgFilter.filter=name">
+			<div class="clusters centered">
+				<div class="employer" ng-repeat="employer in employers | limitTo:10" ng-mouseover="$parent.orgFilter.filter=name">
 					<a ng-href="#/organization/{{ employer.name }}">
 						<div class = "count">{{ employer.staffers.length }}</div>
 						<div class = "name">{{ employer.name }}</div>
-					</a>
-				</div>
-			</div>
-
-			<div class="singles centered" ng-if="employers.filter(filterSingles).length > 0" ng-click="$parent.orgFilter=name">
-				<div class="employer" ng-repeat="employer in employers" ng-if="employer.staffers.length == 1">
-					<a ng-href="#/organization/{{ employer.name }}">
-					<table>
-						<tr>
-							<td class="count">
-								<div class="circle">1</div>
-							</td>
-							<td>
-								<div class="name">{{ employer.name }}</div>
-							</td>
-						</tr>
-					</table>
 					</a>
 				</div>
 			</div>
