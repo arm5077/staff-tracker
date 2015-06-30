@@ -174,21 +174,28 @@ app.get("/api/staffer/:stafferName", function(request, response){
 	connection.query("SELECT * FROM history WHERE name = ?", [request.params.stafferName], function(err, rows, header){
 		if( err ) throw err;
 		
-		var history = [];
-		
-		rows.forEach(function(row){
-			history.push({ year: row.year, employer: row.employer })
+		// Check to see if this person has resigned
+		connection.query("SELECT action, date FROM feed WHERE name = ? ORDER BY date DESC", [request.params.stafferName], function(err, countrows, header){
+			
+			if(countrows[0].action == "leaves")
+				var resigned = true;
+			
+			var history = [];
+
+			rows.forEach(function(row){
+				history.push({ year: row.year, employer: row.employer, resigned: (resigned && row.year == 2016) ? "true" : "false" });
+			});
+
+			connection.end();
+
+			response.status(200).json({
+				name: request.params.stafferName,
+				position: rows[0].position,
+				linkedin: rows[0].linkedin,
+				twitter: rows[0].twitter,
+				history: history
+			});
 		});
-		
-		connection.end();
-		
-		response.status(200).json({
-			name: request.params.stafferName,
-			position: rows[0].position,
-			linkedin: rows[0].linkedin,
-			twitter: rows[0].twitter,
-			history: history
-		});	
 	});	
 });
 
@@ -204,31 +211,41 @@ app.get("/api/feed", function(request, response){
 		rows.forEach(function(row){
 			if( !temp[row.name] )
 				temp[row.name] = {};
-			temp[row.name].date = row.date;
-			temp[row.name].year = row.year;
-			temp[row.name][row.action] = { employer: row.employer };
+				
+			if( !temp[row.name][row.date])
+				temp[row.name][row.date] = [];
+			temp[row.name][row.date].push({date: row.date, year: row.year, action: row.action, employer: row.employer});
 		});
 		
 		var exportArray = []; 
 		
 		for( key in temp){
 			if( temp.hasOwnProperty(key) ){
-				var leaves = null;
-				if( temp[key].leaves ) 
-					leaves = temp[key].leaves.employer
-				exportArray.push({
-					name: key,
-					date: temp[key].date,
-					year: temp[key].year,
-					joining: temp[key].joins.employer,
-					leaving: leaves
-				});
+				
+				
+				
+				for(date in temp[key]){
+					temp[key][date].sort(function(a,b){ b.date - a.date });
+					var joins = "", leaves = "";
+					temp[key][date].forEach(function(move){
+						if(move.action == "joins") joins = move.employer;
+						if(move.action == "leaves") leaves = move.employer;
+					});
+										
+					exportArray.push({
+						name: key,
+						date: date,
+						year: temp[key][date][0].year,
+						joining: joins,
+						leaving: leaves
+					});
+				};
 			}
 		}
 			
 		// Sort from newest to oldest
 		exportArray.sort(function(a,b){
-			return b.date - a.date;
+			return new Date(b.date) - new Date(a.date);
 		});
 		
 		connection.end();
@@ -330,37 +347,51 @@ app.get("/api/scrape", function(request, response){
 						date = new Date(date);
 						date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate());
 					} else {
-						var year = date;
+						var year = (date == '') ? null : date;
 						date = null;
 					}
 					
-					// Check if this is a "joining" entry
-					if( data.employers[i] ){
-					// console.log(date + ": " + data.Staffer + " joins " + data.employers[i]);
-						connection.query('INSERT INTO feed (name, employer, action, date, year) VALUES (?,?,?,?,?)', 
-							[data.Staffer,
-							data.employers[i],
-							"joins",
-							date,
-							year],
-						function(err, rows, header){ 
-							if( err ) throw err;
-						//	console.log(date + ": " + data.Staffer + " joins " + data.employers[i]);
-						});
-					}
-					
-					// Check if is a "leaving" entry
-					if( data.employers[i + 1] ){
-						connection.query('INSERT INTO feed (name, employer, action, date, year) VALUES (?,?,?,?,?)', 
-							[data.Staffer,
-							data.employers[i+1],
-							"leaves",
-							date,
-							year],
-						function(err, rows, header){ 
-							if( err ) throw err;
-						//	console.log(date + ": " + data.Staffer + " leaves " + data.employers[i+1]);
-						});
+					if( date != "NaN-NaN-NaN" && date != null ){
+						// Check if this is a "joining" entry
+						if( !data.employers[i] ){					
+							connection.query('INSERT INTO feed (name, employer, action, date, year) VALUES (?,?,?,?,?)', 
+								[data.Staffer,
+								data.employers[i-1],
+								"leaves",
+								date,
+								year],
+							function(err, rows, header){ 
+								if( err ) throw err;
+							//	console.log(date + ": " + data.Staffer + " joins " + data.employers[i]);
+							});
+						}
+						
+						if( data.employers[i]){					
+							connection.query('INSERT INTO feed (name, employer, action, date, year) VALUES (?,?,?,?,?)', 
+								[data.Staffer,
+								data.employers[i],
+								"joins",
+								date,
+								year],
+							function(err, rows, header){ 
+								if( err ) throw err;
+							//	console.log(date + ": " + data.Staffer + " joins " + data.employers[i]);
+							});
+						}
+
+						// Check if is a "leaving" entry
+						if( data.employers[i + 1]){
+							connection.query('INSERT INTO feed (name, employer, action, date, year) VALUES (?,?,?,?,?)', 
+								[data.Staffer,
+								data.employers[i+1],
+								"leaves",
+								date,
+								year],
+							function(err, rows, header){ 
+								if( err ) throw err;
+							//	console.log(date + ": " + data.Staffer + " leaves " + data.employers[i+1]);
+							});
+						}	
 					}
 				});
 			});

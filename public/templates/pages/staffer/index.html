@@ -32,16 +32,16 @@
 							<a ng-if="job.year != 2016" ng-href="#/organization/{{job.employer}}"><strong>{{job.employer}}<strong></a>
 						</td>
 						<td>
-							<div ng-if="job.year == 2016">{{jobs.position}}</div>
+							<div ng-if="job.year == 2016 && $index == 0">{{jobs.position}} <span class="resigned" ng-if="job.resigned=='true'"><strong>(has left)</strong></span></div>
 						</td>
 						<td>
-							<div ng-if="job.year == 2016">
+							<div ng-if="job.year == 2016 && $index == 0">
 								<a ng-href="{{jobs.twitter}}" ng-if="jobs.twitter" target="blank">@{{jobs.twitter.replace('https://twitter.com/', '').replace('http://www.twitter.com/', '').replace('http://twitter.com/', '').replace('https://www.twitter.com/', '')}}</a>
 								<span class="none-found" ng-if="!jobs.twitter">None found</span>
 							</div>
 						</td>
 						<td>
-							<div ng-if="job.year == 2016">
+							<div ng-if="job.year == 2016 && $index == 0">
 								<a ng-href="{{jobs.linkedin}}" ng-if="jobs.linkedin" target="blank">Go to profile</a>
 								<span class="none-found" ng-if="!jobs.linkedin">None found</span>
 							</div>

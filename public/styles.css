@@ -53,6 +53,10 @@ body {
 
 //body::-webkit-scrollbar, body *::-webkit-scrollbar { width: 0 !important }
 
+strong {
+	font-weight: 800;
+}
+
 .mobile {
 	display: none;
 }
@@ -133,6 +137,7 @@ a {
 
 .data th:not(.cap){
 	width:20%;
+	color:#808080;
 }
 
 .data tr {
@@ -151,7 +156,7 @@ a {
 }
 
 .data td strong {
-	font-weight: 400;
+	font-weight: 900;
 }
 
 
@@ -534,10 +539,6 @@ a {
 
 #staffer .lead-title strong {
 	color: #649985;
-}
-
-#staffer td strong {
-	font-weight: 400;
 }
 
 #staffer .none-found {
