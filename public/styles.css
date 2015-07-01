@@ -454,9 +454,10 @@ a {
 }
 
 #network .expand {
-	width: 400px;
-  padding: 10px;
-  margin: auto;
+	width: 90%;
+	max-width:400px;
+  padding: 10px 0px;
+  margin: 10px auto 0px;
   text-align: center;
   background-color: #EA463D;
   color: rgba(255,255,255,.95);
@@ -685,6 +686,18 @@ a {
 	
 	.content {
 		margin-top: 60px;
+		width: 100%;
+	}
+	
+	.lead-title {
+		font-size: 	15pt;
+		  margin: 15px 0px 15px;
+	}
+	
+	.disclaimer {
+		font-size: 10pt;
+		text-align: left;
+		padding: 0px 20px;
 	}
 	
 	.mobile-header {
@@ -707,22 +720,31 @@ a {
 		display:none;
 	}
 	
-	#organization .cap {
+	.cap {
 		display: none;
 	}
-
-	#organization .data table {
-		font-size: 10pt;
-		
+	
+	.data table {
+		font-size: 5pt;
 	}
 	
-	#organization .data td, #organization .data th {
+	.data td, .data th {
 		min-width: 10px;
+		padding: 15px 2%;
+		font-size: 10pt;
+		width: auto;
 	}
+	
+	.data td:nth-child(2), 	.data th:nth-child(2) {
+	//	padding-left: 5%;
+	}
+
+	
 
 	#organization .portrait img {
 		width: 100px;
 		height: 100px;
+		background-color: white;
 	}
 
 	#home .right {
@@ -763,6 +785,7 @@ a {
 		top: 10%;
 		margin: 0px 15px 0px 10px;
 		border-radius: 50%;
+		background-color: white;
 	}
 	
 	#home .mobile-candidate .text {
@@ -840,6 +863,31 @@ a {
 	
 	#network .list {
 		display: none;
+	}
+	
+	#network .clusters .employer {
+		width: 100%;
+	  background-color: #EA463D;
+	  padding: 10px 0px;
+	  margin: 0;
+	border-bottom: 1px solid rgba(255,255,255,.8);
+	}
+	
+	#network .clusters .employer .name {
+		width: auto;
+		color: rgba(255,255,255,.95);
+		display: inline-block;
+		font-size: 11pt;
+	}
+	
+	#network .clusters .employer .count {
+	  display:inline-block;
+		font-size: 11pt;
+		margin-right: 5px;
+		padding: 0;
+		width: auto;
+		height: auto;
+		line-height: normal;
 	}
 	
 	#network .mobile-label {
@@ -924,4 +972,5 @@ a {
 		font-size:12pt;
 	}
 	
+
 }
