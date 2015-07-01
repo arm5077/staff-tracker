@@ -10,7 +10,7 @@
 
 
 		<div class="lead-title">Who's working for <strong>{{name}}</strong> in 2016?</div>
-		<div class="data" id="all-staffers" perfect-scrollbar>
+		<div class="data" id="all-staffers">
 			<table>
 				<thead>
 					<th class="cap"></th>
@@ -20,18 +20,21 @@
 					<th class="cap"></th>
 				</thead>
 				<tbody>
-					<tr ng-repeat="staffer in staffers">
+					<tr ng-repeat="staffer in staffers | orderBy: ['name.substr(name.indexOf(\' \') + 1)'] | limitTo:limit">
 						<td class="cap"></td>
 						<td><strong><a ng-href="#/staffer/{{staffer.name}}">{{staffer.name}}</strong></td>
-						<td class="position">{{staffer.position}}</td>
+						<td class="position">{{staffer.position}}<span ng-if="staffer.outsideGroup">*</span></td>
 						<td><a href="#/organization/{{staffer.employers[0].name}}">{{staffer.employers[0].name}}</a></td>
 						<td class="cap"></td>
 					</tr>
 				</tbody>
 			</table>
+
+			<div class="asterisk">*Staffer works for an outside PAC or nonprofit supporting {{name}}.</div>
+			<div class="expand" ng-click="limit=staffers.length" ng-show="limit < staffers.length">Show all staffers</div>
 		</div>
 		
-		<div class="lead-title">Where have they worked before?</div>
+		<div class="lead-title">The top 10 campaigns where {{name}} staffers worked before</div>
 		<div class="map">
 			<div class="clusters centered">
 				<div class="employer" ng-repeat="employer in employers | limitTo:10" ng-mouseover="$parent.orgFilter.filter=name">
@@ -42,7 +45,8 @@
 				</div>
 			</div>
 		</div>
-
+		
+		<ng-include name="disclaimer" src="'/templates/snippets/disclaimer.html'"></ng-include>
 	
 	<div class = "mobile">
 		

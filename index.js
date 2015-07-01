@@ -134,7 +134,7 @@ app.get("/api/network/:candidateName", function(request, response){
 				// Aggregate first by employee, then by employer
 				rows.forEach(function(row){
 					if( !staffers[row.name] ){
-						staffers[row.name] = {name: row.name, position: row.position, twitter: row.twitter, linkedin: row.linkedin, employers: [] };
+						staffers[row.name] = {name: row.name, position: row.position, twitter: row.twitter, linkedin: row.linkedin, outsideGroup: row.outside_group != null, employers: [] };
 					}			
 					if(row.year != 2016)
 						staffers[row.name].employers.push({year: row.year, name:row.employer});
@@ -193,6 +193,7 @@ app.get("/api/staffer/:stafferName", function(request, response){
 				position: rows[0].position,
 				linkedin: rows[0].linkedin,
 				twitter: rows[0].twitter,
+				outsideGroup: rows[0].outside_group != "",
 				history: history
 			});
 		});
@@ -405,13 +406,14 @@ app.get("/api/scrape", function(request, response){
 					
 					if( data[year.toString()] ){
 						data[year.toString()].split(",").forEach(function(job){							
-							connection.query('INSERT INTO history (name, year, employer, position, twitter, linkedin) VALUES (?,?,?,?,?,?)',
+							connection.query('INSERT INTO history (name, year, employer, position, twitter, linkedin, outside_group) VALUES (?,?,?,?,?,?,?)',
 								[data.Staffer,
 								year,
 								job,
 								position,
 								data["Twitter (URL)"],
-								data["LinkedIn (URL)"]
+								data["LinkedIn (URL)"],
+								data["PAC/non-profit?"]
 								],
 						 	function(err, rows, header){
 								if( err ) throw err;

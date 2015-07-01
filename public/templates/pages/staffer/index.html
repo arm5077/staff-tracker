@@ -8,51 +8,52 @@
 		<strong>TwentySixteen</strong> campaign staffer tracker
 	</div>
 		
-		<span class="app_ads" data-zone="whitehouse_content" data-ord="" data-customtargetting='{"njid":"staffertracker_staffer","pos":"interactive"}' data-desktop="728x90" data-tablet="728x90" data-phone="300x50"></span>
-		
-		<div class="lead-title">Staffer <strong>{{name}}'s</strong> previous campaign work</div>
-		
-		<div class="data">
-			<table>
-				<thead>
-					<th class="cap"></th>
-					<th class = "year">Election cycle</th>
-					<th>Candidate/group</th>
-					<th>Position</th>
-					<th>Twitter</th>
-					<th>Linkedin</th>
-					<th class="cap"></th>
-				</thead>
-				<tbody>
-					<tr ng-repeat="job in jobs.history">
-						<td class="cap"></td>
-						<td class="year">{{job.year}}</td>
-						<td>
-							<a ng-if="job.year == 2016" ng-href="#/network/{{job.employer}}"><strong>{{job.employer}}<strong></a>
-							<a ng-if="job.year != 2016" ng-href="#/organization/{{job.employer}}"><strong>{{job.employer}}<strong></a>
-						</td>
-						<td>
-							<div ng-if="job.year == 2016 && $index == 0">{{jobs.position}} <span class="resigned" ng-if="job.resigned=='true'"><strong>(has left)</strong></span></div>
-						</td>
-						<td>
-							<div ng-if="job.year == 2016 && $index == 0">
-								<a ng-href="{{jobs.twitter}}" ng-if="jobs.twitter" target="blank">@{{jobs.twitter.replace('https://twitter.com/', '').replace('http://www.twitter.com/', '').replace('http://twitter.com/', '').replace('https://www.twitter.com/', '')}}</a>
-								<span class="none-found" ng-if="!jobs.twitter">None found</span>
-							</div>
-						</td>
-						<td>
-							<div ng-if="job.year == 2016 && $index == 0">
-								<a ng-href="{{jobs.linkedin}}" ng-if="jobs.linkedin" target="blank">Go to profile</a>
-								<span class="none-found" ng-if="!jobs.linkedin">None found</span>
-							</div>
-						</td>
-						<td class="cap"></td>
-					</tr>
-				</tbody>
-			<table>
-		</div>
-	</div>	
+	<span class="app_ads" data-zone="whitehouse_content" data-ord="" data-customtargetting='{"njid":"staffertracker_staffer","pos":"interactive"}' data-desktop="728x90" data-tablet="728x90" data-phone="300x50"></span>
 	
+	<div class="lead-title">Staffer <strong>{{name}}'s</strong> previous campaign work</div>
+	
+	<div class="data">
+		<table>
+			<thead>
+				<th class="cap"></th>
+				<th class = "year">Election cycle</th>
+				<th>Candidate/group</th>
+				<th>Position</th>
+				<th>Twitter</th>
+				<th>Linkedin</th>
+				<th class="cap"></th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="job in jobs.history">
+					<td class="cap"></td>
+					<td class="year">{{job.year}}</td>
+					<td>
+						<a ng-if="job.year == 2016" ng-href="#/network/{{job.employer}}"><strong>{{job.employer}}<strong></a>
+						<a ng-if="job.year != 2016" ng-href="#/organization/{{job.employer}}"><strong>{{job.employer}}<strong></a>
+					</td>
+					<td>
+						<div ng-if="job.year == 2016 && $index == 0">{{jobs.position}} <span class="resigned" ng-if="job.resigned=='true'"><strong>(has left)</strong></span><span ng-if="jobs.outsideGroup">*</span></div>
+					</td>
+					<td>
+						<div ng-if="job.year == 2016 && $index == 0">
+							<a ng-href="{{jobs.twitter}}" ng-if="jobs.twitter" target="blank">@{{jobs.twitter.replace('https://twitter.com/', '').replace('http://www.twitter.com/', '').replace('http://twitter.com/', '').replace('https://www.twitter.com/', '')}}</a>
+							<span class="none-found" ng-if="!jobs.twitter">None found</span>
+						</div>
+					</td>
+					<td>
+						<div ng-if="job.year == 2016 && $index == 0">
+							<a ng-href="{{jobs.linkedin}}" ng-if="jobs.linkedin" target="blank">Go to profile</a>
+							<span class="none-found" ng-if="!jobs.linkedin">None found</span>
+						</div>
+					</td>
+					<td class="cap"></td>
+				</tr>
+			</tbody>
+		<table>
+		<div class="asterisk">*Staffer works for an outside PAC or nonprofit supporting {{name}}.</div>
+	</div>
+
+	<ng-include name="disclaimer" src="'/templates/snippets/disclaimer.html'"></ng-include>
 
 </div>
 <ng-include src="'/templates/snippets/advertisements.html'"></ng-include>

@@ -8,6 +8,7 @@ angular.module("stafferApp")
 	$scope.previouslySelected = [];
 	$scope.selectionOn = false;
 	$scope.biggestEmployer = "";
+	$scope.limit = 10;
 	
 	$http.get("/api/network/" + $routeParams.candidateName).success(function(data){
 		$scope.staffers = data.staffers;
