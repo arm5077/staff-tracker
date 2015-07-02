@@ -44,6 +44,7 @@ angular.module("stafferApp", ['ngRoute', 'pc035860.scrollWatch', "ngAnimate"])
 		link: function(scope, element, attr) {
 			element.attr("data-ord", new Date().getTime() * 19880502);
 			njHelper.ad.renderAd(element);
+			console.log("rendering ad!");
 			var interval = setInterval(function(){			
 				scope.adHeight = element[0].offsetHeight;
 				if( element[0].offsetHeight > 0 )
