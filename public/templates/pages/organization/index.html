@@ -1,18 +1,22 @@
 <div id="organization">
-	<div class="header">
+	
+	<div ad class="gptAd" id="politics_top" data-id="politics_top" data-zone="politics_content" data-ord="1998050219581119" data-customtargetting='{"njid":"staffertracker","pos":"interactive"}' data-desktop="728x90" data-tablet="728x90" data-phone="300x50"></div>
+
+	<div class="header" scroll-watch="{from: 0, to: -1}" sw-style="{position: $positive > adHeight ? 'fixed' : 'relative', top: 0, left: 0}">
 		<div class="social">
 			<i class="fa fa-arrow-circle-left" back-button></i>
 			<a href="#/"><i class="fa fa-home"></i></a>
 		</div>
 		<strong>TwentySixteen</strong> campaign staffer tracker
 	</div>
+
 	
-	<div class="organization desktop">
+	<div class="organization desktop" scroll-watch="{from: 0, to: -1}" sw-style="{'margin-top': $positive > adHeight ? '70px' : '30px' }">
 		<div class="lead-title">Where are <strong>{{name}}</strong> alums in 2016?</div>
 		<div class="small">They're working on campaigns with these guys!</div>		
 	</div>
 	
-	<div class="portraits desktop">
+	<div class="portraits">
 		<a ng-repeat="candidate in candidates">
 			<div class="portrait" ng-click="(candidate.name == orgFilter.filter) ? orgFilter.filter = '' : orgFilter.filter = candidate.name">
 

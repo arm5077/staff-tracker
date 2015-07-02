@@ -4,7 +4,597 @@
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+	<script type="text/javascript">
+	   var googletag = googletag || {};
+	   googletag.cmd = googletag.cmd || [];
+	   (function() {
+	     var gads = document.createElement("script");
+	     gads.async = true;
+	     gads.type = "text/javascript";
+	     var useSSL = "https:" == document.location.protocol;
+	     gads.src = (useSSL ? "https:" : "http:") + "//www.googletagservices.com/tag/js/gpt.js";
+	     var node =document.getElementsByTagName("script")[0];
+	     node.parentNode.insertBefore(gads, node);
+	    })();
+	</script>
+
+	<!-- Peer39 tagging code. -->
+	<script type="text/javascript">
+	   var ord = Number(ord) || Math.floor(Math.random()*10e12);
+	   var p39_ids_DFP = '';
+	   var p39_ids_GPT = '';
+
+	   function afterFinished_1388() {
+	       var pList = p39_KVP('p', ',');
+	       pList = pList.replace(/(^\s*,)|(,\s*$)/g, '');
+	       p39_ids_DFP = ';p=' + pList.replace(/(p\=)/g, '');
+	       p39_ids_GPT = '[' + pList.replace(/(p\=)/g, '') + ']';
+	   }
+	</script>
+
+	<!-- Criteo tagging code. -->
+	<script type='text/javascript'>
+	var crtg_nid = '3114';
+	var crtg_cookiename = 'crtg_national';
+	var crtg_varname = 'crtg_content';
+	function crtg_getCookie(c_name){ var i,x,y,ARRCookies=document.cookie.split(";");for(i=0;i<ARRCookies.length;i++){x=ARRCookies[i].substr(0,ARRCookies[i].indexOf("="));y=ARRCookies[i].substr(ARRCookies[i].indexOf("=")+1);x=x.replace(/^\s+|\s+$/g,"");if(x==c_name){return unescape(y);} }return'';}
+	var crtg_content = crtg_getCookie(crtg_cookiename);
+	var crtg_rnd=Math.floor(Math.random()*99999999999);
+	(function(){
+	var crtg_url=location.protocol+'//rtax.criteo.com/delivery/rta/rta.js?netId='+escape(crtg_nid);
+	crtg_url +='&cookieName='+escape(crtg_cookiename);
+	crtg_url +='&rnd='+crtg_rnd;
+	crtg_url +='&varName=' + escape(crtg_varname);
+	var crtg_script=document.createElement('script');crtg_script.type='text/javascript';crtg_script.src=crtg_url;crtg_script.async=true;
+	if(document.getElementsByTagName("head").length>0)document.getElementsByTagName("head")[0].appendChild(crtg_script);
+	else if(document.getElementsByTagName("body").length>0)document.getElementsByTagName("body")[0].appendChild(crtg_script);
+	})();
+	</script>
+
+	<script>
+	googletag.cmd.push(function(){
+	    if (typeof isIE7 == 'undefined')
+	        googletag.pubads().collapseEmptyDivs(true);
+	    //else
+	    //    googletag.pubads().collapseEmptyDivs();
+	    googletag.pubads().disableInitialLoad();
+	    googletag.pubads().enableSingleRequest();
+	    googletag.enableServices();
+	});
+	</script>
+
+	<script>
+
+	var DESKTOP_SCREENSIZE = 1120;
+	var TABLET_SCREENSIZE = 740;
+	var PHONE_SCREENSIZE = 320;
+
+	var GOOGLE_PLUS_ACCOUNT_ID = 101109783989792704485;
+
+	var GOOGLE_API_KEY = 'ABQIAAAAKm6rlwI749ER1XLX6FQ4NRR2xMPL4T21GWiFu7RsroKbVATRFBRBhJ999ZBCwAtyMamcFpYV9J9HLw';
+	var OMNITURE_REPORT_SUITE = 'atlanticnationaljournal2013dev';
+	var ADSERVICE_USE_ASYNC = true;
+	var AD_SITE_NAME = 'nationaljournalonline';
+	var ADS_SITE_ID = '1594';
+
+	// s -> omniture tracking?
+	var s = null;
+
+	//njHelperAd
+	if (typeof njHelper == 'undefined')
+	var njHelper = {};
+
+	njHelper.browsing = {};
+	/***
+	 * @var justEntered
+	 */
+	njHelper.browsing.justEntered = true;
+	/***/
+
+	/**
+	 * getDeviceScreen
+	 * 
+	 * get a device screen based on window width
+	 * 
+	 * @return string - device screen name
+	 */
+	njHelper.getDeviceScreen = function(){
+	    var $window = $(window); 
+	    var w = $window.width(); 
+	    if ( w >= DESKTOP_SCREENSIZE )
+	        return 'desktop';
+	    //if ( w >= LAPTOP_SCREENSIZE )
+	    //    return 'laptop';
+	    if ( w >= TABLET_SCREENSIZE )
+	        return 'tablet';
+	    return 'phone';
+	}
+
+	njHelper.ad = {};
+	njHelper.ad.initialLoad = true;
+	njHelper.ad.tile = 1;
+	njHelper.ad.adSlots = [];
+	njHelper.ad.adCallBacks = [];
+	njHelper.ad.events = {
+	    0: "gpt-service_add_targeting",
+	    1: "gpt-page_load_complete",
+	    2: "gpt-slot_create",
+	    3: "gpt-slot_fetch",
+	    4: "gpt-slot_receiving",
+	    5: "gpt-slot_rendering",
+	    6: "gpt-slot_rendered",
+	    8: "gpt-google_js_loaded",
+	    17: "gpt-slot_add_targeting",
+	    31: "gpt-queue_start",
+	    35: "gpt-service_create",
+	    40: "gpt-service_add_slot",
+	    46: "gpt-gpt_fetch",
+	    48: "gpt-gpt_fetched",
+	    50: "gpt-slot_fill",
+	    53: "gpt-slot_render_delay",
+	    63: "gpt-service_single_request_mode_enable",
+	    78: "gpt-service_collapse_containers_enable"
+	};
+	/***/
+
+	/***
+	 * @function: renderAds
+	 * @return void
+	 * @uses: gpt
+	 * @see: https://support.google.com/dfp_premium/answer/1650154
+	 * @description: render ads on page. Should only make gpt call to new ads.
+	 * On resize device specific ad will be fetched if user has not already
+	 * been to device view.
+	 * 
+	 * @Note: we use googletag.pubads().disableInitialLoad(); and then googletag.pubads().enableSingleRequest();
+	 * this is why we call display and then refresh. The display initiates the ad, but does not render, and then 
+	 * refresh finally renders the ad. This was the solution we came up with that helped solve road block issues
+	 * where ads from outside the road block were serving.
+	 */
+	njHelper.ad.renderAds = function(){
+		var slots = []
+		var refreshSlots = [];
+		var device = njHelper.currentDevice; 
+		var testing = false;
+		var prestitial = '';
+		if (typeof isIE == 'undefined'){
+			//must call prestitial first
+			prestitial = njHelper.ad.handlePrestitial();
+			refreshSlots.push(njHelper.ad.adSlots[prestitial]);
+		}
+
+		//loop only through visible ads (device specific)
+		//create ad slot for new ads only
+		$('.gptAd:visible').each(function(){
+			var $this = $(this);
+			var data = $this.data()
+			var adId = $this.attr('id');
+			if (adId){
+				var slot = '/'+ADS_SITE_ID+'/'+AD_SITE_NAME;
+				if (data.zone)
+	     			slot+='/'+data.zone;
+
+				//check if ad already exists
+				if (!njHelper.ad.adSlots[adId]){
+					googletag.cmd.push(function(){
+						//use gpt to handle responsive ad
+						var mapping = googletag
+							.sizeMapping()
+							.addSize([DESKTOP_SCREENSIZE, 0], njHelper.ad.formatSize(data.desktop))
+							.addSize([TABLET_SCREENSIZE, 0], njHelper.ad.formatSize(data.tablet))
+							.addSize([0, 0], njHelper.ad.formatSize(data.phone))
+							.build();
+						//define slot must be unique id
+						var adSlot = googletag.defineSlot(slot, [100,10], adId).defineSizeMapping(mapping).addService(googletag.pubads());
+						if (typeof isIE == 'undefined')
+		                	adSlot.setCollapseEmptyDiv(true, true);
+		                else if (typeof isIE7 == 'undefined')
+		                   	adSlot.setCollapseEmptyDiv(true);
+
+						adSlot.setTargeting('tile', njHelper.ad.tile);
+						njHelper.ad.setTargetting(adSlot, data);
+
+						//store new slot locally and globally
+						slots[adId]=adSlot;
+						njHelper.ad.adSlots[adId]=adSlot;
+						//for ie8 only dont use refresh for first page load but use for all other page lodds
+						if (!njHelper.ad.initialLoad  || typeof isIE == 'undefined' || typeof isIE7 != 'undefined')
+							refreshSlots.push(njHelper.ad.adSlots[adId]);
+						njHelper.ad.tile++;
+					});
+				}
+				else{
+					njHelper.ad.adSlots[adId].clearTargeting();
+					njHelper.ad.setTargetting(njHelper.ad.adSlots[adId], data);
+					refreshSlots.push(njHelper.ad.adSlots[adId]);
+				}
+			}
+		})
+
+		//loop through new ads and display/initiate
+		for(adId in slots){
+			googletag.cmd.push(function(){
+				googletag.display(adId);
+			});
+		}
+
+		//refresh ads which displays/renders
+		if (refreshSlots.length){
+			googletag.cmd.push(function(){
+				googletag.pubads().refresh(refreshSlots);
+			});
+		}
+
+		googletag.cmd.push(function(){
+			googletag.pubads().addEventListener('slotRenderEnded', function(event) {
+				njHelper.ad.gptSlot_rendered(event);
+			});
+		});
+		njHelper.ad.initialLoad = false;
+	}
+	/***/
+
+	/***
+	 * @function: renderAds
+	 * @return void
+	 * @uses: gpt
+	 * @see: https://support.google.com/dfp_premium/answer/1650154
+	 * @description: render ads on page. Should only make gpt call to new ads.
+	 * On resize device specific ad will be fetched if user has not already
+	 * been to device view.
+	 * 
+	 * @Note: we use googletag.pubads().disableInitialLoad(); and then googletag.pubads().enableSingleRequest();
+	 * this is why we call display and then refresh. The display initiates the ad, but does not render, and then 
+	 * refresh finally renders the ad. This was the solution we came up with that helped solve road block issues
+	 * where ads from outside the road block were serving.
+	 */
+	njHelper.ad.renderAd = function($ad){
+		var refreshSlots = [];
+		var device = njHelper.currentDevice; 
+		var testing = false;
+
+		//loop only through visible ads (device specific)
+		//create ad slot for new ads only
+		var data = $ad.data()
+		var adId = $ad.attr('id');
+
+		if (adId && !njHelper.ad.adSlots[adId]){
+			var slot = '/'+ADS_SITE_ID+'/'+AD_SITE_NAME;
+			if (data.zone)
+	     		slot+='/'+data.zone;
+
+			googletag.cmd.push(function(){
+				//use gpt to handle responsive ad
+				var mapping = googletag
+					var mapping = googletag
+						.sizeMapping()
+						.addSize([DESKTOP_SCREENSIZE, 0], njHelper.ad.formatSize(data.desktop))
+						.addSize([TABLET_SCREENSIZE, 0], njHelper.ad.formatSize(data.tablet))
+						.addSize([0, 0], njHelper.ad.formatSize(data.phone))
+						.build();
+				//define slot must be unique id
+				var adSlot = googletag.defineSlot(slot, [100,10], adId).defineSizeMapping(mapping).addService(googletag.pubads());
+
+				if (typeof isIE == 'undefined')
+	            	adSlot.setCollapseEmptyDiv(true, true);
+	            else if (typeof isIE7 == 'undefined')
+	               	adSlot.setCollapseEmptyDiv(true);
+
+				adSlot.setTargeting('tile', njHelper.ad.tile);
+				njHelper.ad.setTargetting(adSlot, data);
+				//store new slot locally and globally
+				njHelper.ad.adSlots[adId]=adSlot;
+				//for ie8 only dont use refresh for first page load but use for all other page lodds
+				if (!njHelper.ad.initialLoad  || typeof isIE == 'undefined' || typeof isIE7 != 'undefined')
+					refreshSlots.push(njHelper.ad.adSlots[adId]);
+				njHelper.ad.tile++;
+			});
+
+			googletag.cmd.push(function(){
+				googletag.display(adId);
+			});
+
+			googletag.cmd.push(function(){
+				googletag.pubads().refresh(refreshSlots);
+			});
+		}
+	}
+	/***/
+
+
+	/***
+	 * @function: renderAdHTML
+	 * @return string
+	 * @description: create ad html, used in embedded slideshows
+	 */
+	njHelper.ad.renderAdHTML = function(data){
+		var html = '';
+		html+= '<span id="'+data.customtargetting.pos+'_'+data.idzone+'"';
+		html+= 	' class="gptAd adunit '+(data.cssclass?data.cssclass:'')+'"';
+		html+= 	' data-zone="'+data.zone+'"';
+		html+= 	' data-ord="'+njHelper.ad.ord()+'"';
+		html+= 	" data-customtargetting='"+JSON.stringify(data.customtargetting)+"'";
+		if ( typeof AD_TESTING != 'undefined' &&  AD_TESTING)
+			html+= 	' data-testing="1"';		
+		html+= 	' data-desktop="'+data.desktop+'"';
+		html+= 	' data-laptop="'+data.laptop+'"';
+		html+= 	' data-tablet="'+data.tablet+'"';
+		html+= 	' data-phone="'+data.phone+'"';
+		html+= 	' >Advertisement</span>';
+		return html;
+	}
+	/***/
+
+	/***
+	 * @function: setTargetting
+	 * @return array
+	 * @description: format ad size for google
+	 * @note: sizes must be ints 
+	 */
+	njHelper.ad.setTargetting = function(adSlot, data){
+		//set targetting
+		adSlot.setTargeting('device', njHelper.getDeviceScreen());
+		var p39Clean = njHelper.ad.cleanP39();
+		adSlot.setTargeting('p', p39Clean);
+		adSlot.setTargeting('ord', njHelper.ad.ord());
+		adSlot.setTargeting('poe', njHelper.browsing.justEntered);
+
+		//Criteo Tagging
+		var crtg_split = crtg_content.split(';'); 
+		for (var i=1;i<crtg_split.length;i++){ 
+			adSlot.setTargeting("" + (crtg_split[i-1].split('='))[0] + "", "" + (crtg_split[i-1].split('='))[1] + "");
+		}	
+
+		//set custom targetting
+		if (data.customtargetting){
+			var customTargetting = data.customtargetting;
+			for (customTarget in customTargetting){
+				var customCriteria = customTargetting[customTarget];
+				if (customCriteria)
+					adSlot.setTargeting(customTarget, customCriteria);
+			}
+		}
+
+		if (s){
+			if (s.prop19)
+				adSlot.setTargeting('HTTP_REFERER', s.prop19);
+			if (s.prop10)
+				adSlot.setTargeting('source', s.prop10);
+		}
+
+		if (typeof AD_TESTING != 'undefined' && AD_TESTING)
+			adSlot.setTargeting('test', 1);
+	}
+	/***/
+
+	/***
+	 * @function: cleanP39
+	 * @return array
+	 * @description: cleans p39 tags 
+	 */
+	njHelper.ad.cleanP39 = function(){
+		if (!p39_ids_GPT)
+			return ["14333"];
+		if (typeof p39_ids_GPT != 'string')
+			return p39_ids_GPT;
+		var clean = p39_ids_GPT;
+		clean = clean.replace('[', '');
+		clean = clean.replace(']', '');
+		clean = clean.split(',');
+		return clean; 
+
+	}
+	/***/
+
+	/***
+	 * @function: formatSize
+	 * @return array
+	 * @description: format ad size for google
+	 * @note: sizes must be ints 
+	 */
+	njHelper.ad.formatSize = function(sz){
+		var formatted = [];
+		if (sz){
+			var sizes = sz.split(',');
+			if (sizes.length == 1){
+				formatted = njHelper.ad.parseSize(sizes[0]);
+			}
+			else{
+				for (var i=0; i < sizes.length; i++)
+					formatted.push(njHelper.ad.parseSize(sizes[i]));
+			}
+		}
+		else
+			formatted = [9,75]//non-existant ad size;
+		return formatted;
+	}
+	/***/
+
+	/***
+	 * @function: parseSize
+	 * @return array
+	 * @description: parse size, split on the x, and guarantee everything is an int
+	 */
+	njHelper.ad.parseSize = function(size){
+		var split = size.split('x');
+		for (var j =0; j < split.length; j++)
+			split[j] = parseInt(split[j]);
+		return split;
+	}
+	/***/
+
+	/***
+	 * @function: gptSlot_rendered
+	 * @var args : comes from google gpt
+	 * @description: can handle different on render events
+	 */
+	njHelper.ad.gptSlot_rendered = function(gptAd){
+		if (gptAd && gptAd.slot){
+			var id = gptAd.slot.getSlotId().getDomId();
+			var pos = gptAd.slot.getTargetingMap().pos[0];
+			if (id && !gptAd.isEmpty)
+				njHelper.totalAdsOnPage++;
+
+			if (njHelper.ad.adCallBacks[pos])
+				njHelper.ad.adCallBacks[pos](gptAd);
+
+		    switch(pos){
+			    case 'prestitial':
+			    	if (!gptAd.isEmpty){
+					    njHelper.ad.prestitial.init();
+					    njHelper.totalAdsOnPage--;
+					}
+					break;
+				default:
+				    break;
+			} 
+		}
+	}
+	/***/
+
+	/***
+	 * @function: handlePrestitial
+	 * @return void
+	 * @description: initiate a prestitial call if no cookie is found
+	 */
+	njHelper.ad.handlePrestitial = function(){
+		//GPT handles frequency of an ad serve
+		var $ad = $('.gptAd:visible:last');
+		var data = $ad.data();
+
+		var $prestitial = $('#prestitial .gptAd span');
+		if (data && data.zone){
+	 		var slot = '/'+ADS_SITE_ID+'/'+AD_SITE_NAME+'/'+data.zone;
+	 		$prestitial.attr('id', 'prestitial_'+data.zone);
+	 	}
+	 	else{
+			var slot = '/'+ADS_SITE_ID+'/'+AD_SITE_NAME;
+			$prestitial.attr('id', 'prestitial');
+		}
+		var adId = $prestitial.attr('id');
+
+		if (!njHelper.ad.adSlots[adId]){
+			googletag.cmd.push(function(){
+				//use gpt to handle responsive ad
+				var mapping = googletag
+					.sizeMapping()
+					.addSize([DESKTOP_SCREENSIZE, 0], [640,480])
+					.addSize([LAPTOP_SCREENSIZE, 0], [640,480])
+					.addSize([TABLET_SCREENSIZE, 0], [640,480])
+					.addSize([0, 0], [300,251])
+					.build();
+				//define slot must be unique id
+				var adSlot = googletag.defineSlot(slot, [640,480], adId).defineSizeMapping(mapping).addService(googletag.pubads());
+
+				adSlot.setTargeting('tile', njHelper.ad.tile);
+				njHelper.ad.setTargetting(adSlot, { ord: njHelper.ad.ord(), customtargetting: {pos:'prestitial'}});
+
+				//store new slot locally and globally
+				njHelper.ad.adSlots[adId]=adSlot;
+				njHelper.ad.tile++;
+			});
+
+			googletag.cmd.push(function(){
+				googletag.display(adId);
+			});
+
+			return adId;
+	    }
+	}
+	/***/
+
+	/***
+	 * @function: ord
+	 * @return int
+	 * @description: return a random ord number
+	 */
+	njHelper.ad.ord = function(){
+	    return Math.floor(Math.random()*9999999999);
+	}
+	/***/
+
+	njHelper.ad.prestitial = {};
+	/***
+	 * @function: init
+	 * @return void
+	 * @description: initiate the prestitial javascript
+	 * set the cookie so it doesnt show again
+	 */
+	njHelper.ad.prestitial.init = function(){
+		//check to see if init has already been called (this is a bug specific to ie8 where the prestitial loads twice)
+		if (typeof njHelper.ad.prestitial.counter == 'undefined' || (typeof njHelper.ad.prestitial.counter != 'undefined' && njHelper.ad.prestitial.counter == 0)){
+			njHelper.ad.prestitial.SHOW_TIME = 15; //seconds
+		    njHelper.ad.prestitial.counter = njHelper.ad.prestitial.SHOW_TIME;
+
+		    $('#prestitialTimer span').html( njHelper.ad.prestitial.counter );
+		    $('#prestitial').show()
+		    $(document).on('click touchstart', '#prestitial', function(){ 
+		    	njHelper.ad.prestitial.closePrestitial(); 
+		    })
+
+		    $(document).on('click touchstart', '#prestitialClose a', function(){
+		        njHelper.ad.prestitial.closePrestitial();
+		        return false;
+		    })
+
+		    njHelper.ad.prestitial.countDown = setInterval(njHelper.ad.prestitial.ticker, 1000); //1s
+		}	    
+	}
+	/***/
+
+	/***
+	 * @function: ticker
+	 * @return void
+	 * @description: ticker function to handle countdown
+	 */
+	njHelper.ad.prestitial.ticker = function(){
+		if (njHelper.ad.prestitial.counter <= 0)
+	        njHelper.ad.prestitial.closePrestitial();
+	    else{
+	        njHelper.ad.prestitial.counter--;
+	        $('#prestitialTimer span').html( njHelper.ad.prestitial.counter );
+	    }                
+	}
+	/***/
+
+	/***
+	 * @function: closePrestitial
+	 * @return void
+	 * @description: close prestitial with animation
+	 */
+	njHelper.ad.prestitial.closePrestitial = function(){
+	    clearInterval(njHelper.ad.prestitial.countDown);
+	    njHelper.ad.prestitial.counter = 0;
+	    njHelper.ad.prestitial.countDown = null;
+	    $('#prestitial').animate(
+	    	{ left: '-100%' }, 
+	    	750, 
+	    	function(){ 
+	            $('#prestitial').hide().css({left: 0});
+	            $('#prestitial .gptAd span').html(''); 
+	   		}
+	   	);
+	}
+	/***/
+
+	/***
+	 * @function: ucFirst
+	 * @return string
+	 * @description: capitalize first letter
+	 */
+	njHelper.ucFirst = function(s){
+		str = '';
+	    if (s)
+	    	str = s[0].toUpperCase() + s.substr(1);
+
+	    return str;
+	}
+	</script>
+	
 	<ng-include src="'/templates/snippets/omniture.html'"></ng-include>
+	<ng-include src="'/templates/snippets/advertisements.html'"></ng-include>
 	
 	<!-- Angular -->
 	<script src="bower_components/angularjs/angular.min.js"></script>
@@ -41,8 +631,6 @@
 <script src="js/controllers/homeController.js"></script>
 <script src="js/controllers/searchController.js"></script>
 <script src="js/routes.js"></script>
-
-
 
 
 </html>

@@ -1,6 +1,8 @@
 <div id="network">
+	
+	<div ad class="gptAd" id="politics_top" data-id="politics_top" data-zone="politics_content" data-ord="1998050219581119" data-customtargetting='{"njid":"staffertracker","pos":"interactive"}' data-desktop="728x90" data-tablet="728x90" data-phone="300x50"></div>
 
-	<div class="header" header>
+	<div class="header" scroll-watch="{from: 0, to: -1}" sw-style="{position: $positive > adHeight ? 'fixed' : 'relative', top: 0, left: 0}">
 		<div class="social">
 			<i class="fa fa-arrow-circle-left" back-button></i>
 			<a href="#/"><i class="fa fa-home"></i></a>
@@ -9,73 +11,44 @@
 	</div>
 
 
-		<div class="lead-title">Who's working for <strong>{{name}}</strong> in 2016?</div>
-		<div class="data" id="all-staffers">
-			<table>
-				<thead>
-					<th class="cap"></th>
-					<th>Staffer</th>
-					<th class="number">Position</th>
-					<th>Previous campaign</th>
-					<th class="cap"></th>
-				</thead>
-				<tbody>
-					<tr ng-repeat="staffer in staffers | orderBy: ['name.substr(name.indexOf(\' \') + 1)'] | limitTo:limit">
-						<td class="cap"></td>
-						<td><strong><a ng-href="#/staffer/{{staffer.name}}">{{staffer.name}}</strong></td>
-						<td class="position">{{staffer.position}}<span ng-if="staffer.outsideGroup">*</span></td>
-						<td><a href="#/organization/{{staffer.employers[0].name}}">{{staffer.employers[0].name}}</a></td>
-						<td class="cap"></td>
-					</tr>
-				</tbody>
-			</table>
+	<div class="lead-title" scroll-watch="{from: 0, to: -1}" sw-style="{'margin-top': $positive > adHeight ? '70px' : '30px' }">Who's working for <strong>{{name}}</strong> in 2016?</div>
+	<div class="data" id="all-staffers">
+		<table>
+			<thead>
+				<th class="cap"></th>
+				<th>Staffer</th>
+				<th class="number">Position</th>
+				<th>Previous campaign</th>
+				<th class="cap"></th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="staffer in staffers | orderBy: ['name.substr(name.indexOf(\' \') + 1)'] | limitTo:limit">
+					<td class="cap"></td>
+					<td><strong><a ng-href="#/staffer/{{staffer.name}}">{{staffer.name}}</strong></td>
+					<td class="position">{{staffer.position}}<span ng-if="staffer.outsideGroup">*</span></td>
+					<td><a href="#/organization/{{staffer.employers[0].name}}">{{staffer.employers[0].name}}</a></td>
+					<td class="cap"></td>
+				</tr>
+			</tbody>
+		</table>
 
-			<div class="asterisk">*Staffer works for an outside PAC or nonprofit supporting {{name}}.</div>
-			<div class="expand" ng-click="limit=staffers.length" ng-show="limit < staffers.length">Show all staffers</div>
-		</div>
-		
-		<div class="lead-title">The top 10 campaigns where {{name}} staffers worked before</div>
-		<div class="map">
-			<div class="clusters centered">
-				<div class="employer" ng-repeat="employer in employers | limitTo:10" ng-mouseover="$parent.orgFilter.filter=name">
-					<a ng-href="#/organization/{{ employer.name }}">
-						<div class = "count">{{ employer.staffers.length }}</div>
-						<div class = "name">{{ employer.name }}</div>
-					</a>
-				</div>
-			</div>
-		</div>
-		
-		<ng-include name="disclaimer" src="'/templates/snippets/disclaimer.html'"></ng-include>
-	
-	<div class = "mobile">
-		
-		<div class = "mobile-year" ng-repeat="year in years">
-			<div class="mobile-label">{{year.year }}</div>
-			<div class="mobile-employer" ng-repeat="employer in year.employers">
-				<div class="head">
-					<!-- If this is the first result (ie, the current candidate), deactivate org page link -->
-					<a ng-if="$parent.$index==0">
-						<div class="mobile-count">{{ employer.staffers.length }}</div>
-						<div class="mobile-name">{{employer.employer}}</div>
-					</a>
-					<a ng-if="$parent.$index > 0" ng-href="#/organization/{{ employer.employer }}">
-						<div class="mobile-count">{{ employer.staffers.length }}</div>
-						<div class="mobile-name">{{employer.employer}}</div>
-					</a>
-					
-					<div class="mobile-toggle" ng-click="employer.mobileShow = !employer.mobileShow"><i class="fa" ng-class="{ 'fa-minus-circle': employer.mobileShow, 'fa-plus-circle': !employer.mobileShow}"></i></div>
-				</div>
-				<div class="mobile-employees" ng-class="{show: employer.mobileShow }" >
-					<a ng-href="#/staffer/{{staffer}}" ng-repeat="staffer in employer.staffers">
-						<div class="mobile-employee" >
-							{{staffer}}
-						</div>
-					</a>
-				</div>
-			</div>
-		</div>
-
+		<div class="asterisk">*Staffer works for an outside PAC or nonprofit supporting {{name}}.</div>
+		<div class="expand" ng-click="limit=staffers.length" ng-show="limit < staffers.length">Show all staffers</div>
 	</div>
-
+	
+	<div class="lead-title">The top 10 campaigns where <strong>{{name}}</strong> staffers previously worked</div>
+	<div class="map">
+		<div class="clusters centered">
+			<div class="employer" ng-repeat="employer in employers | limitTo:10" ng-mouseover="$parent.orgFilter.filter=name">
+				<a ng-href="#/organization/{{ employer.name }}">
+					<div class = "count">{{ employer.staffers.length }}</div>
+					<div class = "name">{{ employer.name }}</div>
+				</a>
+			</div>
+		</div>
+	</div>
+	
+	<ng-include name="disclaimer" src="'/templates/snippets/disclaimer.html'"></ng-include>
+	
 </div>
+<script src="js/snippets/launch_ads.js"></script>

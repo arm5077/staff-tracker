@@ -187,13 +187,13 @@ app.get("/api/staffer/:stafferName", function(request, response){
 			});
 
 			connection.end();
-
+			console.log(rows);
 			response.status(200).json({
 				name: request.params.stafferName,
 				position: rows[0].position,
 				linkedin: rows[0].linkedin,
 				twitter: rows[0].twitter,
-				outsideGroup: rows[0].outside_group != "",
+				outsideGroup: rows[0].outside_group != null,
 				history: history
 			});
 		});

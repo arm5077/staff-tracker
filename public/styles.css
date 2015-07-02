@@ -58,6 +58,12 @@ strong {
 	font-weight: 800;
 }
 
+.gptAd {
+	text-align: center;
+	padding: 10px 0px;
+	background-color: #eee;
+}
+
 .mobile {
 	display: none;
 }
@@ -83,7 +89,7 @@ a {
 
 .content {
 	min-height: 100%;
-	margin-top: 60px;
+
 }
 
 
@@ -101,11 +107,9 @@ a {
 	color: rgba(255, 255, 255, .95);
 	font-size: 14pt;
 	font-weight: 100;
-	position: fixed;
-	top: 0;
-	left: 0;
 	width: 100%;
 	z-index: 3;
+	position: relative;
 }
 
 	.header .fa {
@@ -183,7 +187,9 @@ a {
 
 #home .header {
 	background-color: #404040;
-	
+	position: fixed;
+	top: 0;
+	left: 0;
 }
 
 #home .header strong {
@@ -204,7 +210,7 @@ a {
 
 #home .hero {
 	width: 90%;
-	margin: 20px auto;
+	margin: 70px auto 20px;
 }
 
 #home .hero .title {
@@ -332,10 +338,24 @@ a {
 	margin: 30px 0px 30px;
 	font-size: 22pt;
 	font-weight: 900;
+
 }
 
 #organization .organization .lead-title {
 	margin-bottom: 0;
+}
+
+#organization .organization.floaty {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	margin-top: -12px;
+	background-color: white;
+	padding-bottom: 35px;
+	z-index: 4;
 }
 
 #organization .organization strong {
@@ -351,7 +371,11 @@ a {
 #organization .portraits {
 	text-align: center;
 	padding: 0px 0px 20px;
+	transition: padding margin .25s;
 }
+
+
+
 
 #organization .portraits a {
 	text-decoration: none;
@@ -376,7 +400,7 @@ a {
 	height: 100px;
 	display: block;
 	margin: 5px auto 10px;
-	background-color: rgba(213, 179, 41, 0.47)
+	background-color: rgba(213, 179, 41, 0.47);
 }
 
 #organization .portrait .image {
@@ -387,6 +411,7 @@ a {
 	margin: 5px auto 10px;
 	background-color: rgba(213, 179, 41, 0.47);
 	background-size: cover;
+		transition: all .25s;
 }
 
 	#organization .portrait:hover img {
@@ -400,10 +425,12 @@ a {
 	display: table-cell;
 	background-color: rgba(255,255,255,.8);
 	border-radius: 50%;
+	transition: all .25s;
 }
 
 #organization .sticker strong {
 	display: block;
+	transition: all .25s;
 }
 
 #organization .sticker small {
@@ -412,6 +439,7 @@ a {
 	font-weight:500;
 	display:block;
 	margin-top: 5px;
+	transition: all .25s;
 }
 
 #organization .data {
@@ -449,6 +477,35 @@ a {
 	padding-bottom: 50px;
 }
 
+#organization .portraits.floaty {
+	position: fixed;
+	top: 105px;
+	left: 0px;
+	width: 100%;
+	background-color: white;
+	z-index:4;
+	padding-bottom: 10px;
+	margin-top:-20px;
+}
+
+#organization .portraits.floaty .portrait .image {
+	width:50px;
+	height: 50px;
+
+}
+
+#organization .portraits.floaty .portrait .sticker {
+	width: 50px;
+	height: 50px;
+}
+
+#organization .portraits.floaty .sticker strong {
+	opacity: 0;
+}
+
+#organization .portraits.floaty .sticker small {
+	opacity: 0;
+}
 
 
 /* Network/history page styles */
@@ -459,6 +516,7 @@ a {
 #network .lead-title strong { 
 	color: #EA463D;
 }
+
 
 #network #all-staffers {
 	

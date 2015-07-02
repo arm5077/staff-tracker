@@ -38,16 +38,18 @@ angular.module("stafferApp", ['ngRoute', 'pc035860.scrollWatch', "ngAnimate"])
 		}
 	};	
 
-}).directive('script', function() {
-	    return {
-	      restrict: 'E',
-	      scope: false,
-	      link: function(scope, elem, attr) {
-	        if (attr.type === 'text/javascript-lazy') {
-	          var code = elem.text();
-	          var f = new Function(code);
-	          f();
-	        }
-	      }
-	    };
-	  });
+})
+.directive("ad", function() {
+	return {
+		link: function(scope, element, attr) {
+			element.attr("data-ord", new Date().getTime() * 19880502);
+			njHelper.ad.renderAd(element);
+			var interval = setInterval(function(){			
+				scope.adHeight = element[0].offsetHeight;
+				if( element[0].offsetHeight > 0 )
+					clearInterval(interval);
+			}, 250);
+		}
+	};	
+
+});
