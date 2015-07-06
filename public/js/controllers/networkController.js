@@ -1,5 +1,11 @@
 angular.module("stafferApp")
-.controller("networkController", ["$scope", "$http", "$sce", "$routeParams", function($scope, $http, $sce, $routeParams){
+.controller("networkController", ["$scope", "$http", "$sce", "$routeParams", "$rootScope", function($scope, $http, $sce, $routeParams, $rootScope){
+	
+	// Change page title
+	$scope.$parent.pageTitle = "Current staffers | " + $routeParams.candidateName;
+	
+	// Set "done" loading to false
+	$rootScope.done = false;
 	
 	$scope.name = $routeParams.candidateName;
 	$scope.showList = true;
@@ -13,7 +19,9 @@ angular.module("stafferApp")
 	$http.get("/api/network/" + $routeParams.candidateName).success(function(data){
 		$scope.staffers = data.staffers;
 		$scope.employers = data.employers;
-	
+
+		// Set "done" loading to true
+		$rootScope.done = true;
 		
 		
 	});

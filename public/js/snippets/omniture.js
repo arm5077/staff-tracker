@@ -1,4 +1,4 @@
-	var OMNITURE_REPORT_SUITE = "atlanticnationaljournal2013prod";
+
     var s = s || {};
             s.prop1 = '';
             s.prop2 = '';

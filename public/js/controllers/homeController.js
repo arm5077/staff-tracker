@@ -1,6 +1,12 @@
 angular.module("stafferApp")
-.controller("homeController", ["$scope", "$http", "$routeParams", "$location", function($scope, $http, $routeParams, $location){
-
+.controller("homeController", ["$scope", "$http", "$routeParams", "$location", "$rootScope", function($scope, $http, $routeParams, $location, $rootScope){
+	
+	// Change page title
+	$scope.$parent.pageTitle = "Home"
+	
+	// Set "done" loading to false
+	$rootScope.done = false;
+	
 	$scope.header = "<strong>TwentySixteen</strong> Staffer Tracker"
 	$scope.$parent.header = "<strong>TwentySixteen</strong> Staffer Tracker"
 	$scope.mobileFeedHeight = 1000;
@@ -25,12 +31,10 @@ angular.module("stafferApp")
 	
 	$http.get("/api/staffers/").success(function(data){
 		$scope.staffers = data;
-		
 	});
 	
 	$http.get("/api/organizations/").success(function(data){
 		$scope.organizations = data;
-		
 	});
 	
 	$scope.search = function(){

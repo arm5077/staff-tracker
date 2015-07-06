@@ -1,13 +1,14 @@
 angular.module("stafferApp", ['ngRoute', 'pc035860.scrollWatch', "ngAnimate"])
-.controller("overallController", ["$scope", "$sce", function($scope, $sce){
+.controller("overallController", ["$scope", "$sce", "$rootScope", function($scope, $sce, $rootScope){
 	$scope.renderHTML = function(text){ return $sce.trustAsHtml(text); };
 	$scope.header = "<strong>TwentySixteen</strong> Staffer Tracker";
 	$scope.hint = true;
 	$scope.JSON = JSON;
 	$scope.orgFilter = {filter:""};
+	$scope.pageTitle = "Home";
+	
 	if( window.innerWidth <= 700 )
 		$scope.mobile = true;
-	
 }])
 .directive("sizeToSibling", function() {
 	return {
@@ -53,4 +54,12 @@ angular.module("stafferApp", ['ngRoute', 'pc035860.scrollWatch', "ngAnimate"])
 		}
 	};	
 
+})
+.directive("center", function(){
+	return {
+		link: function(scope, element, attr) {
+			console.log(window.innerHeight);
+			element[0].style.marginTop = ((window.innerHeight - element[0].offsetHeight) / 2) + "px"
+		}
+	};	
 });

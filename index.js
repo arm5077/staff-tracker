@@ -140,11 +140,13 @@ app.get("/api/network/:candidateName", function(request, response){
 						staffers[row.name].employers.push({year: row.year, name:row.employer});
 					
 					// Employer section
-					if( !employers[row.employer] )
-						employers[row.employer] = {name: row.employer, staffers: []};
+					if(row.year != 2016){	
+						if( !employers[row.employer] )
+							employers[row.employer] = {name: row.employer, staffers: []};
 						
-					if( employers[row.employer].staffers.indexOf(row.name) == -1 && row.year != 2016 )
-						employers[row.employer].staffers.push(row.name)
+						if( employers[row.employer].staffers.indexOf(row.name) == -1 && row.year != 2016 )
+							employers[row.employer].staffers.push(row.name)
+					}
 				});
 
 			}
