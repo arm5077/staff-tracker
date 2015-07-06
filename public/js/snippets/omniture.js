@@ -67,3 +67,5 @@
             s.prop65 = '';
             s.pageName = 'twentysixteen campaign staffer tracker';
             s.channel = 'twentysixteen';
+
+sendMetrics();
