@@ -16,13 +16,13 @@
 		<table>
 			<thead>
 				<th class="cap"></th>
-				<th>Staffer</th>
-				<th class="number">Position</th>
-				<th>Previous campaign</th>
+				<th ng-click="sort = 'name.substr(name.indexOf(\' \') + 1)'">Staffer <i class="fa fa-sort-alpha-asc" ng-class="{ selected: sort == 'name.substr(name.indexOf(\' \') + 1)' }"></i></th>
+				<th ng-click="sort = 'position'" class="number">Position <i class="fa fa-sort-alpha-asc" ng-class="{ selected: sort == 'position' }"></i></th>
+				<th ng-click="sort = 'employers[0].name'">Previous campaign <i class="fa fa-sort-alpha-asc" ng-class="{ selected: sort == 'employers[0].name' }"></i></th>
 				<th class="cap"></th>
 			</thead>
 			<tbody>
-				<tr ng-repeat="staffer in staffers | orderBy: ['name.substr(name.indexOf(\' \') + 1)'] | limitTo:limit">
+				<tr ng-repeat="staffer in staffers | orderBy: sort | limitTo:limit">
 					<td class="cap"></td>
 					<td><strong><a ng-href="#/staffer/{{staffer.name}}">{{staffer.name}}</strong></td>
 					<td class="position">{{staffer.position}}<span ng-if="staffer.outsideGroup">*</span></td>

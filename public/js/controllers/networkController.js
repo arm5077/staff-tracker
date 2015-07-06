@@ -15,6 +15,7 @@ angular.module("stafferApp")
 	$scope.selectionOn = false;
 	$scope.biggestEmployer = "";
 	$scope.limit = 10;
+	$scope.sort = 'name.substr(name.indexOf(\' \') + 1)';
 	
 	$http.get("/api/network/" + $routeParams.candidateName).success(function(data){
 		$scope.staffers = data.staffers;
