@@ -4,7 +4,7 @@
             s.prop2 = '';
             s.prop3 = 'twentysixteen campaign staffer tracker andrew mcgill';
             s.prop4 = '1988050219860613';
-            s.prop5 = 'story';
+            s.prop5 = 'article';
             s.prop6 = 'twentysixteen';
             s.prop7 = '';
             s.prop8 = '';
@@ -27,16 +27,16 @@
             s.prop25 = '';
             s.prop26 = '';
             s.prop27 = '';
-            s.prop28 = '';
-            s.prop29 = '';
-            s.prop30 = '';
+            s.prop28 = '07';
+            s.prop29 = '01';
+            s.prop30 = '2015';
             s.prop31 = '';
             s.prop32 = '';
             s.prop33 = '';
             s.prop34 = '';
             s.prop35 = '';
             s.prop36 = '';
-            s.prop37 = '';
+            s.prop37 = '/staffertracker';
             s.prop38 = '';
             s.prop39 = '';
             s.prop40 = '';
@@ -65,5 +65,5 @@
             s.prop63 = '';
             s.prop64 = '';
             s.prop65 = '';
-            s.pageName = '';
-            s.channel = '';
+            s.pageName = 'twentysixteen campaign staffer tracker';
+            s.channel = 'twentysixteen';
