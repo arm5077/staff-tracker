@@ -207,7 +207,7 @@ app.get("/api/feed", function(request, response){
 	
 	var connection = connectMySQL();
 	
-	connection.query("SELECT * FROM feed", function(err, rows, header){
+	connection.query("SELECT feed.name as name, feed.employer, action, date, year, candidates.party FROM feed LEFT JOIN candidates on feed.employer = candidates.name", function(err, rows, header){
 		if( err ) throw err;
 		var temp = {};
 		
@@ -217,7 +217,7 @@ app.get("/api/feed", function(request, response){
 				
 			if( !temp[row.name][row.date])
 				temp[row.name][row.date] = [];
-			temp[row.name][row.date].push({date: row.date, year: row.year, action: row.action, employer: row.employer});
+			temp[row.name][row.date].push({date: row.date, year: row.year, action: row.action, employer: row.employer, party: row.party});
 		});
 		
 		var exportArray = []; 
@@ -234,13 +234,16 @@ app.get("/api/feed", function(request, response){
 						if(move.action == "joins") joins = move.employer;
 						if(move.action == "leaves") leaves = move.employer;
 					});
-										
+					
+					if(temp[key][date][1]) console.log( temp[key][date][1]);					
+					
 					exportArray.push({
 						name: key,
 						date: date,
 						year: temp[key][date][0].year,
 						joining: joins,
-						leaving: leaves
+						leaving: leaves, 
+						party: temp[key][date][1] ? temp[key][date][1].party : temp[key][date][0].party
 					});
 				};
 			}
@@ -269,6 +272,7 @@ app.get("/api/scrape", function(request, response){
 	var spreadsheet_key = process.env.SPREADSHEET_KEY;
 	
 	var completed = 0;
+	var outstanding = 0;
 	var timeout = 0;
 	
 	var connection = connectMySQL();
@@ -299,10 +303,31 @@ app.get("/api/scrape", function(request, response){
 			if( err ) throw err;
 			// Cycle through spreadsheet and create new object
 			data = makeObjectFromSpreadsheet(rows);
+			
+			// Start checker to see if we're done computing
+			var success = 0;
+			var checker = setInterval(function(){
+				console.log(outstanding);
+				if( outstanding === 0 )
+					success++;
+				else
+					success = 0;
+
+				if( success == 5 ){
+					response.status(200).json({ message: "done" });
+					clearInterval(checker);
+				}
+
+			},1000);
+			
+			
 			data.forEach(function(candidate){
 				if( candidate.party ){
+					
+					outstanding++;
 					connection.query('INSERT INTO candidates (name, party) VALUES (?,?)', [candidate.name, candidate.party], function(err){
 						if(err) throw err;
+						outstanding--;
 					});
 				}
 			});
@@ -356,42 +381,48 @@ app.get("/api/scrape", function(request, response){
 					
 					if( date != "NaN-NaN-NaN" && date != null ){
 						// Check if this is a "joining" entry
-						if( !data.employers[i] ){					
+						if( !data.employers[i] ){	
+							outstanding++;				
 							connection.query('INSERT INTO feed (name, employer, action, date, year) VALUES (?,?,?,?,?)', 
-								[data.Staffer,
-								data.employers[i-1],
+								[data.Staffer.trim(),
+								data.employers[i-1].trim(),
 								"leaves",
 								date,
 								year],
 							function(err, rows, header){ 
 								if( err ) throw err;
+								outstanding--;
 							//	console.log(date + ": " + data.Staffer + " joins " + data.employers[i]);
 							});
 						}
 						
-						if( data.employers[i]){					
+						if( data.employers[i]){	
+							outstanding++;				
 							connection.query('INSERT INTO feed (name, employer, action, date, year) VALUES (?,?,?,?,?)', 
-								[data.Staffer,
-								data.employers[i],
+								[data.Staffer.trim(),
+								data.employers[i].trim(),
 								"joins",
 								date,
 								year],
 							function(err, rows, header){ 
 								if( err ) throw err;
+								outstanding--;
 							//	console.log(date + ": " + data.Staffer + " joins " + data.employers[i]);
 							});
 						}
 
 						// Check if is a "leaving" entry
 						if( data.employers[i + 1]){
+							outstanding++;
 							connection.query('INSERT INTO feed (name, employer, action, date, year) VALUES (?,?,?,?,?)', 
-								[data.Staffer,
-								data.employers[i+1],
+								[data.Staffer.trim(),
+								data.employers[i+1].trim(),
 								"leaves",
 								date,
 								year],
 							function(err, rows, header){ 
 								if( err ) throw err;
+								outstanding--;
 							//	console.log(date + ": " + data.Staffer + " leaves " + data.employers[i+1]);
 							});
 						}	
@@ -408,10 +439,11 @@ app.get("/api/scrape", function(request, response){
 					
 					if( data[year.toString()] ){
 						data[year.toString()].split(",").forEach(function(job){							
+							outstanding++;
 							connection.query('INSERT INTO history (name, year, employer, position, twitter, linkedin, outside_group) VALUES (?,?,?,?,?,?,?)',
-								[data.Staffer,
+								[data.Staffer.trim(),
 								year,
-								job,
+								job.trim(),
 								position,
 								data["Twitter (URL)"],
 								data["LinkedIn (URL)"],
@@ -419,6 +451,7 @@ app.get("/api/scrape", function(request, response){
 								],
 						 	function(err, rows, header){
 								if( err ) throw err;
+								outstanding--;
 							});
 						});
 					}
