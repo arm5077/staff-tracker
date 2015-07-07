@@ -19,8 +19,8 @@ app.get("/api/candidates", function(request, response){
 	
 	connection.query("SELECT employer as name, party, count(employer) as count FROM history JOIN candidates ON candidates.name=history.employer WHERE year = 2016 GROUP BY name ORDER BY count DESC", function(err, rows, header){
 		if(err) throw err;		
-		response.status(200).json(rows);
 		connection.end();
+		response.status(200).json(rows);
 	});
 	
 });
@@ -31,8 +31,8 @@ app.get("/api/staffers", function(request, response){
 	
 	connection.query("SELECT name, MID(name,LOCATE(' ', name) + 1, 100) as lastName from history GROUP BY name ORDER BY lastName ASC", function(err, rows, header){
 		if(err) throw err;		
-		response.status(200).json(rows);
 		connection.end();
+		response.status(200).json(rows);
 	});
 	
 });
@@ -43,8 +43,8 @@ app.get("/api/organizations", function(request, response){
 	
 	connection.query("SELECT employer as name from history WHERE year < 2016 GROUP BY employer ORDER BY employer ASC", function(err, rows, header){
 		if(err) throw err;		
-		response.status(200).json(rows);
 		connection.end();
+		response.status(200).json(rows);
 	});
 	
 });
@@ -58,6 +58,7 @@ app.get("/api/organization/:organization", function(request, response){
 		if(err) throw err;
 		
 		if( rows.length == 0 ){
+			connection.end();
 			response.status(200).json([]);
 		}
 		else {
@@ -102,7 +103,8 @@ app.get("/api/organization/:organization", function(request, response){
 					else
 						return 1;
 				});
-			
+				
+				connection.end();
 				response.status(200).json({staffers: staff, candidates: exportArray});
 				
 
@@ -189,7 +191,6 @@ app.get("/api/staffer/:stafferName", function(request, response){
 			});
 
 			connection.end();
-			console.log(rows);
 			response.status(200).json({
 				name: request.params.stafferName,
 				position: rows[0].position,
@@ -255,7 +256,6 @@ app.get("/api/feed", function(request, response){
 		});
 		
 		connection.end();
-		
 		response.status(200).json(exportArray);
 		
 	});
@@ -314,6 +314,7 @@ app.get("/api/scrape", function(request, response){
 					success = 0;
 
 				if( success == 5 ){
+					connection.end();
 					response.status(200).json({ message: "done" });
 					clearInterval(checker);
 				}

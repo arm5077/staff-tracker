@@ -672,6 +672,7 @@ a {
 #feed {
 	background-color: white;
 	border-right: 10px solid #404041;	
+	min-height: 100%;
 }
 
 .feed .head {
