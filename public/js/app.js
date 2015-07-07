@@ -1,4 +1,4 @@
-angular.module("stafferApp", ['ngRoute', 'pc035860.scrollWatch', "ngAnimate"])
+angular.module("stafferApp", ['ngRoute', 'pc035860.scrollWatch'])
 .controller("overallController", ["$scope", "$sce", "$rootScope", function($scope, $sce, $rootScope){
 	$scope.renderHTML = function(text){ return $sce.trustAsHtml(text); };
 	$scope.header = "<strong>TwentySixteen</strong> Staffer Tracker";

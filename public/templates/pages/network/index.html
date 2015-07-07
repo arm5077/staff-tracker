@@ -39,7 +39,7 @@
 	<div class="lead-title">The top 10 campaigns where <strong>{{name}}</strong> staffers previously worked</div>
 	<div class="map">
 		<div class="clusters centered">
-			<div class="employer" ng-repeat="employer in employers | limitTo:10" ng-mouseover="$parent.orgFilter.filter=name">
+			<div class="employer" ng-repeat="employer in employers | limitTo:10">
 				<a ng-href="#/organization/{{ employer.name }}">
 					<div class = "count">{{ employer.staffers.length }}</div>
 					<div class = "name">{{ employer.name }}</div>

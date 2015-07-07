@@ -1,14 +1,38 @@
 <div id="feed" ng-controller="feedController" style="height: {{mobile ? mobileFeedHeight + 'px' : ''}}" >
 	<table>
 		<thead>
-
+			<tr>
+				<th>Date</th>
+				<th>Staffer & campaign <i class="fa fa-filter" ng-click="showFilter = !showFilter"></i></th>
+			</tr>
+		</thead>
+	</table>
+	<div class="filter" ng-class="{ visible: showFilter == true }">
+		<div class="filterTitle" ng-click="showFilter = false">Close filter</div>
+		<div class="label lead">
+			<input type="checkbox" id="checkboxAll" ng-init="allChecked = true" ng-model="allChecked" ng-click="checkAll(allChecked)"/>
+			<label for="checkboxAll">
+				Check all
+				<span><i class="fa fa-check"></i></span>
+			</label>
+		</div>
+		<div class="label" ng-repeat="candidate in candidates">
+			<input type="checkbox" id="checkbox{{$index}}" ng-model="filteredCandidates[candidate.name]" />
+			<label for="checkbox{{$index}}">
+				{{candidate.name}}
+				<span><i class="fa fa-check"></i></span>
+			</label>
+		</div>
+	</div>
+	<table>
+		<thead style="display:none">
 			<tr>
 				<th>Date</th>
 				<th>Staffer & campaign</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="staffer in feed">
+			<tr ng-repeat="staffer in feed | filter: filterCandidates">
 				<td class="date">{{moment( staffer.date ).format("M/DD/YYYY")}}</td>
 				<td class="info">
 					<a ng-href="#/staffer/{{staffer.name}}"><div class="name">{{staffer.name}}</div></a>
