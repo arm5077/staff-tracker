@@ -122,21 +122,22 @@ app.get("/api/network/:candidateName", function(request, response){
 		if(err) throw err;
 		var names = "";
 		rows.forEach(function(row){
-			names += " OR name = '" + row.name.replace("'", "\\'") + "'";
+			names += " OR history.name = '" + row.name.replace("'", "\\'") + "'";
 		});
 		
-		connection.query("SELECT * FROM history WHERE ((" + names.slice(4) + ")) ORDER BY year DESC", function(err, rows, header){
+		connection.query("SELECT * FROM history LEFT JOIN (SELECT action, name as resignedName, employer as resignedEmployer FROM feed WHERE action = 'leaves') as resignations on history.name = resignations.resignedName && history.employer = resignations.resignedEmployer WHERE ((" + names.slice(4) + ")) ORDER BY year DESC", function(err, rows, header){
 			var staffers = [];
 			var employers = [];
 			var exportArray = {staffers: [], employers: []};
-
+			
+			console.log("SELECT * FROM history LEFT JOIN (SELECT action, name as resignedName, employer as resignedEmployer FROM feed WHERE action = 'leaves') as resignations on history.name = resignations.resignedName && history.employer = resignations.resignedEmployer WHERE ((" + names.slice(4) + ")) ORDER BY year DESC");
 		
 			
 			if(rows){
 				// Aggregate first by employee, then by employer
 				rows.forEach(function(row){
 					if( !staffers[row.name] ){
-						staffers[row.name] = {name: row.name, position: row.position, twitter: row.twitter, linkedin: row.linkedin, outsideGroup: row.outside_group != null, employers: [] };
+						staffers[row.name] = {name: row.name, position: row.position, twitter: row.twitter, linkedin: row.linkedin, outsideGroup: row.outside_group != null, resigned: row.resignedEmployer != null, employers: [] };
 					}			
 					if(row.year != 2016)
 						staffers[row.name].employers.push({year: row.year, name:row.employer});
