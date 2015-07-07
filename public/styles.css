@@ -186,6 +186,8 @@ a {
 #network .data th .fa, #organization .data th .fa {
 	opacity: 0;
 	margin-left:3px;
+	position: relative;
+	top: -3px;
 }
 
 #network .data th .fa.selected, #organization .data th .fa.selected {
@@ -720,8 +722,9 @@ a {
 }
 
 #feed .filter.visible {
-	height: auto;
+	height: 200px;
 	padding: 5px;
+	overflow-y: scroll;
 }
 
 #feed .filterTitle {
@@ -754,7 +757,7 @@ a {
 	display: none;
 }
 
-#feed .filter input[type="checkbox"] + label span {
+#feed .filter input[type="checkbox"] + label span.check {
     display:inline-block;
 	width:20px;
 	height: 20px;
@@ -768,12 +771,12 @@ a {
 	border-radius: 50%;
 }
 
-#feed .filter input[type="checkbox"] + label span .fa {
+#feed .filter input[type="checkbox"] + label span.check .fa {
 
 	opacity:0;
 }
 
-#feed .filter input[type="checkbox"]:checked + label span {
+#feed .filter input[type="checkbox"]:checked + label span.check {
     display:inline-block;
 	width:20px;
 	height: 20px;
@@ -781,7 +784,7 @@ a {
 	float: right;
 }
 
-#feed .filter input[type="checkbox"]:checked + label span .fa {
+#feed .filter input[type="checkbox"]:checked + label span.check .fa {
 	margin-top:4px;
 	transition: all .25s;
 	opacity:1;
@@ -879,9 +882,10 @@ a {
 .disclaimer {
 	font-weight:300;
 	color: #606060;
-	font-size: 12pt;
+	font-size: 11pt;
 	margin: 20px auto 0;
 	text-align:center;
+	padding: 0px 10px;
 }
 
 .disclaimer a {
@@ -1038,6 +1042,11 @@ a {
 		  padding: 14px;
 		  width: 96%;
 	}
+	
+	#feed .filter.visible {
+		height: auto;
+	}
+	
 	
 	#feed {
 		border: 0;

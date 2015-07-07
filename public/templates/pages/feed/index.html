@@ -12,15 +12,15 @@
 		<div class="label lead">
 			<input type="checkbox" id="checkboxAll" ng-init="allChecked = true" ng-model="allChecked" ng-click="checkAll(allChecked)"/>
 			<label for="checkboxAll">
-				Check all
-				<span><i class="fa fa-check"></i></span>
+				<span ng-bind="allChecked == true ? 'Uncheck all' : 'Check all'">Check all</span>
+				<span class="check"><i class="fa fa-check"></i></span>
 			</label>
 		</div>
 		<div class="label" ng-repeat="candidate in candidates">
 			<input type="checkbox" id="checkbox{{$index}}" ng-model="filteredCandidates[candidate.name]" />
 			<label for="checkbox{{$index}}">
 				{{candidate.name}}
-				<span><i class="fa fa-check"></i></span>
+				<span class="check"><i class="fa fa-check"></i></span>
 			</label>
 		</div>
 	</div>

@@ -34,9 +34,9 @@
 		<table>
 			<thead>
 				<th class="cap"></th>
-				<th ng-click="sort = 'name.substr(name.indexOf(\' \') + 1)'">Staffer <i class="fa fa-sort-alpha-asc" ng-class="{ selected: sort == 'name.substr(name.indexOf(\' \') + 1)' }"></i></th>
-				<th class="number" ng-click="sort = 'year'">When they worked for {{name}} <i class="fa fa-sort-alpha-asc" ng-class="{ selected: sort == 'year' }"></i></th>
-				<th ng-click="sort = 'employer'">Who they're working for now <i class="fa fa-sort-alpha-asc" ng-class="{ selected: sort == 'employer' }"></i></th>
+				<th ng-click="sort = 'name.substr(name.indexOf(\' \') + 1)'">Staffer <i class="fa fa-sort-desc" ng-class="{ selected: sort == 'name.substr(name.indexOf(\' \') + 1)' }"></i></th>
+				<th class="number" ng-click="sort = 'year'">When they worked for {{name}} <i class="fa fa-sort-desc" ng-class="{ selected: sort == 'year' }"></i></th>
+				<th ng-click="sort = 'employer'">Who they're working for now <i class="fa fa-sort-desc" ng-class="{ selected: sort == 'employer' }"></i></th>
 				<th class="cap"></th>
 			</thead>
 			<tbody>

@@ -16,9 +16,9 @@
 		<table>
 			<thead>
 				<th class="cap"></th>
-				<th ng-click="sort = 'name.substr(name.indexOf(\' \') + 1)'">Staffer <i class="fa fa-sort-alpha-asc" ng-class="{ selected: sort == 'name.substr(name.indexOf(\' \') + 1)' }"></i></th>
-				<th ng-click="sort = 'position'" class="number">Position <i class="fa fa-sort-alpha-asc" ng-class="{ selected: sort == 'position' }"></i></th>
-				<th ng-click="sort = 'employers[0].name'">Previous campaign <i class="fa fa-sort-alpha-asc" ng-class="{ selected: sort == 'employers[0].name' }"></i></th>
+				<th ng-click="sort = 'name.substr(name.indexOf(\' \') + 1)'">Staffer <i class="fa fa-sort-desc" ng-class="{ selected: sort == 'name.substr(name.indexOf(\' \') + 1)' }"></i></th>
+				<th ng-click="sort = 'position'" class="number">Position <i class="fa fa-sort-desc" ng-class="{ selected: sort == 'position' }"></i></th>
+				<th ng-click="sort = 'employers[0].name'">Previous campaign <i class="fa fa-sort-desc" ng-class="{ selected: sort == 'employers[0].name' }"></i></th>
 				<th class="cap"></th>
 			</thead>
 			<tbody>
@@ -33,7 +33,7 @@
 		</table>
 
 		<div class="asterisk">*Staffer works for an outside PAC or nonprofit supporting {{name}}.</div>
-		<div class="expand" ng-click="limit=staffers.length" ng-show="limit < staffers.length">Show all staffers</div>
+		<div class="expand" ng-click="limit=staffers.length" ng-show="limit < staffers.length">Show more staffers</div>
 	</div>
 	
 	<div class="lead-title">The top 10 campaigns where <strong>{{name}}</strong> staffers previously worked</div>
