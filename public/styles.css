@@ -825,6 +825,7 @@ a {
 	font-weight: 300;
 	vertical-align: middle;
 	width: 82px;
+	font-size: 12pt;
 }
 
 #feed th:nth-child(2){
