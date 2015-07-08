@@ -319,7 +319,6 @@ app.get("/api/scrape", function(request, response){
 					success = 0;
 
 				if( success == 5 ){
-					connection.end();
 					response.status(200).json({ message: "done" });
 					clearInterval(checker);
 				}
