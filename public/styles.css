@@ -439,27 +439,19 @@ a {
 	overflow: hidden;
 	position:relative;
 	font-weight: 400;
-	margin: 0px 15px 10px;
-	font-size: 11pt;
+	margin: 0px 9px 10px;
+	font-size: 10pt;
 }
 
 	#organization .portrait:hover {
 		cursor: pointer;
 	}
 
-#organization .portrait img {
-	border-radius: 50%;
-	width: 75px;
-	height: 75px;
-	display: block;
-	margin: 5px auto 10px;
-	background-color: rgba(213, 179, 41, 0.47);
-}
 
 #organization .portrait .image {
 	border-radius: 50%;
-	width: 100px;
-	height: 100px;
+	width: 75px;
+	height: 75px;
 	display: block;
 	margin: 5px auto 10px;
 	background-color: rgba(213, 179, 41, 0.47);
