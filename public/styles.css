@@ -813,6 +813,11 @@ a {
 	padding: 15px 20px;
 }
 
+	#feed tr:last-child td{
+		padding-bottom: 150px;
+		border-bottom: 0;
+	}
+
 #feed th {
 	padding: 10px 20px;
 	border-top: 0;
@@ -1208,12 +1213,22 @@ a {
 		font-size:12pt;
 	}
 	
+	#footer {
+		font-size: 9pt;
+	}
+	
 	#footer .logo {
 		display: none;
 	}
 	
 	#footer .explainer {
 		border-left: 0;
+		padding-left: 0;
+		font-size: 9pt;
+	}
+	
+	#footer .credits {
+		padding-right:0px;
 	}
 	
 }
