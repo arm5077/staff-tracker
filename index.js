@@ -11,7 +11,11 @@ app.listen(port, function(){
 
 
 // Set up static page (main page)
-app.use("/", express.static(__dirname + "/public/"));
+app.get("/", function(request, response){
+	response.redirect(301,'/app');
+});
+
+app.use("/app", express.static(__dirname + "/public/"));
 
 // Return 2016 candidates
 app.get("/api/candidates", function(request, response){

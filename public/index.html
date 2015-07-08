@@ -621,18 +621,18 @@
 	<!-- Omniture -->
 	<script> var OMNITURE_REPORT_SUITE = "atlanticnationaljournal2013prod"; </script>
 	<script src="http://www.nationaljournal.com/js/libs/omniture/core.js"></script>
-	<script src="js/snippets/omniture.js"></script>
+	<script src="/app/js/snippets/omniture.js"></script>
 	
 	<!-- Site-specific styles -->
-	<link rel="stylesheet" href="styles.css" />
+	<link rel="stylesheet" href="/app/styles.css" />
 	
 </head>
 
 <body>
 	
-	<ng-include ng-hide="done" src="'/templates/pages/loader/index.html'"></ng-include>
+	<ng-include ng-hide="done" src="'/app/templates/pages/loader/index.html'"></ng-include>
 	<div class="content" ng-view="" autoscroll=""></div>
-	<ng-include src="'/templates/snippets/footer.html'"></ng-include>
+	<ng-include src="'/app/templates/snippets/footer.html'"></ng-include>
 	
 
 	

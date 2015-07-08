@@ -5,7 +5,7 @@
 			<span class="mobile"><strong>TwentySixteen</strong> Staffer Tracker</span>
 			<span class="desktop">Recent moves</span>
 		</div>
-		<ng-include src="'/templates/pages/feed/index.html'"></ng-include>
+		<ng-include src="'templates/pages/feed/index.html'"></ng-include>
 		
 		<!-- This is mobile stuff below -->
 		<div class="more mobile" ng-click="mobileFeedHeight = mobileFeedHeight + 1000">More</div>
@@ -58,7 +58,7 @@
 				<div class = "label">{{party.name}}</div>
 				<a ng-repeat="candidate in party.candidates" ng-href="#/network/{{candidate}}">
 					<div class="candidate">
-						<img ng-src="/img/{{ candidate.substr(candidate.indexOf(' ')+1,100) }}.png" />
+						<img ng-src="img/{{ candidate.substr(candidate.indexOf(' ')+1,100) }}.png" />
 						<div class="name">{{candidate}}</div>
 					</div>
 				</a>
