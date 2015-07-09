@@ -14,7 +14,7 @@
 			<div class="mobile-title">{{party.name}}</div>
 			<a ng-href="#/network/{{candidate}}" ng-repeat="candidate in party.candidates">
 				<div class="mobile-candidate">
-					<img ng-src="/img/{{ candidate.substr(candidate.indexOf(' ')+1,100) }}.png" />
+					<img ng-src="img/{{ candidate.substr(candidate.indexOf(' ')+1,100) }}.png" />
 					<div class="text">{{candidate}}</div>
 				</div>
 			</a>
