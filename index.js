@@ -385,6 +385,7 @@ app.get("/api/scrape", function(request, response){
 					}
 					
 					if( date != "NaN-NaN-NaN" && date != null ){
+						console.log(data);
 						// Check if this is a "joining" entry
 						if( !data.employers[i] ){	
 							outstanding++;				
