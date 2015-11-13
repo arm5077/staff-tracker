@@ -180,11 +180,11 @@ app.get("/api/network/:candidateName", function(request, response){
 app.get("/api/staffer/:stafferName", function(request, response){
 	var connection = connectMySQL();
 	
-	connection.query("SELECT * FROM history WHERE name = ?", [request.params.stafferName], function(err, rows, header){
+	connection.query("SELECT * FROM history WHERE name = ? ORDER BY year DESC, id DESC", [request.params.stafferName], function(err, rows, header){
 		if( err ) throw err;
 		
 		// Check to see if this person has resigned
-		connection.query("SELECT action, date FROM feed WHERE name = ? ORDER BY date DESC", [request.params.stafferName], function(err, countrows, header){
+		connection.query("SELECT action, date FROM feed WHERE name = ? ORDER BY date DESC, id ASC", [request.params.stafferName], function(err, countrows, header){
 			
 			if(countrows[0].action == "leaves")
 				var resigned = true;
@@ -417,6 +417,7 @@ app.get("/api/scrape", function(request, response){
 							});
 						}
 
+						/*
 						// Check if is a "leaving" entry
 						if( data.employers[i + 1]){
 							outstanding++;
@@ -431,7 +432,8 @@ app.get("/api/scrape", function(request, response){
 								outstanding--;
 							//	console.log(date + ": " + data.Staffer + " leaves " + data.employers[i+1]);
 							});
-						}	
+						}
+						*/	
 					}
 				});
 			});
