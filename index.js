@@ -303,7 +303,7 @@ app.get("/api/scrape", function(request, response){
 	Spreadsheet.load({
 		debug: true,
 		spreadsheetId: "15mJ0Ked8Dbrn9iRW-yYTCi7C4JFlIHpQ7IL1hvWEtQE",
-		worksheetId: "0",
+		worksheetId: "od6",
 		oauth: {
 			email: spreadsheet_email,
 			key: spreadsheet_key
@@ -358,7 +358,7 @@ app.get("/api/scrape", function(request, response){
 	Spreadsheet.load({
 		debug: true,
 		spreadsheetId: "15mJ0Ked8Dbrn9iRW-yYTCi7C4JFlIHpQ7IL1hvWEtQE",
-		worksheetId: "0",
+		worksheetId: "od6",
 		oauth: {
 			email: spreadsheet_email,
 			key: spreadsheet_key
